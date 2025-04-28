@@ -106,5 +106,10 @@ namespace Barbearia
         {
 
         }
+
+        private void Txt_Codigo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

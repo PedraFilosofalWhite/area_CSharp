@@ -159,6 +159,7 @@
             Txt_Codigo.Name = "Txt_Codigo";
             Txt_Codigo.Size = new Size(100, 26);
             Txt_Codigo.TabIndex = 7;
+            Txt_Codigo.TextChanged += Txt_Codigo_TextChanged;
             // 
             // lblTelefone
             // 
