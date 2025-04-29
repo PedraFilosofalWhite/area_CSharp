@@ -65,7 +65,7 @@ namespace Barbearia
 
         private void Bt_Estoque_Click(object sender, EventArgs e)
         {
-            Estoque estoque = new Estoque();
+            FrmEstoque estoque = new FrmEstoque();
             estoque.Show();
             this.Hide();
         }
@@ -93,11 +93,11 @@ namespace Barbearia
 
         private void Menu_Estoque_Click(object sender, EventArgs e)
         {
-            Estoque estoque = new Estoque();
+            FrmEstoque estoque = new FrmEstoque();
             estoque.Show();
             this.Hide();
         }
-
+            
         private void Menu_Funcionario_Click(object sender, EventArgs e)
         {
             FrmFuncionario funcionario = new FrmFuncionario();
