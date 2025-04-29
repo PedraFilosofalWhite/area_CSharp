@@ -1,6 +1,6 @@
 ﻿namespace Barbearia
 {
-    partial class Estoque
+    partial class FrmEstoque
     {
         /// <summary>
         /// Required designer variable.
@@ -28,12 +28,327 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Estoque";
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmEstoque));
+            Gpb_Estoque = new GroupBox();
+            pctFotocubo = new PictureBox();
+            txtProduto = new TextBox();
+            txtPreco = new MaskedTextBox();
+            lblPreco = new Label();
+            txtQuantidade = new MaskedTextBox();
+            TxtDescricao = new MaskedTextBox();
+            lbldescricao = new Label();
+            lblQuantidade = new Label();
+            cbxCategoria = new ComboBox();
+            Txt_Codigo = new TextBox();
+            lblProduto = new Label();
+            lblCategoria = new Label();
+            lblCodigo = new Label();
+            Btn_Voltar = new Button();
+            Btn_Pesquisar = new Button();
+            Btn_Limpar = new Button();
+            Btn_Excluir = new Button();
+            Btn_Alterar = new Button();
+            Btn_Cadastrar = new Button();
+            Btn_Novo = new Button();
+            Gpb_Estoque.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pctFotocubo).BeginInit();
+            SuspendLayout();
+            // 
+            // Gpb_Estoque
+            // 
+            Gpb_Estoque.Controls.Add(pctFotocubo);
+            Gpb_Estoque.Controls.Add(txtProduto);
+            Gpb_Estoque.Controls.Add(txtPreco);
+            Gpb_Estoque.Controls.Add(lblPreco);
+            Gpb_Estoque.Controls.Add(txtQuantidade);
+            Gpb_Estoque.Controls.Add(TxtDescricao);
+            Gpb_Estoque.Controls.Add(lbldescricao);
+            Gpb_Estoque.Controls.Add(lblQuantidade);
+            Gpb_Estoque.Controls.Add(cbxCategoria);
+            Gpb_Estoque.Controls.Add(Txt_Codigo);
+            Gpb_Estoque.Controls.Add(lblProduto);
+            Gpb_Estoque.Controls.Add(lblCategoria);
+            Gpb_Estoque.Controls.Add(lblCodigo);
+            Gpb_Estoque.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Gpb_Estoque.Location = new Point(15, 14);
+            Gpb_Estoque.Margin = new Padding(6, 5, 6, 5);
+            Gpb_Estoque.Name = "Gpb_Estoque";
+            Gpb_Estoque.Padding = new Padding(6, 5, 6, 5);
+            Gpb_Estoque.Size = new Size(1246, 197);
+            Gpb_Estoque.TabIndex = 8;
+            Gpb_Estoque.TabStop = false;
+            Gpb_Estoque.Text = "Cadastrar Produtos";
+            // 
+            // pctFotocubo
+            // 
+            pctFotocubo.Image = (Image)resources.GetObject("pctFotocubo.Image");
+            pctFotocubo.Location = new Point(1164, 18);
+            pctFotocubo.Margin = new Padding(4);
+            pctFotocubo.Name = "pctFotocubo";
+            pctFotocubo.Size = new Size(72, 72);
+            pctFotocubo.SizeMode = PictureBoxSizeMode.AutoSize;
+            pctFotocubo.TabIndex = 17;
+            pctFotocubo.TabStop = false;
+            // 
+            // txtProduto
+            // 
+            txtProduto.Location = new Point(113, 97);
+            txtProduto.Margin = new Padding(4);
+            txtProduto.Name = "txtProduto";
+            txtProduto.Size = new Size(88, 26);
+            txtProduto.TabIndex = 16;
+            // 
+            // txtPreco
+            // 
+            txtPreco.Location = new Point(678, 55);
+            txtPreco.Margin = new Padding(4);
+            txtPreco.Name = "txtPreco";
+            txtPreco.Size = new Size(135, 26);
+            txtPreco.TabIndex = 15;
+            // 
+            // lblPreco
+            // 
+            lblPreco.AutoSize = true;
+            lblPreco.Font = new Font("Arial Rounded MT Bold", 12F);
+            lblPreco.Location = new Point(590, 58);
+            lblPreco.Margin = new Padding(4, 0, 4, 0);
+            lblPreco.Name = "lblPreco";
+            lblPreco.Size = new Size(61, 18);
+            lblPreco.TabIndex = 14;
+            lblPreco.Text = "Preço:";
+            // 
+            // txtQuantidade
+            // 
+            txtQuantidade.Location = new Point(678, 97);
+            txtQuantidade.Margin = new Padding(4);
+            txtQuantidade.Name = "txtQuantidade";
+            txtQuantidade.Size = new Size(135, 26);
+            txtQuantidade.TabIndex = 13;
+            // 
+            // TxtDescricao
+            // 
+            TxtDescricao.Location = new Point(113, 146);
+            TxtDescricao.Margin = new Padding(4);
+            TxtDescricao.Name = "TxtDescricao";
+            TxtDescricao.Size = new Size(210, 26);
+            TxtDescricao.TabIndex = 12;
+            // 
+            // lbldescricao
+            // 
+            lbldescricao.AutoSize = true;
+            lbldescricao.Font = new Font("Arial Rounded MT Bold", 12F);
+            lbldescricao.Location = new Point(10, 149);
+            lbldescricao.Margin = new Padding(4, 0, 4, 0);
+            lbldescricao.Name = "lbldescricao";
+            lbldescricao.Size = new Size(95, 18);
+            lbldescricao.TabIndex = 11;
+            lbldescricao.Text = "Descrição:";
+            // 
+            // lblQuantidade
+            // 
+            lblQuantidade.AutoSize = true;
+            lblQuantidade.Font = new Font("Arial Rounded MT Bold", 12F);
+            lblQuantidade.Location = new Point(560, 107);
+            lblQuantidade.Margin = new Padding(4, 0, 4, 0);
+            lblQuantidade.Name = "lblQuantidade";
+            lblQuantidade.Size = new Size(106, 18);
+            lblQuantidade.TabIndex = 10;
+            lblQuantidade.Text = "Quantidade:";
+            // 
+            // cbxCategoria
+            // 
+            cbxCategoria.FormattingEnabled = true;
+            cbxCategoria.Location = new Point(678, 141);
+            cbxCategoria.Margin = new Padding(4);
+            cbxCategoria.Name = "cbxCategoria";
+            cbxCategoria.Size = new Size(215, 26);
+            cbxCategoria.TabIndex = 8;
+            // 
+            // Txt_Codigo
+            // 
+            Txt_Codigo.Location = new Point(113, 55);
+            Txt_Codigo.Margin = new Padding(4);
+            Txt_Codigo.Name = "Txt_Codigo";
+            Txt_Codigo.Size = new Size(88, 26);
+            Txt_Codigo.TabIndex = 7;
+            // 
+            // lblProduto
+            // 
+            lblProduto.AutoSize = true;
+            lblProduto.Font = new Font("Arial Rounded MT Bold", 12F);
+            lblProduto.Location = new Point(28, 107);
+            lblProduto.Margin = new Padding(4, 0, 4, 0);
+            lblProduto.Name = "lblProduto";
+            lblProduto.Size = new Size(77, 18);
+            lblProduto.TabIndex = 4;
+            lblProduto.Text = "Produto:";
+            // 
+            // lblCategoria
+            // 
+            lblCategoria.AutoSize = true;
+            lblCategoria.Font = new Font("Arial Rounded MT Bold", 12F);
+            lblCategoria.Location = new Point(571, 149);
+            lblCategoria.Margin = new Padding(4, 0, 4, 0);
+            lblCategoria.Name = "lblCategoria";
+            lblCategoria.Size = new Size(92, 18);
+            lblCategoria.TabIndex = 3;
+            lblCategoria.Text = "Categoria:";
+            // 
+            // lblCodigo
+            // 
+            lblCodigo.AutoSize = true;
+            lblCodigo.Font = new Font("Arial Rounded MT Bold", 12F);
+            lblCodigo.Location = new Point(32, 62);
+            lblCodigo.Margin = new Padding(4, 0, 4, 0);
+            lblCodigo.Name = "lblCodigo";
+            lblCodigo.Size = new Size(73, 18);
+            lblCodigo.TabIndex = 0;
+            lblCodigo.Text = "Código :";
+            // 
+            // Btn_Voltar
+            // 
+            Btn_Voltar.BackColor = SystemColors.ControlLightLight;
+            Btn_Voltar.Font = new Font("Arial Rounded MT Bold", 12F);
+            Btn_Voltar.Location = new Point(1099, 593);
+            Btn_Voltar.Margin = new Padding(4);
+            Btn_Voltar.Name = "Btn_Voltar";
+            Btn_Voltar.Size = new Size(175, 75);
+            Btn_Voltar.TabIndex = 25;
+            Btn_Voltar.Text = "Voltar";
+            Btn_Voltar.UseVisualStyleBackColor = false;
+            Btn_Voltar.Click += Btn_Voltar_Click;
+            // 
+            // Btn_Pesquisar
+            // 
+            Btn_Pesquisar.BackColor = SystemColors.ControlLightLight;
+            Btn_Pesquisar.Font = new Font("Arial Rounded MT Bold", 12F);
+            Btn_Pesquisar.Location = new Point(733, 593);
+            Btn_Pesquisar.Margin = new Padding(4);
+            Btn_Pesquisar.Name = "Btn_Pesquisar";
+            Btn_Pesquisar.Size = new Size(175, 75);
+            Btn_Pesquisar.TabIndex = 23;
+            Btn_Pesquisar.Text = "Pesquisar";
+            Btn_Pesquisar.UseVisualStyleBackColor = false;
+            Btn_Pesquisar.Click += Btn_Pesquisar_Click;
+            // 
+            // Btn_Limpar
+            // 
+            Btn_Limpar.BackColor = SystemColors.ControlLightLight;
+            Btn_Limpar.Font = new Font("Arial Rounded MT Bold", 12F);
+            Btn_Limpar.Location = new Point(367, 593);
+            Btn_Limpar.Margin = new Padding(4);
+            Btn_Limpar.Name = "Btn_Limpar";
+            Btn_Limpar.Size = new Size(175, 75);
+            Btn_Limpar.TabIndex = 21;
+            Btn_Limpar.Text = "Limpar";
+            Btn_Limpar.UseVisualStyleBackColor = false;
+            Btn_Limpar.Click += Btn_Limpar_Click;
+            // 
+            // Btn_Excluir
+            // 
+            Btn_Excluir.BackColor = SystemColors.ControlLightLight;
+            Btn_Excluir.Font = new Font("Arial Rounded MT Bold", 12F);
+            Btn_Excluir.Location = new Point(916, 593);
+            Btn_Excluir.Margin = new Padding(4);
+            Btn_Excluir.Name = "Btn_Excluir";
+            Btn_Excluir.Size = new Size(175, 75);
+            Btn_Excluir.TabIndex = 24;
+            Btn_Excluir.Text = "Excluir";
+            Btn_Excluir.UseVisualStyleBackColor = false;
+            // 
+            // Btn_Alterar
+            // 
+            Btn_Alterar.BackColor = SystemColors.ControlLightLight;
+            Btn_Alterar.Font = new Font("Arial Rounded MT Bold", 12F);
+            Btn_Alterar.Location = new Point(550, 593);
+            Btn_Alterar.Margin = new Padding(4);
+            Btn_Alterar.Name = "Btn_Alterar";
+            Btn_Alterar.Size = new Size(175, 75);
+            Btn_Alterar.TabIndex = 22;
+            Btn_Alterar.Text = "Alterar";
+            Btn_Alterar.UseVisualStyleBackColor = false;
+            // 
+            // Btn_Cadastrar
+            // 
+            Btn_Cadastrar.BackColor = SystemColors.ControlLightLight;
+            Btn_Cadastrar.Font = new Font("Arial Rounded MT Bold", 12F);
+            Btn_Cadastrar.Location = new Point(181, 593);
+            Btn_Cadastrar.Margin = new Padding(4);
+            Btn_Cadastrar.Name = "Btn_Cadastrar";
+            Btn_Cadastrar.Size = new Size(175, 75);
+            Btn_Cadastrar.TabIndex = 20;
+            Btn_Cadastrar.Text = "Cadastrar";
+            Btn_Cadastrar.UseVisualStyleBackColor = false;
+            Btn_Cadastrar.Click += Btn_Cadastrar_Click;
+            // 
+            // Btn_Novo
+            // 
+            Btn_Novo.BackColor = SystemColors.ControlLightLight;
+            Btn_Novo.Font = new Font("Arial Rounded MT Bold", 12F);
+            Btn_Novo.Location = new Point(-2, 593);
+            Btn_Novo.Margin = new Padding(4);
+            Btn_Novo.Name = "Btn_Novo";
+            Btn_Novo.Size = new Size(175, 75);
+            Btn_Novo.TabIndex = 19;
+            Btn_Novo.Text = "Novo";
+            Btn_Novo.UseVisualStyleBackColor = false;
+            Btn_Novo.Click += Btn_Novo_Click;
+            // 
+            // FrmEstoque
+            // 
+            AutoScaleDimensions = new SizeF(10F, 18F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ControlLightLight;
+            ClientSize = new Size(1264, 681);
+            Controls.Add(Btn_Voltar);
+            Controls.Add(Btn_Pesquisar);
+            Controls.Add(Btn_Limpar);
+            Controls.Add(Btn_Excluir);
+            Controls.Add(Btn_Alterar);
+            Controls.Add(Btn_Cadastrar);
+            Controls.Add(Btn_Novo);
+            Controls.Add(Gpb_Estoque);
+            Font = new Font("Arial Rounded MT Bold", 12F);
+            Margin = new Padding(4);
+            Name = "FrmEstoque";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Estoque";
+            Gpb_Estoque.ResumeLayout(false);
+            Gpb_Estoque.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pctFotocubo).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private GroupBox Gpb_Pesquisar;
+        private ListBox ltb_Pesquisar;
+        private TextBox Txt_Descricao;
+        private Label lbldescricao;
+        private RadioButton Rb_Codigo;
+        private RadioButton Rb_Nome;
+        private GroupBox Gpb_Estoque;
+        private TextBox Txt_Produto;
+        
+        private TextBox Txt_Codigo;
+        private Label lblProduto;
+        private Label lblCategoria;
+        private Label lbl_Produto;
+        private Label lblCodigo;
+        private ComboBox cbxCategoria;
+        private Button Btn_Voltar;
+        private Button Btn_Pesquisar;
+        private Button Btn_Limpar;
+        private Button Btn_Excluir;
+        private Button Btn_Alterar;
+        private Button Btn_Cadastrar;
+        private Button Btn_Novo;
+        private MaskedTextBox txtQuantidade;
+        private MaskedTextBox TxtDescricao;
+        private Label lblQuantidade;
+        private MaskedTextBox txtPreco;
+        private Label lblPreco;
+        private TextBox txtProduto;
+        public PictureBox pctFotocubo;
     }
 }
