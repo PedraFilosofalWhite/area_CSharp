@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTela_Inicial));
             msNavBar = new MenuStrip();
             Menu_Agenda = new ToolStripMenuItem();
+            menuVizualizarAgenda = new ToolStripMenuItem();
             Menu_cliente = new ToolStripMenuItem();
             Menu_Estoque = new ToolStripMenuItem();
             Menu_Funcionario = new ToolStripMenuItem();
@@ -49,7 +50,6 @@
             Btn_avançar_mes = new Button();
             Btn_retornar = new Button();
             fileSystemWatcher1 = new FileSystemWatcher();
-            vizualizarAgendaToolStripMenuItem = new ToolStripMenuItem();
             msNavBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)fileSystemWatcher1).BeginInit();
             SuspendLayout();
@@ -57,7 +57,7 @@
             // msNavBar
             // 
             msNavBar.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            msNavBar.Items.AddRange(new ToolStripItem[] { Menu_Agenda, vizualizarAgendaToolStripMenuItem, Menu_cliente, Menu_Estoque, Menu_Funcionario, Menu_Financa, Menu_Sair });
+            msNavBar.Items.AddRange(new ToolStripItem[] { Menu_Agenda, menuVizualizarAgenda, Menu_cliente, Menu_Estoque, Menu_Funcionario, Menu_Financa, Menu_Sair });
             msNavBar.Location = new Point(0, 0);
             msNavBar.Name = "msNavBar";
             msNavBar.RenderMode = ToolStripRenderMode.Professional;
@@ -71,6 +71,13 @@
             Menu_Agenda.Size = new Size(89, 22);
             Menu_Agenda.Text = "&Agendar";
             Menu_Agenda.Click += Menu_Agenda_Click;
+            // 
+            // menuVizualizarAgenda
+            // 
+            menuVizualizarAgenda.Name = "menuVizualizarAgenda";
+            menuVizualizarAgenda.Size = new Size(162, 22);
+            menuVizualizarAgenda.Text = "Vizualizar Agenda";
+            menuVizualizarAgenda.Click += menuVizualizarAgenda_Click;
             // 
             // Menu_cliente
             // 
@@ -230,13 +237,6 @@
             fileSystemWatcher1.EnableRaisingEvents = true;
             fileSystemWatcher1.SynchronizingObject = this;
             // 
-            // vizualizarAgendaToolStripMenuItem
-            // 
-            vizualizarAgendaToolStripMenuItem.Name = "vizualizarAgendaToolStripMenuItem";
-            vizualizarAgendaToolStripMenuItem.Size = new Size(162, 22);
-            vizualizarAgendaToolStripMenuItem.Text = "Vizualizar Agenda";
-            vizualizarAgendaToolStripMenuItem.Click += vizualizarAgendaToolStripMenuItem_Click;
-            // 
             // frmTela_Inicial
             // 
             AutoScaleDimensions = new SizeF(10F, 18F);
@@ -293,6 +293,6 @@
         private Button Btn_avançar_mes;
         private Button Btn_retornar;
         private FileSystemWatcher fileSystemWatcher1;
-        private ToolStripMenuItem vizualizarAgendaToolStripMenuItem;
+        private ToolStripMenuItem menuVizualizarAgenda;
     }
 }
