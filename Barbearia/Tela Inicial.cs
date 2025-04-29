@@ -100,7 +100,9 @@ namespace Barbearia
 
         private void Menu_Funcionario_Click(object sender, EventArgs e)
         {
-
+            FrmFuncionario funcionario = new FrmFuncionario();
+            funcionario.Show();
+            this.Hide();
         }
 
         private void Menu_Financa_Click(object sender, EventArgs e)
@@ -160,7 +162,7 @@ namespace Barbearia
             mes++;
             string nomemes = DateTimeFormatInfo.CurrentInfo.GetMonthName(mes);
 
-            Lb_mes.Text = nomemes + "" + ano;
+            Lb_mes.Text = nomemes + "  " + ano;
 
             Flp_Calendario.Controls.Clear();
 
@@ -197,7 +199,7 @@ namespace Barbearia
             mes--;
             string nomemes = DateTimeFormatInfo.CurrentInfo.GetMonthName(mes);
 
-            Lb_mes.Text = nomemes + "" + ano;
+            Lb_mes.Text = nomemes + "   " + ano;
 
             Flp_Calendario.Controls.Clear();
 

@@ -15,6 +15,7 @@ namespace Barbearia
         public Finança()
         {
             InitializeComponent();
+            DesabilitarCampos();
         }
 
         private void Btn_Voltar_Click(object sender, EventArgs e)
@@ -22,7 +23,7 @@ namespace Barbearia
             frmTela_Inicial tela = new frmTela_Inicial();
             tela.Show();
             this.Hide();
-            // aaaaaaaaaaaaaaaaaaaaaa
+            
         }
         private void AtualizarResumo()
         {
@@ -37,10 +38,20 @@ namespace Barbearia
             txb_Entradas.Text = totalEntradas.ToString("C");
             txb_Saldo.Text = saldo.ToString("C");
         }
-        public enum TipoFinanceiro
+
+        private void txb_Saldo_TextChanged(object sender, EventArgs e)
         {
-            Entrada,
-            Saida
+
+        }
+
+        public void DesabilitarCampos()
+        {
+            txb_Entradas.Enabled = false;
+            txb_Saldo.Enabled = false;
+            Txt_Projetivo.Enabled = false;
+            Txt_QuantCliente.Enabled = false;
+            Txt__ServPrestado.Enabled = false;
+            Txt_ProdVendidos.Enabled = false;
         }
 
     }
