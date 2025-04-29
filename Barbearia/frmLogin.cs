@@ -1,3 +1,6 @@
+using MySql.Data.MySqlClient;
+using System.Data;
+
 namespace Barbearia
 {
     public partial class Login : Form
@@ -5,6 +8,7 @@ namespace Barbearia
         public Login()
         {
             InitializeComponent();
+            
         }
        private void avançar_tela_inicial()
         {
@@ -29,7 +33,8 @@ namespace Barbearia
 
         private void Bt_Entrar_Click(object sender, EventArgs e)
         {
-            string usuario, senha;
+            string usuario;
+            string senha;
             usuario = Tb_Usuario.Text;
             senha = Tb_Senha.Text;
 
@@ -46,7 +51,7 @@ namespace Barbearia
             }
 
             // credenciais  validar o acesso
-            if (usuario == "paulogoiaba" && senha == "123456")
+            if (BuscarFunc(usuario, senha))
             {
                 avançar_tela_inicial();
             }
@@ -55,6 +60,28 @@ namespace Barbearia
                 MessageBox.Show("Senha ou Usuário inválido", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+        }
+
+        public Boolean BuscarFunc (string usuario, string senha)
+        {
+            MySqlCommand comm = new MySqlCommand();
+            comm.CommandText = "select * from Funcionarios where loginFunc = @nomeFunc and senhaFunc = @senhaFunc;";
+            comm.CommandType = CommandType.Text;
+            comm.Connection = Conexao.obterConexao();
+
+            comm.Parameters.Clear();
+            comm.Parameters.Add("@nomeFunc", MySqlDbType.VarChar, 50).Value = usuario;
+            comm.Parameters.Add("@senhaFunc", MySqlDbType.VarChar, 12).Value = senha;
+
+            MySqlDataReader DR;
+            DR = comm.ExecuteReader();
+            DR.Read();
+
+            bool resp = DR.HasRows;
+
+            Conexao.Fecharconexao();
+
+            return resp;
         }
     }
 }

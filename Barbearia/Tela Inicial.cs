@@ -77,11 +77,6 @@ namespace Barbearia
             this.Hide();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void Menu_Agenda_Click(object sender, EventArgs e)
         {
             frmAgenda agenda = new frmAgenda();
@@ -234,7 +229,7 @@ namespace Barbearia
             }
         }
 
-        private void vizualizarAgendaToolStripMenuItem_Click(object sender, EventArgs e)
+        private void menuVizualizarAgenda_Click(object sender, EventArgs e)
         {
             frmVisualizarAgenda abrir = new frmVisualizarAgenda();
             abrir.Show();
