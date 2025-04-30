@@ -155,9 +155,8 @@ namespace Barbearia
 
             return resp;
 
- 
-        }
 
+        }
         private void Btn_Cadastrar_Click(object sender, EventArgs e)
         {
 
@@ -197,6 +196,79 @@ namespace Barbearia
 
             }
         }
+        public void pesquisarPorNome(string descricao)
+        {
+            MySqlCommand comm = new MySqlCommand();
+            comm.CommandText = "select nomeCli from Clientes" +
+                "where nomeCli Like '%@Nome%';";
+            comm.CommandType = CommandType.Text;
+
+            comm.Parameters.Clear();
+            comm.Parameters.Add("@nome", MySqlDbType.VarChar, 100).Value = descricao;
+
+            comm.Connection = Conexao.obterConexao();
+
+            MySqlDataReader DR;
+            DR = comm.ExecuteReader();
+
+            while (DR.Read())
+            {
+                ltb_Pesquisar.Items.Add((DR.GetString(0)));
+            }
+
+            Conexao.Fecharconexao();
+        }
+        public void pesquisarProCodigo(int descricao)
+        {
+            MySqlCommand comm = new MySqlCommand();
+            comm.CommandText = "select idCli from Clientes" +
+                "where codCli = @idCliente;";
+            comm.CommandType = CommandType.Text;
+
+            comm.Parameters.Clear();
+            comm.Parameters.Add("@idCLiente", MySqlDbType.Int16).Value = descricao;
+
+            comm.Connection = Conexao.obterConexao();
+
+            MySqlDataReader DR;
+            DR = comm.ExecuteReader();
+
+            try
+            {
+                ltb_Pesquisar.Items.Add(DR.GetString(0));
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Registro não encontrado");
+                Txt_Descricao.Focus();
+                Txt_Descricao.Clear();
+            }
+
+            Conexao.Fecharconexao();
+        }
+        public void pesquisarVip(string descricao)
+        {
+            MySqlCommand comm = new MySqlCommand();
+            comm.CommandText = "select nomeCli from Clientes" +
+                "where nomeCli Like '%@Nome%';";
+            comm.CommandType = CommandType.Text;
+
+            comm.Parameters.Clear();
+            comm.Parameters.Add("@nome", MySqlDbType.VarChar, 100).Value = descricao;
+
+            comm.Connection = Conexao.obterConexao();
+
+            MySqlDataReader DR;
+            DR = comm.ExecuteReader();
+
+            while (DR.Read())
+            {
+                ltb_Pesquisar.Items.Add((DR.GetString(0)));
+            }
+
+            Conexao.Fecharconexao();
+        }
+
     }
 }
 
