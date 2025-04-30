@@ -97,7 +97,7 @@ namespace Barbearia
             estoque.Show();
             this.Hide();
         }
-            
+
         private void Menu_Funcionario_Click(object sender, EventArgs e)
         {
             FrmFuncionario funcionario = new FrmFuncionario();
@@ -158,82 +158,162 @@ namespace Barbearia
 
         private void Btn_avançar_mes_Click(object sender, EventArgs e)
         {
-            DateTime now = DateTime.Now;
-            mes++;
-            string nomemes = DateTimeFormatInfo.CurrentInfo.GetMonthName(mes);
-
-            Lb_mes.Text = nomemes + "  " + ano;
-
-            Flp_Calendario.Controls.Clear();
-
-            // Primeiro dia do mês
-            DateTime Primeirodia = new DateTime(ano, mes, 1);
-
-            // Obter a contagem dos dias dos meses
-            int dias = DateTime.DaysInMonth(ano, mes);
-
-            //conversão para deixar inteiro 
-            int primeirosdias = Convert.ToInt32(Primeirodia.DayOfWeek.ToString("d")) + 1;
-
-            // Ultilizando o userCalendario em branco
-
-            for (int i = 1; i < primeirosdias; i++)
+            try
             {
-                UserCalendario ucBranco = new UserCalendario();
-                Flp_Calendario.Controls.Add(ucBranco);
-            }
+                DateTime now = DateTime.Now;
+                mes++;
+                string nomemes = DateTimeFormatInfo.CurrentInfo.GetMonthName(mes);
 
-            //Criação do userControl para os dias 
-            for (int i = 1; i <= dias; i++)
+                Lb_mes.Text = nomemes + "  " + ano;
+
+                Flp_Calendario.Controls.Clear();
+
+                // Primeiro dia do mês
+                DateTime Primeirodia = new DateTime(ano, mes, 1);
+
+                // Obter a contagem dos dias dos meses
+                int dias = DateTime.DaysInMonth(ano, mes);
+
+                //conversão para deixar inteiro 
+                int primeirosdias = Convert.ToInt32(Primeirodia.DayOfWeek.ToString("d")) + 1;
+
+                // Ultilizando o userCalendario em branco
+
+                for (int i = 1; i < primeirosdias; i++)
+                {
+                    UserCalendario ucBranco = new UserCalendario();
+                    Flp_Calendario.Controls.Add(ucBranco);
+                }
+
+                //Criação do userControl para os dias 
+                for (int i = 1; i <= dias; i++)
+                {
+                    Calendario_Dias ucDias = new Calendario_Dias();
+                    ucDias.Dias(i);
+                    Flp_Calendario.Controls.Add((ucDias));
+                }
+            }
+            catch
             {
-                Calendario_Dias ucDias = new Calendario_Dias();
-                ucDias.Dias(i);
-                Flp_Calendario.Controls.Add((ucDias));
-            }
+                MessageBox.Show("Data muito extensa para o periodo atual", "Informação ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DateTime now = DateTime.Now;
+                mes--;
+                string nomemes = DateTimeFormatInfo.CurrentInfo.GetMonthName(mes);
 
+                Lb_mes.Text = nomemes + "   " + ano;
+
+                Flp_Calendario.Controls.Clear();
+
+                // Primeiro dia do mês
+                DateTime Primeirodia = new DateTime(ano, mes, 1);
+
+                // Obter a contagem dos dias dos meses
+                int dias = DateTime.DaysInMonth(ano, mes);
+
+                //conversão para deixar inteiro 
+                int primeirosdias = Convert.ToInt32(Primeirodia.DayOfWeek.ToString("d")) + 1;
+
+                // Ultilizando o userCalendario em branco
+
+                for (int i = 1; i < primeirosdias; i++)
+                {
+                    UserCalendario ucBranco = new UserCalendario();
+                    Flp_Calendario.Controls.Add(ucBranco);
+                }
+
+                //Criação do userControl para os dias 
+                for (int i = 1; i <= dias; i++)
+                {
+                    Calendario_Dias ucDias = new Calendario_Dias();
+                    ucDias.Dias(i);
+                    Flp_Calendario.Controls.Add((ucDias));
+                }
+                return;
+            }
         }
 
         private void Btn_retornar_Click(object sender, EventArgs e)
         {
-            DateTime now = DateTime.Now;
-            mes--;
-            string nomemes = DateTimeFormatInfo.CurrentInfo.GetMonthName(mes);
 
-            Lb_mes.Text = nomemes + "   " + ano;
 
-            Flp_Calendario.Controls.Clear();
-
-            // Primeiro dia do mês
-            DateTime Primeirodia = new DateTime(ano, mes, 1);
-
-            // Obter a contagem dos dias dos meses
-            int dias = DateTime.DaysInMonth(ano, mes);
-
-            //conversão para deixar inteiro 
-            int primeirosdias = Convert.ToInt32(Primeirodia.DayOfWeek.ToString("d")) + 1;
-
-            // Ultilizando o userCalendario em branco
-
-            for (int i = 1; i < primeirosdias; i++)
+            try
             {
-                UserCalendario ucBranco = new UserCalendario();
-                Flp_Calendario.Controls.Add(ucBranco);
+                DateTime now = DateTime.Now;
+                mes--;
+                string nomemes = DateTimeFormatInfo.CurrentInfo.GetMonthName(mes);
+
+                Lb_mes.Text = nomemes + "   " + ano;
+
+                Flp_Calendario.Controls.Clear();
+
+                // Primeiro dia do mês
+                DateTime Primeirodia = new DateTime(ano, mes, 1);
+
+                // Obter a contagem dos dias dos meses
+                int dias = DateTime.DaysInMonth(ano, mes);
+
+                //conversão para deixar inteiro 
+                int primeirosdias = Convert.ToInt32(Primeirodia.DayOfWeek.ToString("d")) + 1;
+
+                // Ultilizando o userCalendario em branco
+
+                for (int i = 1; i < primeirosdias; i++)
+                {
+                    UserCalendario ucBranco = new UserCalendario();
+                    Flp_Calendario.Controls.Add(ucBranco);
+                }
+
+                //Criação do userControl para os dias 
+                for (int i = 1; i <= dias; i++)
+                {
+                    Calendario_Dias ucDias = new Calendario_Dias();
+                    ucDias.Dias(i);
+                    Flp_Calendario.Controls.Add((ucDias));
+                }
             }
-
-            //Criação do userControl para os dias 
-            for (int i = 1; i <= dias; i++)
+            catch
             {
-                Calendario_Dias ucDias = new Calendario_Dias();
-                ucDias.Dias(i);
-                Flp_Calendario.Controls.Add((ucDias));
+                DateTime now = DateTime.Now;
+                mes++;
+                string nomemes = DateTimeFormatInfo.CurrentInfo.GetMonthName(mes);
+
+                Lb_mes.Text = nomemes + "   " + ano;
+
+                Flp_Calendario.Controls.Clear();
+
+                // Primeiro dia do mês
+                DateTime Primeirodia = new DateTime(ano, mes, 1);
+
+                // Obter a contagem dos dias dos meses
+                int dias = DateTime.DaysInMonth(ano, mes);
+
+                //conversão para deixar inteiro 
+                int primeirosdias = Convert.ToInt32(Primeirodia.DayOfWeek.ToString("d")) + 1;
+
+                // Ultilizando o userCalendario em branco
+
+                for (int i = 1; i < primeirosdias; i++)
+                {
+                    UserCalendario ucBranco = new UserCalendario();
+                    Flp_Calendario.Controls.Add(ucBranco);
+                }
+
+                //Criação do userControl para os dias 
+                for (int i = 1; i <= dias; i++)
+                {
+                    Calendario_Dias ucDias = new Calendario_Dias();
+                    ucDias.Dias(i);
+                    Flp_Calendario.Controls.Add((ucDias));
+                }
+
             }
         }
 
-        private void menuVizualizarAgenda_Click(object sender, EventArgs e)
-        {
-            frmVisualizarAgenda abrir = new frmVisualizarAgenda();
-            abrir.Show();
+            private void menuVizualizarAgenda_Click(object sender, EventArgs e)
+            {
+                frmVisualizarAgenda abrir = new frmVisualizarAgenda();
+                abrir.Show();
+            }
         }
-    }
-}
+    } 
 

@@ -8,15 +8,30 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.Runtime.InteropServices;
+using System.Globalization;
+
+
 
 namespace Barbearia
 {
     public partial class Cliente : Form
     {
+
+
+        const int MF_BYCOMMAND = 0X400;
+        [DllImport("user32")]
+        static extern int RemoveMenu(IntPtr hMenu, int nPosition, int wFlags);
+        [DllImport("user32")]
+        static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
+        [DllImport("user32")]
+        static extern int GetMenuItemCount(IntPtr hWnd);
+
         public Cliente()
         {
             InitializeComponent();
             DesabilitarCampos();
+           
         }
         public void DesabilitarCampos()
         {
@@ -49,7 +64,9 @@ namespace Barbearia
         }
         private void Cliente_Load(object sender, EventArgs e)
         {
-
+            IntPtr hMenu = GetSystemMenu(this.Handle, false);
+            int MenuCount = GetMenuItemCount(hMenu) - 1;
+            RemoveMenu(hMenu, MenuCount, MF_BYCOMMAND);
         }
 
         private void Btn_Voltar_Click(object sender, EventArgs e)

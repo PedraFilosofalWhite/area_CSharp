@@ -273,6 +273,7 @@
             // Gpb_Pesquisar
             // 
             Gpb_Pesquisar.BackColor = SystemColors.ControlLightLight;
+            Gpb_Pesquisar.Controls.Add(btn_voltar2);
             Gpb_Pesquisar.Controls.Add(ltb_Pesquisar);
             Gpb_Pesquisar.Controls.Add(Txt_Descricao);
             Gpb_Pesquisar.Controls.Add(lblDescricao);
@@ -339,7 +340,7 @@
             // btn_voltar2
             // 
             btn_voltar2.BackColor = SystemColors.ControlLightLight;
-            btn_voltar2.Location = new Point(1083, 600);
+            btn_voltar2.Location = new Point(1071, 329);
             btn_voltar2.Name = "btn_voltar2";
             btn_voltar2.Size = new Size(175, 75);
             btn_voltar2.TabIndex = 19;
@@ -354,7 +355,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(1260, 677);
-            Controls.Add(btn_voltar2);
             Controls.Add(Gpb_Pesquisar);
             Controls.Add(Btn_Voltar);
             Controls.Add(Btn_Pesquisar);

@@ -301,6 +301,7 @@
             Name = "FrmEstoque";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Estoque";
+            Load += FrmEstoque_Load;
             Gpb_Estoque.ResumeLayout(false);
             Gpb_Estoque.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pctFotocubo).EndInit();

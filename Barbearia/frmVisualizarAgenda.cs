@@ -12,9 +12,16 @@ namespace Barbearia
 {
     public partial class frmVisualizarAgenda : Form
     {
+       
+
         public frmVisualizarAgenda()
         {
             InitializeComponent();
+        }
+
+        private void frmVisualizarAgenda_Load(object sender, EventArgs e)
+        {
+           
         }
     }
 }
