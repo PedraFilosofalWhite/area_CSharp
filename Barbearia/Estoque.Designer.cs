@@ -46,10 +46,9 @@
             Btn_Voltar = new Button();
             Btn_Pesquisar = new Button();
             Btn_Limpar = new Button();
-            Btn_Excluir = new Button();
-            Btn_Alterar = new Button();
             Btn_Cadastrar = new Button();
             Btn_Novo = new Button();
+            Btn_voltar2 = new Button();
             Gpb_Estoque.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pctFotocubo).BeginInit();
             SuspendLayout();
@@ -75,7 +74,7 @@
             Gpb_Estoque.Name = "Gpb_Estoque";
             Gpb_Estoque.Padding = new Padding(6, 5, 6, 5);
             Gpb_Estoque.Size = new Size(1246, 197);
-            Gpb_Estoque.TabIndex = 8;
+            Gpb_Estoque.TabIndex = 1;
             Gpb_Estoque.TabStop = false;
             Gpb_Estoque.Text = "Cadastrar Produtos";
             // 
@@ -95,8 +94,8 @@
             txtProduto.Location = new Point(113, 97);
             txtProduto.Margin = new Padding(4);
             txtProduto.Name = "txtProduto";
-            txtProduto.Size = new Size(88, 26);
-            txtProduto.TabIndex = 16;
+            txtProduto.Size = new Size(210, 26);
+            txtProduto.TabIndex = 1;
             // 
             // txtPreco
             // 
@@ -104,7 +103,7 @@
             txtPreco.Margin = new Padding(4);
             txtPreco.Name = "txtPreco";
             txtPreco.Size = new Size(135, 26);
-            txtPreco.TabIndex = 15;
+            txtPreco.TabIndex = 3;
             // 
             // lblPreco
             // 
@@ -123,7 +122,7 @@
             txtQuantidade.Margin = new Padding(4);
             txtQuantidade.Name = "txtQuantidade";
             txtQuantidade.Size = new Size(135, 26);
-            txtQuantidade.TabIndex = 13;
+            txtQuantidade.TabIndex = 4;
             // 
             // TxtDescricao
             // 
@@ -131,7 +130,7 @@
             TxtDescricao.Margin = new Padding(4);
             TxtDescricao.Name = "TxtDescricao";
             TxtDescricao.Size = new Size(210, 26);
-            TxtDescricao.TabIndex = 12;
+            TxtDescricao.TabIndex = 2;
             // 
             // lbldescricao
             // 
@@ -161,11 +160,12 @@
             cbxCategoria.Location = new Point(678, 141);
             cbxCategoria.Margin = new Padding(4);
             cbxCategoria.Name = "cbxCategoria";
-            cbxCategoria.Size = new Size(215, 26);
+            cbxCategoria.Size = new Size(226, 26);
             cbxCategoria.TabIndex = 8;
             // 
             // Txt_Codigo
             // 
+            Txt_Codigo.Enabled = false;
             Txt_Codigo.Location = new Point(113, 55);
             Txt_Codigo.Margin = new Padding(4);
             Txt_Codigo.Name = "Txt_Codigo";
@@ -209,11 +209,11 @@
             // 
             Btn_Voltar.BackColor = SystemColors.ControlLightLight;
             Btn_Voltar.Font = new Font("Arial Rounded MT Bold", 12F);
-            Btn_Voltar.Location = new Point(1099, 593);
+            Btn_Voltar.Location = new Point(1076, 593);
             Btn_Voltar.Margin = new Padding(4);
             Btn_Voltar.Name = "Btn_Voltar";
             Btn_Voltar.Size = new Size(175, 75);
-            Btn_Voltar.TabIndex = 25;
+            Btn_Voltar.TabIndex = 5;
             Btn_Voltar.Text = "Voltar";
             Btn_Voltar.UseVisualStyleBackColor = false;
             Btn_Voltar.Click += Btn_Voltar_Click;
@@ -222,11 +222,11 @@
             // 
             Btn_Pesquisar.BackColor = SystemColors.ControlLightLight;
             Btn_Pesquisar.Font = new Font("Arial Rounded MT Bold", 12F);
-            Btn_Pesquisar.Location = new Point(733, 593);
+            Btn_Pesquisar.Location = new Point(560, 593);
             Btn_Pesquisar.Margin = new Padding(4);
             Btn_Pesquisar.Name = "Btn_Pesquisar";
             Btn_Pesquisar.Size = new Size(175, 75);
-            Btn_Pesquisar.TabIndex = 23;
+            Btn_Pesquisar.TabIndex = 4;
             Btn_Pesquisar.Text = "Pesquisar";
             Btn_Pesquisar.UseVisualStyleBackColor = false;
             Btn_Pesquisar.Click += Btn_Pesquisar_Click;
@@ -235,48 +235,24 @@
             // 
             Btn_Limpar.BackColor = SystemColors.ControlLightLight;
             Btn_Limpar.Font = new Font("Arial Rounded MT Bold", 12F);
-            Btn_Limpar.Location = new Point(367, 593);
+            Btn_Limpar.Location = new Point(377, 593);
             Btn_Limpar.Margin = new Padding(4);
             Btn_Limpar.Name = "Btn_Limpar";
             Btn_Limpar.Size = new Size(175, 75);
-            Btn_Limpar.TabIndex = 21;
+            Btn_Limpar.TabIndex = 3;
             Btn_Limpar.Text = "Limpar";
             Btn_Limpar.UseVisualStyleBackColor = false;
             Btn_Limpar.Click += Btn_Limpar_Click;
-            // 
-            // Btn_Excluir
-            // 
-            Btn_Excluir.BackColor = SystemColors.ControlLightLight;
-            Btn_Excluir.Font = new Font("Arial Rounded MT Bold", 12F);
-            Btn_Excluir.Location = new Point(916, 593);
-            Btn_Excluir.Margin = new Padding(4);
-            Btn_Excluir.Name = "Btn_Excluir";
-            Btn_Excluir.Size = new Size(175, 75);
-            Btn_Excluir.TabIndex = 24;
-            Btn_Excluir.Text = "Excluir";
-            Btn_Excluir.UseVisualStyleBackColor = false;
-            // 
-            // Btn_Alterar
-            // 
-            Btn_Alterar.BackColor = SystemColors.ControlLightLight;
-            Btn_Alterar.Font = new Font("Arial Rounded MT Bold", 12F);
-            Btn_Alterar.Location = new Point(550, 593);
-            Btn_Alterar.Margin = new Padding(4);
-            Btn_Alterar.Name = "Btn_Alterar";
-            Btn_Alterar.Size = new Size(175, 75);
-            Btn_Alterar.TabIndex = 22;
-            Btn_Alterar.Text = "Alterar";
-            Btn_Alterar.UseVisualStyleBackColor = false;
             // 
             // Btn_Cadastrar
             // 
             Btn_Cadastrar.BackColor = SystemColors.ControlLightLight;
             Btn_Cadastrar.Font = new Font("Arial Rounded MT Bold", 12F);
-            Btn_Cadastrar.Location = new Point(181, 593);
+            Btn_Cadastrar.Location = new Point(194, 593);
             Btn_Cadastrar.Margin = new Padding(4);
             Btn_Cadastrar.Name = "Btn_Cadastrar";
             Btn_Cadastrar.Size = new Size(175, 75);
-            Btn_Cadastrar.TabIndex = 20;
+            Btn_Cadastrar.TabIndex = 2;
             Btn_Cadastrar.Text = "Cadastrar";
             Btn_Cadastrar.UseVisualStyleBackColor = false;
             Btn_Cadastrar.Click += Btn_Cadastrar_Click;
@@ -285,14 +261,27 @@
             // 
             Btn_Novo.BackColor = SystemColors.ControlLightLight;
             Btn_Novo.Font = new Font("Arial Rounded MT Bold", 12F);
-            Btn_Novo.Location = new Point(-2, 593);
+            Btn_Novo.Location = new Point(11, 593);
             Btn_Novo.Margin = new Padding(4);
             Btn_Novo.Name = "Btn_Novo";
             Btn_Novo.Size = new Size(175, 75);
-            Btn_Novo.TabIndex = 19;
+            Btn_Novo.TabIndex = 1;
             Btn_Novo.Text = "Novo";
             Btn_Novo.UseVisualStyleBackColor = false;
             Btn_Novo.Click += Btn_Novo_Click;
+            // 
+            // Btn_voltar2
+            // 
+            Btn_voltar2.BackColor = SystemColors.ControlLightLight;
+            Btn_voltar2.Font = new Font("Arial Rounded MT Bold", 12F);
+            Btn_voltar2.Location = new Point(1076, 593);
+            Btn_voltar2.Margin = new Padding(4);
+            Btn_voltar2.Name = "Btn_voltar2";
+            Btn_voltar2.Size = new Size(175, 75);
+            Btn_voltar2.TabIndex = 6;
+            Btn_voltar2.Text = "Voltar";
+            Btn_voltar2.UseVisualStyleBackColor = false;
+            Btn_voltar2.Click += Btn_voltar2_Click;
             // 
             // FrmEstoque
             // 
@@ -300,11 +289,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLightLight;
             ClientSize = new Size(1264, 681);
+            Controls.Add(Btn_voltar2);
             Controls.Add(Btn_Voltar);
             Controls.Add(Btn_Pesquisar);
             Controls.Add(Btn_Limpar);
-            Controls.Add(Btn_Excluir);
-            Controls.Add(Btn_Alterar);
             Controls.Add(Btn_Cadastrar);
             Controls.Add(Btn_Novo);
             Controls.Add(Gpb_Estoque);
@@ -339,8 +327,6 @@
         private Button Btn_Voltar;
         private Button Btn_Pesquisar;
         private Button Btn_Limpar;
-        private Button Btn_Excluir;
-        private Button Btn_Alterar;
         private Button Btn_Cadastrar;
         private Button Btn_Novo;
         private MaskedTextBox txtQuantidade;
@@ -350,5 +336,6 @@
         private Label lblPreco;
         private TextBox txtProduto;
         public PictureBox pctFotocubo;
+        private Button Btn_voltar2;
     }
 }

@@ -41,6 +41,9 @@
             btnPesquisar = new Button();
             lblCategoria = new Label();
             BtnVoltar = new Button();
+            button1 = new Button();
+            Btn_Excluir = new Button();
+            Btn_Alterar = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pctFotocubo).BeginInit();
             Gpb_Pesquisar.SuspendLayout();
@@ -172,7 +175,7 @@
             // 
             BtnVoltar.BackColor = SystemColors.ControlLightLight;
             BtnVoltar.Font = new Font("Arial Rounded MT Bold", 12F);
-            BtnVoltar.Location = new Point(193, 594);
+            BtnVoltar.Location = new Point(1077, 595);
             BtnVoltar.Name = "BtnVoltar";
             BtnVoltar.Size = new Size(175, 75);
             BtnVoltar.TabIndex = 18;
@@ -180,11 +183,50 @@
             BtnVoltar.UseVisualStyleBackColor = false;
             BtnVoltar.Click += BtnVoltar_Click;
             // 
+            // button1
+            // 
+            button1.BackColor = SystemColors.ControlLightLight;
+            button1.Font = new Font("Arial Rounded MT Bold", 12F);
+            button1.Location = new Point(194, 595);
+            button1.Margin = new Padding(4);
+            button1.Name = "button1";
+            button1.Size = new Size(175, 75);
+            button1.TabIndex = 25;
+            button1.Text = "Limpar";
+            button1.UseVisualStyleBackColor = false;
+            // 
+            // Btn_Excluir
+            // 
+            Btn_Excluir.BackColor = SystemColors.ControlLightLight;
+            Btn_Excluir.Font = new Font("Arial Rounded MT Bold", 12F);
+            Btn_Excluir.Location = new Point(560, 595);
+            Btn_Excluir.Margin = new Padding(4);
+            Btn_Excluir.Name = "Btn_Excluir";
+            Btn_Excluir.Size = new Size(175, 75);
+            Btn_Excluir.TabIndex = 27;
+            Btn_Excluir.Text = "Excluir";
+            Btn_Excluir.UseVisualStyleBackColor = false;
+            // 
+            // Btn_Alterar
+            // 
+            Btn_Alterar.BackColor = SystemColors.ControlLightLight;
+            Btn_Alterar.Font = new Font("Arial Rounded MT Bold", 12F);
+            Btn_Alterar.Location = new Point(377, 595);
+            Btn_Alterar.Margin = new Padding(4);
+            Btn_Alterar.Name = "Btn_Alterar";
+            Btn_Alterar.Size = new Size(175, 75);
+            Btn_Alterar.TabIndex = 26;
+            Btn_Alterar.Text = "Alterar";
+            Btn_Alterar.UseVisualStyleBackColor = false;
+            // 
             // FrmListaEstoque
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1264, 681);
+            Controls.Add(button1);
+            Controls.Add(Btn_Excluir);
+            Controls.Add(Btn_Alterar);
             Controls.Add(Gpb_Pesquisar);
             Controls.Add(BtnVoltar);
             Controls.Add(btnCarregaGridView);
@@ -214,5 +256,8 @@
         private Button btnPesquisar;
         private Label lblCategoria;
         private Button btn_Limpar;
+        private Button button1;
+        private Button Btn_Excluir;
+        private Button Btn_Alterar;
     }
 }
