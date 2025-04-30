@@ -56,17 +56,25 @@ namespace Barbearia
         public void limpar()
         {
             Txt_nome.Clear();
-            Txt_Email.Clear();
             Msk_Telefone.Clear();
-            Rb_Feminino.Checked = false;
-            Rb_Masculino.Checked = false;
-            Rb_NaoInfo.Checked = false;
         }
         private void Cliente_Load(object sender, EventArgs e)
         {
             IntPtr hMenu = GetSystemMenu(this.Handle, false);
             int MenuCount = GetMenuItemCount(hMenu) - 1;
             RemoveMenu(hMenu, MenuCount, MF_BYCOMMAND);
+            rdbVipNao.Checked = false;
+            rdbVipSim.Checked = false;
+            rdbVipNao.Checked = false;
+
+            Txt_Descricao.Clear();
+            rdbCodigo.Checked = false;
+            rdbNome.Checked = false;
+            rdbVip.Checked = false;
+
+            ltb_Pesquisar.Items.Clear();
+
+            Txt_nome.Focus();
         }
 
         private void Btn_Voltar_Click(object sender, EventArgs e)
@@ -94,6 +102,8 @@ namespace Barbearia
         private void Btn_Pesquisar_Click(object sender, EventArgs e)
         {
             Gpb_Pesquisar.Visible = true;
+
+
         }
 
         private void Btn_Limpar_Click(object sender, EventArgs e)
@@ -101,7 +111,7 @@ namespace Barbearia
             limpar();
         }
 
-        private void btn_voltar2_Click(object sender, EventArgs e)
+        public void btn_voltar2_Click(object sender, EventArgs e)
         {
             DesabilitarCampos();
             Btn_Novo.Visible = true;
@@ -118,15 +128,75 @@ namespace Barbearia
             Btn_Novo.Enabled = true;
 
         }
-
-        private void Txt_Email_TextChanged(object sender, EventArgs e)
+        public int cadastrarCliente()
         {
+            MySqlCommand comm = new MySqlCommand();
+            comm.CommandText = "insert into Clientes (nomeCli, TelCelCli, vipCli) values (@nomeCli, @TelCelCli, @vipCli);";
+            comm.CommandType = CommandType.Text;
 
+            comm.Parameters.Clear();
+            comm.Parameters.Add("@nomeCli", MySqlDbType.VarChar, 100).Value = Txt_nome.Text;
+            comm.Parameters.Add("@telCelCli", MySqlDbType.VarChar, 10).Value = Msk_Telefone.Text;
+            if (rdbVipSim.Checked)
+            {
+                comm.Parameters.Add("@vipCli", MySqlDbType.Int16).Value = 1;
+
+            }
+            if (rdbVipNao.Checked)
+            {
+                comm.Parameters.Add("@vipCli", MySqlDbType.Int16).Value = 0;
+            }
+
+            comm.Connection = Conexao.obterConexao();
+
+            int resp = comm.ExecuteNonQuery();
+
+            Conexao.Fecharconexao();
+
+            return resp;
+
+ 
         }
 
-        private void Txt_Codigo_TextChanged(object sender, EventArgs e)
+        private void Btn_Cadastrar_Click(object sender, EventArgs e)
         {
 
+            if (Txt_nome.Text.Equals("") ||
+                Msk_Telefone.Text.Equals("     -") ||
+                (!rdbVipSim.Checked && !rdbVipNao.Checked))
+            {
+                MessageBox.Show("Favor preencher todos os campos!!!");
+            }
+            else
+            {
+                if (cadastrarCliente() == 1)
+                {
+                    MessageBox.Show("Cadastrado com sucesso!!!");
+                    limpar();
+                    DesabilitarCampos();
+
+                    DesabilitarCampos();
+                    Btn_Novo.Visible = true;
+                    Btn_Alterar.Visible = true;
+                    Btn_Excluir.Visible = true;
+                    btn_voltar2.Visible = false;
+                    Btn_Voltar.Visible = true;
+                    Btn_Novo.Location = new Point(2, 600);
+                    Btn_Cadastrar.Location = new Point(183, 600);
+                    Btn_Limpar.Location = new Point(364, 600);
+                    Btn_Alterar.Location = new Point(540, 600);
+                    Btn_Excluir.Location = new Point(721, 600);
+                    Btn_Pesquisar.Location = new Point(902, 600);
+                    Btn_Novo.Enabled = true;
+                }
+                else
+                {
+                    MessageBox.Show("Erro ao cadastrar!!!");
+
+                }
+
+            }
         }
     }
 }
+

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Globalization;
+using MySql.Data.MySqlClient;
 
 namespace Barbearia
 {
@@ -38,6 +39,28 @@ namespace Barbearia
             IntPtr hMenu = GetSystemMenu(this.Handle, false);
             int MenuCount = GetMenuItemCount(hMenu) - 1;
             RemoveMenu(hMenu, MenuCount, MF_BYCOMMAND);
+        
+
+        private void Btn_Limpar_Click(object sender, EventArgs e)
+        {
+            limparCampos();
+        }
+
+        public void limparCampos()
+        {
+            Txt_nome.Clear();
+            Txt_Codigo.Clear();
+            Txt_Descricao.Clear();
+            Txt_nome.Text = "";
+            Msk_Telefone.Clear();
+
+            Txt_Descricao.Clear();
+            Rb_Codigo.Checked = false;
+            Rb_Nome.Checked = false;
+
+            ltb_Pesquisar.Items.Clear();
+
+            Txt_nome.Focus();
         }
     }
 }
