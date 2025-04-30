@@ -60,7 +60,7 @@
             // btn_voltar2
             // 
             btn_voltar2.BackColor = SystemColors.ControlLightLight;
-            btn_voltar2.Location = new Point(1071, 329);
+            btn_voltar2.Location = new Point(1083, 594);
             btn_voltar2.Name = "btn_voltar2";
             btn_voltar2.Size = new Size(175, 75);
             btn_voltar2.TabIndex = 29;
@@ -71,7 +71,6 @@
             // Gpb_Pesquisar
             // 
             Gpb_Pesquisar.BackColor = SystemColors.ControlLightLight;
-            Gpb_Pesquisar.Controls.Add(btn_voltar2);
             Gpb_Pesquisar.Controls.Add(ltb_Pesquisar);
             Gpb_Pesquisar.Controls.Add(Txt_Descricao);
             Gpb_Pesquisar.Controls.Add(lblDescricao);
@@ -164,6 +163,7 @@
             Btn_Limpar.TabIndex = 24;
             Btn_Limpar.Text = "&Limpar";
             Btn_Limpar.UseVisualStyleBackColor = false;
+            Btn_Limpar.Click += Btn_Limpar_Click;
             // 
             // Btn_Excluir
             // 
@@ -234,7 +234,7 @@
             maskedTextBox2.Location = new Point(615, 112);
             maskedTextBox2.Name = "maskedTextBox2";
             maskedTextBox2.Size = new Size(307, 26);
-            maskedTextBox2.TabIndex = 10;
+            maskedTextBox2.TabIndex = 4;
             // 
             // label2
             // 
@@ -251,7 +251,7 @@
             maskedTextBox1.Location = new Point(758, 52);
             maskedTextBox1.Name = "maskedTextBox1";
             maskedTextBox1.Size = new Size(164, 26);
-            maskedTextBox1.TabIndex = 8;
+            maskedTextBox1.TabIndex = 2;
             // 
             // label1
             // 
@@ -318,6 +318,7 @@
             AutoScaleDimensions = new SizeF(10F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1260, 677);
+            Controls.Add(btn_voltar2);
             Controls.Add(Gpb_Pesquisar);
             Controls.Add(Btn_Voltar);
             Controls.Add(Btn_Pesquisar);
