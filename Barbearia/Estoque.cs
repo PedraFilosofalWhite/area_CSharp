@@ -16,22 +16,17 @@ namespace Barbearia
         {
             InitializeComponent();
             DesabilitarCampos();
+            Txt_Codigo.Enabled = false;
         }
         public void DesabilitarCampos()
         {
             Gpb_Estoque.Enabled = false;
-            Txt_Codigo.Enabled = false;
-            Btn_Alterar.Enabled = false;
-            Btn_Excluir.Enabled = false;
             Btn_Limpar.Enabled = false;
             Btn_Cadastrar.Enabled = false;
         }
         public void HabilitarCampos()
         {
             Gpb_Estoque.Enabled = true;
-            Txt_Codigo.Enabled = true;
-            Btn_Alterar.Enabled = true;
-            Btn_Excluir.Enabled = true;
             Btn_Limpar.Enabled = true;
             Btn_Cadastrar.Enabled = true;
         }
@@ -46,6 +41,10 @@ namespace Barbearia
         private void Btn_Novo_Click(object sender, EventArgs e)
         {
             HabilitarCampos();
+            Btn_Novo.Visible = false;
+            Btn_Cadastrar.Location = new Point(11, 593);
+            Btn_Limpar.Location = new Point(194, 593);
+            Btn_Pesquisar.Location = new Point(377, 593);
         }
 
         private void Btn_Pesquisar_Click(object sender, EventArgs e)
@@ -64,7 +63,7 @@ namespace Barbearia
         {
             Txt_Codigo.Clear();
             txtProduto.Clear();
-            cbxCategoria.Items.Clear();
+
             TxtDescricao.Clear();
             txtPreco.Clear();
             txtQuantidade.Clear();
@@ -72,6 +71,12 @@ namespace Barbearia
 
         private void Btn_Cadastrar_Click(object sender, EventArgs e)
         {
+            
+            Btn_Voltar.Visible = false;
+            Btn_voltar2.Visible = true;
+
+
+
             if (Txt_Codigo.Text.Equals("") ||
                 txtProduto.Text.Equals("") ||
                 TxtDescricao.Text.Equals("") ||
@@ -81,6 +86,20 @@ namespace Barbearia
             {
                 MessageBox.Show("Favor preencher os campos!!!");
             }
+        }
+
+        private void Btn_voltar2_Click(object sender, EventArgs e)
+        {
+            Btn_Novo.Visible= true;
+            Btn_Voltar.Visible=true;
+            Btn_voltar2.Visible = false;
+
+            Btn_Cadastrar.Location = new Point(194, 593);
+            Btn_Limpar.Location = new Point(377, 593);
+            Btn_Pesquisar.Location = new Point(560, 593);
+
+            DesabilitarCampos();
+
         }
     }
 }
