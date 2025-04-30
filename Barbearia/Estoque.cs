@@ -7,11 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
+using System.Globalization;
 
 namespace Barbearia
 {
     public partial class FrmEstoque : Form
     {
+
+        const int MF_BYCOMMAND = 0X400;
+        [DllImport("user32")]
+        static extern int RemoveMenu(IntPtr hMenu, int nPosition, int wFlags);
+        [DllImport("user32")]
+        static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
+        [DllImport("user32")]
+        static extern int GetMenuItemCount(IntPtr hWnd);
         public FrmEstoque()
         {
             InitializeComponent();
@@ -63,7 +73,7 @@ namespace Barbearia
         {
             Txt_Codigo.Clear();
             txtProduto.Clear();
-
+            cbxCategoria.SelectedIndex = -1;
             TxtDescricao.Clear();
             txtPreco.Clear();
             txtQuantidade.Clear();
@@ -71,7 +81,7 @@ namespace Barbearia
 
         private void Btn_Cadastrar_Click(object sender, EventArgs e)
         {
-            
+
             Btn_Voltar.Visible = false;
             Btn_voltar2.Visible = true;
 
@@ -90,8 +100,8 @@ namespace Barbearia
 
         private void Btn_voltar2_Click(object sender, EventArgs e)
         {
-            Btn_Novo.Visible= true;
-            Btn_Voltar.Visible=true;
+            Btn_Novo.Visible = true;
+            Btn_Voltar.Visible = true;
             Btn_voltar2.Visible = false;
 
             Btn_Cadastrar.Location = new Point(194, 593);
@@ -100,6 +110,13 @@ namespace Barbearia
 
             DesabilitarCampos();
 
+        }
+
+        private void FrmEstoque_Load(object sender, EventArgs e)
+        {
+            IntPtr hMenu = GetSystemMenu(this.Handle, false);
+            int MenuCount = GetMenuItemCount(hMenu) - 1;
+            RemoveMenu(hMenu, MenuCount, MF_BYCOMMAND);
         }
     }
 }

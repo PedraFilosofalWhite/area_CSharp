@@ -334,6 +334,7 @@
             MaximizeBox = false;
             Name = "FrmFuncionario";
             Text = "FrmFuncionario";
+            Load += FrmFuncionario_Load;
             Gpb_Pesquisar.ResumeLayout(false);
             Gpb_Pesquisar.PerformLayout();
             Gpb_Cadastrar.ResumeLayout(false);
