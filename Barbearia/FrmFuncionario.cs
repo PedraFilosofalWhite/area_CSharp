@@ -39,9 +39,10 @@ namespace Barbearia
             IntPtr hMenu = GetSystemMenu(this.Handle, false);
             int MenuCount = GetMenuItemCount(hMenu) - 1;
             RemoveMenu(hMenu, MenuCount, MF_BYCOMMAND);
-        
+        }
 
-        private void Btn_Limpar_Click(object sender, EventArgs e)
+
+        public void Btn_Limpar_Click(object sender, EventArgs e)
         {
             limparCampos();
         }
@@ -64,3 +65,4 @@ namespace Barbearia
         }
     }
 }
+

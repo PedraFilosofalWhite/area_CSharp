@@ -36,13 +36,13 @@
             Btn_Pesquisar = new Button();
             Btn_Voltar = new Button();
             Gpb_Pesquisar = new GroupBox();
+            btn_voltar2 = new Button();
             rdbVip = new RadioButton();
             ltb_Pesquisar = new ListBox();
             Txt_Descricao = new TextBox();
             lblDescricao = new Label();
             rdbCodigo = new RadioButton();
             rdbNome = new RadioButton();
-            btn_voltar2 = new Button();
             lblCodigo = new Label();
             lblNome = new Label();
             lblTelefone = new Label();
@@ -135,11 +135,7 @@
             // Gpb_Pesquisar
             // 
             Gpb_Pesquisar.BackColor = SystemColors.ControlLightLight;
-
-            Gpb_Pesquisar.Controls.Add(btn_voltar2);
-
             Gpb_Pesquisar.Controls.Add(rdbVip);
-
             Gpb_Pesquisar.Controls.Add(ltb_Pesquisar);
             Gpb_Pesquisar.Controls.Add(Txt_Descricao);
             Gpb_Pesquisar.Controls.Add(lblDescricao);
@@ -151,6 +147,18 @@
             Gpb_Pesquisar.TabIndex = 7;
             Gpb_Pesquisar.TabStop = false;
             Gpb_Pesquisar.Text = "Pesquisar por";
+            // 
+            // btn_voltar2
+            // 
+            btn_voltar2.BackColor = SystemColors.ControlLightLight;
+            btn_voltar2.Location = new Point(1083, 600);
+            btn_voltar2.Name = "btn_voltar2";
+            btn_voltar2.Size = new Size(175, 75);
+            btn_voltar2.TabIndex = 19;
+            btn_voltar2.Text = "&Voltar";
+            btn_voltar2.UseVisualStyleBackColor = false;
+            btn_voltar2.Visible = false;
+            btn_voltar2.Click += btn_voltar2_Click;
             // 
             // rdbVip
             // 
@@ -214,18 +222,6 @@
             rdbNome.TabStop = true;
             rdbNome.Text = "Nome";
             rdbNome.UseVisualStyleBackColor = true;
-            // 
-            // btn_voltar2
-            // 
-            btn_voltar2.BackColor = SystemColors.ControlLightLight;
-            btn_voltar2.Location = new Point(1071, 329);
-            btn_voltar2.Name = "btn_voltar2";
-            btn_voltar2.Size = new Size(175, 75);
-            btn_voltar2.TabIndex = 19;
-            btn_voltar2.Text = "&Voltar";
-            btn_voltar2.UseVisualStyleBackColor = false;
-            btn_voltar2.Visible = false;
-            btn_voltar2.Click += btn_voltar2_Click;
             // 
             // lblCodigo
             // 
@@ -337,6 +333,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(1260, 677);
+            Controls.Add(btn_voltar2);
             Controls.Add(Gpb_Pesquisar);
             Controls.Add(Btn_Voltar);
             Controls.Add(Btn_Pesquisar);

@@ -31,7 +31,7 @@ namespace Barbearia
         {
             InitializeComponent();
             DesabilitarCampos();
-           
+
         }
         public void DesabilitarCampos()
         {
@@ -57,6 +57,12 @@ namespace Barbearia
         {
             Txt_nome.Clear();
             Msk_Telefone.Clear();
+            rdbVipNao.Checked = false;
+            rdbVipSim.Checked = false;
+            ltb_Pesquisar.Items.Clear();
+            rdbCodigo.Checked = false;
+            rdbNome.Checked = false;
+            rdbVip.Checked = false;
         }
         private void Cliente_Load(object sender, EventArgs e)
         {
@@ -103,6 +109,18 @@ namespace Barbearia
         {
             Gpb_Pesquisar.Visible = true;
 
+            if (rdbCodigo.Checked)
+            {
+                pesquisarPorCodigo(Convert.ToInt16(Txt_Descricao.Text));
+            }
+            else if (rdbNome.Checked)
+            {
+                pesquisarPorNome(Txt_Descricao.Text);
+            }
+            else if (rdbVip.Checked)
+            {
+                pesquisarVip(Txt_Descricao.Text);
+            }
 
         }
 
@@ -198,75 +216,95 @@ namespace Barbearia
         }
         public void pesquisarPorNome(string descricao)
         {
-            MySqlCommand comm = new MySqlCommand();
-            comm.CommandText = "select nomeCli from Clientes" +
-                "where nomeCli Like '%@Nome%';";
-            comm.CommandType = CommandType.Text;
-
-            comm.Parameters.Clear();
-            comm.Parameters.Add("@nome", MySqlDbType.VarChar, 100).Value = descricao;
-
-            comm.Connection = Conexao.obterConexao();
-
-            MySqlDataReader DR;
-            DR = comm.ExecuteReader();
-
-            while (DR.Read())
+            if (string.IsNullOrWhiteSpace(descricao))
             {
-                ltb_Pesquisar.Items.Add((DR.GetString(0)));
+                MessageBox.Show("Por favor, informe um nome para pesquisa");
+                return;
             }
 
-            Conexao.Fecharconexao();
+            ltb_Pesquisar.Items.Clear(); // Limpa resultados anteriores
+
+            MySqlConnection conn = Conexao.obterConexao();
+            MySqlCommand comm = new MySqlCommand();
+            {
+                comm.Connection = conn;
+                comm.CommandText = "SELECT nomeCli FROM Clientes WHERE nomeCli LIKE CONCAT('%', @nome, '%')";
+                comm.Parameters.Add("@nome", MySqlDbType.VarChar, 100).Value = descricao;
+
+                using (MySqlDataReader DR = comm.ExecuteReader())
+                {
+                    while (DR.Read())
+                    {
+                        ltb_Pesquisar.Items.Add(DR.GetString(0));
+                    }
+                }
+            }
         }
-        public void pesquisarProCodigo(int descricao)
+        public void pesquisarPorCodigo(string descricao)
         {
-            MySqlCommand comm = new MySqlCommand();
-            comm.CommandText = "select idCli from Clientes" +
-                "where codCli = @idCliente;";
-            comm.CommandType = CommandType.Text;
-
-            comm.Parameters.Clear();
-            comm.Parameters.Add("@idCLiente", MySqlDbType.Int16).Value = descricao;
-
-            comm.Connection = Conexao.obterConexao();
-
-            MySqlDataReader DR;
-            DR = comm.ExecuteReader();
-
-            try
+            if (!int.TryParse(descricao, out int idCliente))
             {
-                ltb_Pesquisar.Items.Add(DR.GetString(0));
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Registro não encontrado");
-                Txt_Descricao.Focus();
+                MessageBox.Show("Código inválido. Informe um número válido.");
                 Txt_Descricao.Clear();
+                Txt_Descricao.Focus();
+                return;
             }
 
-            Conexao.Fecharconexao();
+            ltb_Pesquisar.Items.Clear();
+
+            MySqlConnection conn = Conexao.obterConexao();
+            MySqlCommand comm = new MySqlCommand();
+            {
+                comm.Connection = conn;
+                comm.CommandText = "SELECT nomeCli FROM Clientes WHERE idCli = @idCliente";
+                comm.Parameters.Add("@idCliente", MySqlDbType.Int32).Value = idCliente;
+
+                using (MySqlDataReader DR = comm.ExecuteReader())
+                {
+                    if (DR.Read())
+                    {
+                        ltb_Pesquisar.Items.Add(DR.GetString(0));
+                    }
+                    else
+                    {
+                        MessageBox.Show("Registro não encontrado");
+                        Txt_Descricao.Clear();
+                        Txt_Descricao.Focus();
+                    }
+                }
+            }
         }
         public void pesquisarVip(string descricao)
         {
-            MySqlCommand comm = new MySqlCommand();
-            comm.CommandText = "select nomeCli from Clientes" +
-                "where nomeCli Like '%@Nome%';";
-            comm.CommandType = CommandType.Text;
+            bool? isVip = null;
 
-            comm.Parameters.Clear();
-            comm.Parameters.Add("@nome", MySqlDbType.VarChar, 100).Value = descricao;
-
-            comm.Connection = Conexao.obterConexao();
-
-            MySqlDataReader DR;
-            DR = comm.ExecuteReader();
-
-            while (DR.Read())
+            if (descricao.Equals("Sim", StringComparison.OrdinalIgnoreCase))
+                isVip = true;
+            else if (descricao.Equals("Não", StringComparison.OrdinalIgnoreCase))
+                isVip = false;
+            else
             {
-                ltb_Pesquisar.Items.Add((DR.GetString(0)));
+                MessageBox.Show("Informe 'Sim' ou 'Não' para pesquisa VIP");
+                return;
             }
 
-            Conexao.Fecharconexao();
+            ltb_Pesquisar.Items.Clear();
+
+            using (MySqlConnection conn = Conexao.obterConexao())
+            using (MySqlCommand comm = new MySqlCommand())
+            {
+                comm.Connection = conn;
+                comm.CommandText = "SELECT nomeCli FROM Clientes WHERE vipCli = @vip";
+                comm.Parameters.Add("@vip", MySqlDbType.Bool).Value = isVip.Value;
+
+                using (MySqlDataReader DR = comm.ExecuteReader())
+                {
+                    while (DR.Read())
+                    {
+                        ltb_Pesquisar.Items.Add(DR.GetString(0));
+                    }
+                }
+            }
         }
 
     }
