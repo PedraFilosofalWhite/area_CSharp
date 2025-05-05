@@ -178,7 +178,7 @@ namespace Barbearia
         public int cadastrarFunc()
         {
             MySqlCommand comm = new MySqlCommand();
-            comm.CommandText = "INSERT INTO Funcionarios (nomeFunc, telCelFunc,loginFunc, senhaFunc, cpfFunc, aluguelCadeira)" +
+            comm.CommandText = "INSERT INTO Funcionarios (nomeFunc, telCelFunc,loginFunc, senhaFunc, cpfFunc, aluguel_Cadeira)" +
                 "VALUES (@nomeFunc, @telCelFunc, @LoginFunc,@senhaFunc, @cpfFunc, @aluguel);";
             comm.CommandType = CommandType.Text;
 
