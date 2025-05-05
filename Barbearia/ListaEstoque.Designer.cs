@@ -211,6 +211,7 @@
             // 
             Btn_Alterar.BackColor = SystemColors.ControlLightLight;
             Btn_Alterar.Font = new Font("Arial Rounded MT Bold", 12F);
+            Btn_Alterar.ImageAlign = ContentAlignment.MiddleLeft;
             Btn_Alterar.Location = new Point(377, 595);
             Btn_Alterar.Margin = new Padding(4);
             Btn_Alterar.Name = "Btn_Alterar";

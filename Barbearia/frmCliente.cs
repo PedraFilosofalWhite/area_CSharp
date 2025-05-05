@@ -108,7 +108,7 @@ namespace Barbearia
         private void Btn_Pesquisar_Click(object sender, EventArgs e)
         {
             Btn_Cadastrar.Visible = true;
-            Btn_Cadastrar.Enabled = true;
+            Btn_Cadastrar.Enabled = false;
             Gpb_Pesquisar.Visible = true;
 
             if (rdbCodigo.Checked)
@@ -412,6 +412,11 @@ namespace Barbearia
             {
 
             }
+        }
+
+        private void Cliente_Load_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
