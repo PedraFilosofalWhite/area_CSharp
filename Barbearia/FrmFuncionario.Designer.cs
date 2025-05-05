@@ -179,6 +179,7 @@
             Btn_Excluir.TabIndex = 27;
             Btn_Excluir.Text = "&Excluir";
             Btn_Excluir.UseVisualStyleBackColor = false;
+            Btn_Excluir.Click += Btn_Excluir_Click;
             // 
             // Btn_Alterar
             // 
@@ -189,6 +190,7 @@
             Btn_Alterar.TabIndex = 25;
             Btn_Alterar.Text = "&Alterar";
             Btn_Alterar.UseVisualStyleBackColor = false;
+            Btn_Alterar.Click += Btn_Alterar_Click;
             // 
             // Btn_Cadastrar
             // 
@@ -322,7 +324,7 @@
             // 
             Msk_Telefone.Font = new Font("Arial", 12F);
             Msk_Telefone.Location = new Point(103, 112);
-            Msk_Telefone.Mask = "00000-9999";
+            Msk_Telefone.Mask = "0 0000-9999";
             Msk_Telefone.Name = "Msk_Telefone";
             Msk_Telefone.Size = new Size(99, 26);
             Msk_Telefone.TabIndex = 4;

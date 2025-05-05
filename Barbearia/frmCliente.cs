@@ -357,7 +357,7 @@ namespace Barbearia
                     MessageBox.Show("Cliente atualizado com sucesso!");
                     limpar();
                     DesabilitarCampos();
-                    Btn_Novo.Enabled = true; // Volta ao estado inicial
+                    Btn_Novo.Enabled = true;
                 }
                 else
                 {

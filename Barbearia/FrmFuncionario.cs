@@ -220,12 +220,173 @@ namespace Barbearia
 
         private void Btn_Pesquisar_Click(object sender, EventArgs e)
         {
+            Btn_Cadastrar.Visible = true;
+            Btn_Cadastrar.Enabled = false;
             Gpb_Pesquisar.Visible = true;
 
-        
-           
+            if (Rb_Codigo.Checked)
+            {
+                pesquisarPorCodigo((Txt_Descricao.Text));
+            }
+            else if (Rb_Nome.Checked)
+            {
+                pesquisarPorNome(Txt_Descricao.Text);
+            }
 
 
+        }
+
+        public void pesquisarPorCodigo(string descricao)
+        {
+            if (!int.TryParse(descricao, out int idFunc))
+            {
+                MessageBox.Show("Código inválido. Informe um número válido.");
+                Txt_Descricao.Clear();
+                Txt_Descricao.Focus();
+                return;
+            }
+
+            ltb_Pesquisar.Items.Clear();
+
+            MySqlConnection conn = Conexao.obterConexao();
+            MySqlCommand comm = new MySqlCommand();
+            {
+                comm.Connection = conn;
+                comm.CommandText = "SELECT nomeFunc FROM Funcionarios WHERE idFunc = @idFunc and ativoFunc = true;";
+                comm.Parameters.Add("@idFunc", MySqlDbType.Int32).Value = idFunc;
+
+                using (MySqlDataReader DR = comm.ExecuteReader())
+                {
+                    if (DR.Read())
+                    {
+                        ltb_Pesquisar.Items.Add(DR.GetString(0));
+                    }
+                    else
+                    {
+                        MessageBox.Show("Registro não encontrado");
+                        Txt_Descricao.Clear();
+                        Txt_Descricao.Focus();
+                    }
+                }
+            }
+        }
+
+        public void pesquisarPorNome(string descricao)
+        {
+            if (string.IsNullOrWhiteSpace(descricao))
+            {
+                MessageBox.Show("Por favor, informe um nome para pesquisa");
+                return;
+            }
+
+            ltb_Pesquisar.Items.Clear();
+
+            MySqlConnection conn = Conexao.obterConexao();
+            MySqlCommand comm = new MySqlCommand();
+            {
+                comm.Connection = conn;
+                comm.CommandText = "SELECT nomeFunc FROM Funcionarios WHERE nomeFunc LIKE CONCAT('%', @nome, '%') and ativoFunc = true";
+                comm.Parameters.Add("@nome", MySqlDbType.VarChar, 100).Value = descricao;
+
+                using (MySqlDataReader DR = comm.ExecuteReader())
+                {
+                    while (DR.Read())
+                    {
+                        ltb_Pesquisar.Items.Add(DR.GetString(0));
+                    }
+                }
+            }
+        }
+
+        private void Btn_Alterar_Click(object sender, EventArgs e)
+        {
+            if (Txt_nome.Text.Equals("") ||
+                !Msk_Telefone.MaskCompleted ||
+                !mskAluguel.MaskCompleted ||
+                !mskCPF.MaskCompleted)
+            {
+                MessageBox.Show("Favor preencher todos os campos!!!");
+            } else
+            {
+                if (AlterarFuncionarios() == 1)
+                {
+                    MessageBox.Show("Cliente atualizado com sucesso!");
+                    limpar();
+                    DesabilitarCampos();
+                    Btn_Novo.Enabled = true;
+                }
+                else
+                {
+                    MessageBox.Show("Erro ao atualizar.");
+                }
+
+            }
+        }
+
+        public int AlterarFuncionarios()
+        {
+            MySqlCommand comm = new MySqlCommand();
+            comm.CommandText = "update Funcionarios " +
+                "set nomeFunc = @nomeFunc," +
+                "loginFunc = @loginFunc," +
+                "senhaFunc = @senhaFunc," +
+                "cpfFunc = @cpfFunc," +
+                "aluguel_cadeira = @aluguel_cadeira," +
+                "telCelFunc = @telCelFunc," +
+                "where idFunc = @idFunc;";
+
+            comm.Parameters.Clear();
+            comm.Parameters.Add("@nomeFunc", MySqlDbType.VarChar, 100).Value = Txt_nome.Text;
+            comm.Parameters.Add("@telCelFunc", MySqlDbType.VarChar, 10).Value = Msk_Telefone.Text;
+            comm.Parameters.Add("LoginFunc", MySqlDbType.VarChar, 50).Value = txtLogin.Text;
+            comm.Parameters.Add("senhaFunc", MySqlDbType.VarChar, 10).Value = txtSenha.Text;
+            comm.Parameters.Add("cpfFunc", MySqlDbType.VarChar, 14).Value = mskCPF.Text;
+            comm.Parameters.Add("aluguel", MySqlDbType.Decimal).Value = decimal.Parse(mskAluguel.Text, NumberStyles.Currency, CultureInfo.GetCultureInfo("pt-BR"));
+
+            int resp = comm.ExecuteNonQuery();
+            Conexao.Fecharconexao();
+            return resp;
+        }
+
+        private void Btn_Excluir_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Deseja excluir?",
+                "Mensagem do sistema",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question,
+                MessageBoxDefaultButton.Button2);
+
+            if (result == DialogResult.Yes)
+            {
+                excluirFuncionarios(Convert.ToInt32(Txt_Codigo.Text));
+                limpar();
+            }
+            else
+            {
+                MessageBox.Show("Operação Abortada",
+                "Mensagem do sistema",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information,
+                MessageBoxDefaultButton.Button1);
+            }
+        }
+        public int excluirFuncionarios(int idFunc)
+        {
+            MySqlCommand comm = new MySqlCommand();
+            comm.CommandText = "update Funcionarios " +
+                "set ativoFunc = FALSE " +
+                "where idFunc = @idFunc;";
+            comm.CommandType = CommandType.Text;
+            comm.Connection = Conexao.obterConexao();
+
+            comm.Parameters.Clear();
+            comm.Parameters.Add("@idFunc", MySqlDbType.Int32).Value = idFunc;
+
+            int resp = comm.ExecuteNonQuery();
+
+            Conexao.Fecharconexao();
+
+            return resp;
         }
     }
 }
