@@ -214,22 +214,25 @@
             // 
             // Btn_avançar_mes
             // 
+            Btn_avançar_mes.BackColor = Color.Transparent;
+            Btn_avançar_mes.ForeColor = Color.White;
+            Btn_avançar_mes.Image = (Image)resources.GetObject("Btn_avançar_mes.Image");
             Btn_avançar_mes.Location = new Point(798, 29);
             Btn_avançar_mes.Name = "Btn_avançar_mes";
             Btn_avançar_mes.Size = new Size(82, 44);
             Btn_avançar_mes.TabIndex = 16;
-            Btn_avançar_mes.Text = "Próximo";
-            Btn_avançar_mes.UseVisualStyleBackColor = true;
+            Btn_avançar_mes.UseVisualStyleBackColor = false;
             Btn_avançar_mes.Click += Btn_avançar_mes_Click;
             // 
             // Btn_retornar
             // 
+            Btn_retornar.BackColor = Color.Transparent;
+            Btn_retornar.Image = (Image)resources.GetObject("Btn_retornar.Image");
             Btn_retornar.Location = new Point(277, 30);
             Btn_retornar.Name = "Btn_retornar";
             Btn_retornar.Size = new Size(82, 44);
             Btn_retornar.TabIndex = 17;
-            Btn_retornar.Text = "Anterior";
-            Btn_retornar.UseVisualStyleBackColor = true;
+            Btn_retornar.UseVisualStyleBackColor = false;
             Btn_retornar.Click += Btn_retornar_Click;
             // 
             // fileSystemWatcher1

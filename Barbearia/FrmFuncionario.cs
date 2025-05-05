@@ -26,6 +26,20 @@ namespace Barbearia
         {
             InitializeComponent();
             Txt_Codigo.Enabled = false;
+            Btn_Cadastrar.Enabled = false;
+            Btn_Limpar.Enabled = false;
+            Btn_Alterar.Enabled = false;
+            Btn_Excluir.Enabled = false;
+            Gpb_Cadastrar.Enabled = false;
+            Gpb_Pesquisar.Visible = false;
+            btn_voltar2.Visible = false;
+
+
+
+
+
+
+
         }
 
         private void Btn_Voltar_Click(object sender, EventArgs e)
@@ -55,12 +69,14 @@ namespace Barbearia
         public void limparCampos()
         {
             Txt_nome.Clear();
-            Txt_Codigo.Clear();
-            Txt_Descricao.Clear();
-            Txt_nome.Text = "";
             Msk_Telefone.Clear();
-
+            txtLogin.Clear();
+            Msk_Telefone.Clear();
+            mskAluguel.Clear();
+            txtSenha.Clear();
+            mskCPF.Clear();
             Txt_Descricao.Clear();
+
             Rb_Codigo.Checked = false;
             Rb_Nome.Checked = false;
 
@@ -200,6 +216,16 @@ namespace Barbearia
             Btn_Excluir.Location = new Point(721, 600);
             Btn_Pesquisar.Location = new Point(902, 600);
             Btn_Novo.Enabled = true;
+        }
+
+        private void Btn_Pesquisar_Click(object sender, EventArgs e)
+        {
+            Gpb_Pesquisar.Visible = true;
+
+        
+           
+
+
         }
     }
 }

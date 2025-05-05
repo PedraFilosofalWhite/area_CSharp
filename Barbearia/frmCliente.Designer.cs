@@ -267,7 +267,7 @@
             Msk_Telefone.Location = new Point(102, 112);
             Msk_Telefone.Mask = "00000-9999";
             Msk_Telefone.Name = "Msk_Telefone";
-            Msk_Telefone.Size = new Size(307, 26);
+            Msk_Telefone.Size = new Size(100, 26);
             Msk_Telefone.TabIndex = 2;
             Msk_Telefone.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
@@ -356,6 +356,7 @@
             Name = "Cliente";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Cliente";
+            Load += Cliente_Load_1;
             Gpb_Pesquisar.ResumeLayout(false);
             Gpb_Pesquisar.PerformLayout();
             gpbVip.ResumeLayout(false);

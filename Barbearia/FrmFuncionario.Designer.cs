@@ -157,6 +157,7 @@
             Btn_Pesquisar.TabIndex = 26;
             Btn_Pesquisar.Text = "&Pesquisar";
             Btn_Pesquisar.UseVisualStyleBackColor = false;
+            Btn_Pesquisar.Click += Btn_Pesquisar_Click;
             // 
             // Btn_Limpar
             // 
