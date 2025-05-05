@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -44,6 +45,27 @@ namespace Barbearia
             TxtNome.Focus();
         }
 
+
+        private void btnCarregaGridView_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (var conexao = Conexao.obterConexao())
+                {
+                    string query = "SELECT codfunc as Codigo, Produto, Descrição, Preço, Quantidade FROM Produtos";
+                    MySqlCommand comando = new MySqlCommand(query, conexao);
+                    MySqlDataReader reader = comando.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        MessageBox.Show($"Código: {reader["Codigo"]} => Produto: {reader["Produto"]}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro: " + ex.Message);
+            }
+        }     
         private void FrmListaEstoque_Load(object sender, EventArgs e)
         {
             IntPtr hMenu = GetSystemMenu(this.Handle, false);

@@ -67,6 +67,7 @@
             btnCarregaGridView.TabIndex = 1;
             btnCarregaGridView.Text = "Carregar Produtos";
             btnCarregaGridView.UseVisualStyleBackColor = false;
+            btnCarregaGridView.Click += btnCarregaGridView_Click;
             // 
             // lblCodigo
             // 

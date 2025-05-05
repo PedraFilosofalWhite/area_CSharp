@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
+using static System.Net.Mime.MediaTypeNames;
 using System.Runtime.InteropServices;
 using System.Globalization;
 
@@ -86,7 +88,6 @@ namespace Barbearia
             Btn_voltar2.Visible = true;
 
 
-
             if (Txt_Codigo.Text.Equals("") ||
                 txtProduto.Text.Equals("") ||
                 TxtDescricao.Text.Equals("") ||
@@ -96,7 +97,37 @@ namespace Barbearia
             {
                 MessageBox.Show("Favor preencher os campos!!!");
             }
+            try
+            {
+                string produto = txtProduto.Text;
+                string descricao = TxtDescricao.Text;
+                decimal preco = decimal.Parse(txtPreco.Text);
+                int quantidade = int.Parse(txtQuantidade.Text);
+                string categoria = cbxCategoria.Text;
+                using (MySqlConnection conexao = Conexao.obterConexao())
+                {
+                    string sql = "INSERT INTO Produtos (nome, descricao, preco, quantidade, categoria) " +
+                                 "VALUES (@nome, @descricao, @preco, @quantidade, @categoria)";
+                    using (MySqlCommand comando = new MySqlCommand(sql, conexao))
+                    {
+                        comando.Parameters.AddWithValue("@nome", produto);
+                        comando.Parameters.AddWithValue("@descricao", descricao);
+                        comando.Parameters.AddWithValue("@preco", preco);
+                        comando.Parameters.AddWithValue("@quantidade", quantidade);
+                        comando.Parameters.AddWithValue("@categoria", categoria);
+                        comando.ExecuteNonQuery();
+                    }
+                    MessageBox.Show("Produto cadastrado com sucesso!");
+                }
+                LimparCampos(); // se quiser limpar os campos após o cadastro
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao cadastrar: " + ex.Message);
+            }
+
         }
+       
 
         private void Btn_voltar2_Click(object sender, EventArgs e)
         {
@@ -110,6 +141,42 @@ namespace Barbearia
 
             DesabilitarCampos();
 
+        }
+
+
+        private void txtPreco_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            {
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != ',')
+                {
+                    e.Handled = true;
+                }
+                TextBox txt = sender as TextBox;
+                // Evita múltiplas vírgulas
+                if (e.KeyChar == ',' && txt.Text.Contains(","))
+                {
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private void txtQuantidade_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+        }
+        public static class Conexao
+        {
+            public static MySqlConnection obterConexao()
+            {
+                string connStr = "server=localhost;user=root;database=barbearia;password=;";
+                MySqlConnection conn = new MySqlConnection(connStr);
+                conn.Open();
+                return conn;
+            }
         }
 
         private void FrmEstoque_Load(object sender, EventArgs e)

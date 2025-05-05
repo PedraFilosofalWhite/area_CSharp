@@ -101,9 +101,12 @@
             // 
             txtPreco.Location = new Point(678, 55);
             txtPreco.Margin = new Padding(4);
+            txtPreco.Mask = "000,000";
             txtPreco.Name = "txtPreco";
             txtPreco.Size = new Size(135, 26);
             txtPreco.TabIndex = 3;
+            txtPreco.ValidatingType = typeof(int);
+            txtPreco.KeyPress += txtPreco_KeyPress;
             // 
             // lblPreco
             // 
@@ -120,9 +123,12 @@
             // 
             txtQuantidade.Location = new Point(678, 97);
             txtQuantidade.Margin = new Padding(4);
+            txtQuantidade.Mask = "00000";
             txtQuantidade.Name = "txtQuantidade";
             txtQuantidade.Size = new Size(135, 26);
             txtQuantidade.TabIndex = 4;
+            txtQuantidade.ValidatingType = typeof(int);
+            txtQuantidade.KeyPress += txtQuantidade_KeyPress;
             // 
             // TxtDescricao
             // 
