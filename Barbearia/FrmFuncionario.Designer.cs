@@ -43,9 +43,13 @@
             Btn_Cadastrar = new Button();
             Btn_Novo = new Button();
             Gpb_Cadastrar = new GroupBox();
-            maskedTextBox2 = new MaskedTextBox();
+            txtSenha = new TextBox();
+            lblSenha = new Label();
+            txtLogin = new TextBox();
+            lblLogin = new Label();
+            mskAluguel = new MaskedTextBox();
             label2 = new Label();
-            maskedTextBox1 = new MaskedTextBox();
+            mskCPF = new MaskedTextBox();
             label1 = new Label();
             Txt_nome = new TextBox();
             Msk_Telefone = new MaskedTextBox();
@@ -60,13 +64,13 @@
             // btn_voltar2
             // 
             btn_voltar2.BackColor = SystemColors.ControlLightLight;
-            btn_voltar2.Location = new Point(1083, 594);
+            btn_voltar2.Location = new Point(1083, 600);
             btn_voltar2.Name = "btn_voltar2";
             btn_voltar2.Size = new Size(175, 75);
             btn_voltar2.TabIndex = 29;
             btn_voltar2.Text = "&Voltar";
             btn_voltar2.UseVisualStyleBackColor = false;
-            btn_voltar2.Visible = false;
+            btn_voltar2.Click += btn_voltar2_Click;
             // 
             // Gpb_Pesquisar
             // 
@@ -136,7 +140,7 @@
             // 
             // Btn_Voltar
             // 
-            Btn_Voltar.Location = new Point(1083, 594);
+            Btn_Voltar.Location = new Point(1083, 600);
             Btn_Voltar.Name = "Btn_Voltar";
             Btn_Voltar.Size = new Size(175, 75);
             Btn_Voltar.TabIndex = 28;
@@ -147,7 +151,7 @@
             // Btn_Pesquisar
             // 
             Btn_Pesquisar.BackColor = SystemColors.ControlLightLight;
-            Btn_Pesquisar.Location = new Point(902, 594);
+            Btn_Pesquisar.Location = new Point(902, 600);
             Btn_Pesquisar.Name = "Btn_Pesquisar";
             Btn_Pesquisar.Size = new Size(175, 75);
             Btn_Pesquisar.TabIndex = 26;
@@ -157,7 +161,7 @@
             // Btn_Limpar
             // 
             Btn_Limpar.BackColor = SystemColors.ControlLightLight;
-            Btn_Limpar.Location = new Point(364, 594);
+            Btn_Limpar.Location = new Point(364, 600);
             Btn_Limpar.Name = "Btn_Limpar";
             Btn_Limpar.Size = new Size(175, 75);
             Btn_Limpar.TabIndex = 24;
@@ -168,7 +172,7 @@
             // Btn_Excluir
             // 
             Btn_Excluir.BackColor = SystemColors.ControlLightLight;
-            Btn_Excluir.Location = new Point(721, 594);
+            Btn_Excluir.Location = new Point(721, 600);
             Btn_Excluir.Name = "Btn_Excluir";
             Btn_Excluir.Size = new Size(175, 75);
             Btn_Excluir.TabIndex = 27;
@@ -178,7 +182,7 @@
             // Btn_Alterar
             // 
             Btn_Alterar.BackColor = SystemColors.ControlLightLight;
-            Btn_Alterar.Location = new Point(540, 594);
+            Btn_Alterar.Location = new Point(540, 600);
             Btn_Alterar.Name = "Btn_Alterar";
             Btn_Alterar.Size = new Size(175, 75);
             Btn_Alterar.TabIndex = 25;
@@ -188,29 +192,35 @@
             // Btn_Cadastrar
             // 
             Btn_Cadastrar.BackColor = SystemColors.ControlLightLight;
-            Btn_Cadastrar.Location = new Point(183, 594);
+            Btn_Cadastrar.Location = new Point(183, 600);
             Btn_Cadastrar.Name = "Btn_Cadastrar";
             Btn_Cadastrar.Size = new Size(175, 75);
             Btn_Cadastrar.TabIndex = 23;
             Btn_Cadastrar.Text = "&Cadastrar";
             Btn_Cadastrar.UseVisualStyleBackColor = false;
+            Btn_Cadastrar.Click += Btn_Cadastrar_Click;
             // 
             // Btn_Novo
             // 
             Btn_Novo.BackColor = SystemColors.ControlLightLight;
-            Btn_Novo.Location = new Point(2, 594);
+            Btn_Novo.Location = new Point(2, 600);
             Btn_Novo.Name = "Btn_Novo";
             Btn_Novo.Size = new Size(175, 75);
             Btn_Novo.TabIndex = 22;
             Btn_Novo.Text = "&Novo";
             Btn_Novo.UseVisualStyleBackColor = false;
+            Btn_Novo.Click += Btn_Novo_Click;
             // 
             // Gpb_Cadastrar
             // 
             Gpb_Cadastrar.BackColor = SystemColors.ControlLightLight;
-            Gpb_Cadastrar.Controls.Add(maskedTextBox2);
+            Gpb_Cadastrar.Controls.Add(txtSenha);
+            Gpb_Cadastrar.Controls.Add(lblSenha);
+            Gpb_Cadastrar.Controls.Add(txtLogin);
+            Gpb_Cadastrar.Controls.Add(lblLogin);
+            Gpb_Cadastrar.Controls.Add(mskAluguel);
             Gpb_Cadastrar.Controls.Add(label2);
-            Gpb_Cadastrar.Controls.Add(maskedTextBox1);
+            Gpb_Cadastrar.Controls.Add(mskCPF);
             Gpb_Cadastrar.Controls.Add(label1);
             Gpb_Cadastrar.Controls.Add(Txt_nome);
             Gpb_Cadastrar.Controls.Add(Msk_Telefone);
@@ -228,35 +238,71 @@
             Gpb_Cadastrar.TabStop = false;
             Gpb_Cadastrar.Text = "Cadastro";
             // 
-            // maskedTextBox2
+            // txtSenha
             // 
-            maskedTextBox2.Font = new Font("Arial", 12F);
-            maskedTextBox2.Location = new Point(615, 112);
-            maskedTextBox2.Name = "maskedTextBox2";
-            maskedTextBox2.Size = new Size(307, 26);
-            maskedTextBox2.TabIndex = 4;
+            txtSenha.Location = new Point(779, 116);
+            txtSenha.MaxLength = 10;
+            txtSenha.Name = "txtSenha";
+            txtSenha.Size = new Size(440, 26);
+            txtSenha.TabIndex = 7;
+            // 
+            // lblSenha
+            // 
+            lblSenha.AutoSize = true;
+            lblSenha.Location = new Point(709, 117);
+            lblSenha.Name = "lblSenha";
+            lblSenha.Size = new Size(64, 18);
+            lblSenha.TabIndex = 14;
+            lblSenha.Text = "Senha:";
+            // 
+            // txtLogin
+            // 
+            txtLogin.Location = new Point(721, 52);
+            txtLogin.MaxLength = 50;
+            txtLogin.Name = "txtLogin";
+            txtLogin.Size = new Size(498, 26);
+            txtLogin.TabIndex = 3;
+            // 
+            // lblLogin
+            // 
+            lblLogin.AutoSize = true;
+            lblLogin.Location = new Point(658, 55);
+            lblLogin.Name = "lblLogin";
+            lblLogin.Size = new Size(57, 18);
+            lblLogin.TabIndex = 12;
+            lblLogin.Text = "Login:";
+            // 
+            // mskAluguel
+            // 
+            mskAluguel.Font = new Font("Arial", 12F);
+            mskAluguel.Location = new Point(376, 116);
+            mskAluguel.Mask = "$000.00";
+            mskAluguel.Name = "mskAluguel";
+            mskAluguel.Size = new Size(106, 26);
+            mskAluguel.TabIndex = 5;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(437, 116);
+            label2.Location = new Point(208, 116);
             label2.Name = "label2";
             label2.Size = new Size(172, 18);
             label2.TabIndex = 11;
             label2.Text = "Aluguel da Cadeira : ";
             // 
-            // maskedTextBox1
+            // mskCPF
             // 
-            maskedTextBox1.Font = new Font("Arial", 12F);
-            maskedTextBox1.Location = new Point(758, 52);
-            maskedTextBox1.Name = "maskedTextBox1";
-            maskedTextBox1.Size = new Size(164, 26);
-            maskedTextBox1.TabIndex = 2;
+            mskCPF.Font = new Font("Arial", 12F);
+            mskCPF.Location = new Point(539, 116);
+            mskCPF.Mask = "000,000,000-99";
+            mskCPF.Name = "mskCPF";
+            mskCPF.Size = new Size(164, 26);
+            mskCPF.TabIndex = 6;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(689, 56);
+            label1.Location = new Point(488, 120);
             label1.Name = "label1";
             label1.Size = new Size(50, 18);
             label1.TabIndex = 9;
@@ -265,18 +311,20 @@
             // Txt_nome
             // 
             Txt_nome.Font = new Font("Arial", 12F);
-            Txt_nome.Location = new Point(278, 52);
+            Txt_nome.Location = new Point(264, 52);
+            Txt_nome.MaxLength = 100;
             Txt_nome.Name = "Txt_nome";
             Txt_nome.Size = new Size(384, 26);
-            Txt_nome.TabIndex = 1;
+            Txt_nome.TabIndex = 2;
             // 
             // Msk_Telefone
             // 
             Msk_Telefone.Font = new Font("Arial", 12F);
             Msk_Telefone.Location = new Point(103, 112);
+            Msk_Telefone.Mask = "00000-9999";
             Msk_Telefone.Name = "Msk_Telefone";
-            Msk_Telefone.Size = new Size(307, 26);
-            Msk_Telefone.TabIndex = 2;
+            Msk_Telefone.Size = new Size(99, 26);
+            Msk_Telefone.TabIndex = 4;
             // 
             // Txt_Codigo
             // 
@@ -284,7 +332,7 @@
             Txt_Codigo.Location = new Point(89, 52);
             Txt_Codigo.Name = "Txt_Codigo";
             Txt_Codigo.Size = new Size(100, 26);
-            Txt_Codigo.TabIndex = 7;
+            Txt_Codigo.TabIndex = 1;
             // 
             // lblTelefone
             // 
@@ -298,7 +346,7 @@
             // lblNome
             // 
             lblNome.AutoSize = true;
-            lblNome.Location = new Point(210, 56);
+            lblNome.Location = new Point(195, 56);
             lblNome.Name = "lblNome";
             lblNome.Size = new Size(63, 18);
             lblNome.TabIndex = 2;
@@ -318,8 +366,8 @@
             AutoScaleDimensions = new SizeF(10F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1260, 677);
-            Controls.Add(btn_voltar2);
             Controls.Add(Gpb_Pesquisar);
+            Controls.Add(btn_voltar2);
             Controls.Add(Btn_Voltar);
             Controls.Add(Btn_Pesquisar);
             Controls.Add(Btn_Limpar);
@@ -333,7 +381,7 @@
             Margin = new Padding(4);
             MaximizeBox = false;
             Name = "FrmFuncionario";
-            Text = "FrmFuncionario";
+            Text = "Funcionarios";
             Load += FrmFuncionario_Load;
             Gpb_Pesquisar.ResumeLayout(false);
             Gpb_Pesquisar.PerformLayout();
@@ -359,9 +407,9 @@
         private Button Btn_Cadastrar;
         private Button Btn_Novo;
         private GroupBox Gpb_Cadastrar;
-        private MaskedTextBox maskedTextBox2;
+        private MaskedTextBox mskAluguel;
         private Label label2;
-        private MaskedTextBox maskedTextBox1;
+        private MaskedTextBox mskCPF;
         private Label label1;
         private TextBox Txt_nome;
         private MaskedTextBox Msk_Telefone;
@@ -369,5 +417,9 @@
         private Label lblTelefone;
         private Label lblNome;
         private Label lblCodigo;
+        private Label lblLogin;
+        private TextBox txtSenha;
+        private Label lblSenha;
+        private TextBox txtLogin;
     }
 }
