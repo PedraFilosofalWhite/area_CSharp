@@ -36,13 +36,13 @@
             Btn_Pesquisar = new Button();
             Btn_Voltar = new Button();
             Gpb_Pesquisar = new GroupBox();
-            btn_voltar2 = new Button();
             rdbVip = new RadioButton();
             ltb_Pesquisar = new ListBox();
             Txt_Descricao = new TextBox();
             lblDescricao = new Label();
             rdbCodigo = new RadioButton();
             rdbNome = new RadioButton();
+            btn_voltar2 = new Button();
             lblCodigo = new Label();
             lblNome = new Label();
             lblTelefone = new Label();
@@ -89,6 +89,7 @@
             Btn_Alterar.TabIndex = 15;
             Btn_Alterar.Text = "&Alterar";
             Btn_Alterar.UseVisualStyleBackColor = false;
+            Btn_Alterar.Click += Btn_Alterar_Click;
             // 
             // Btn_Excluir
             // 
@@ -99,6 +100,7 @@
             Btn_Excluir.TabIndex = 17;
             Btn_Excluir.Text = "&Excluir";
             Btn_Excluir.UseVisualStyleBackColor = false;
+            Btn_Excluir.Click += Btn_Excluir_Click;
             // 
             // Btn_Limpar
             // 
@@ -148,18 +150,6 @@
             Gpb_Pesquisar.TabStop = false;
             Gpb_Pesquisar.Text = "Pesquisar por";
             // 
-            // btn_voltar2
-            // 
-            btn_voltar2.BackColor = SystemColors.ControlLightLight;
-            btn_voltar2.Location = new Point(1083, 600);
-            btn_voltar2.Name = "btn_voltar2";
-            btn_voltar2.Size = new Size(175, 75);
-            btn_voltar2.TabIndex = 19;
-            btn_voltar2.Text = "&Voltar";
-            btn_voltar2.UseVisualStyleBackColor = false;
-            btn_voltar2.Visible = false;
-            btn_voltar2.Click += btn_voltar2_Click;
-            // 
             // rdbVip
             // 
             rdbVip.AutoSize = true;
@@ -181,6 +171,7 @@
             ltb_Pesquisar.Name = "ltb_Pesquisar";
             ltb_Pesquisar.Size = new Size(1209, 274);
             ltb_Pesquisar.TabIndex = 11;
+            ltb_Pesquisar.SelectedIndexChanged += ltb_Pesquisar_SelectedIndexChanged;
             // 
             // Txt_Descricao
             // 
@@ -223,6 +214,18 @@
             rdbNome.Text = "Nome";
             rdbNome.UseVisualStyleBackColor = true;
             // 
+            // btn_voltar2
+            // 
+            btn_voltar2.BackColor = SystemColors.ControlLightLight;
+            btn_voltar2.Location = new Point(1083, 600);
+            btn_voltar2.Name = "btn_voltar2";
+            btn_voltar2.Size = new Size(175, 75);
+            btn_voltar2.TabIndex = 19;
+            btn_voltar2.Text = "&Voltar";
+            btn_voltar2.UseVisualStyleBackColor = false;
+            btn_voltar2.Visible = false;
+            btn_voltar2.Click += btn_voltar2_Click;
+            // 
             // lblCodigo
             // 
             lblCodigo.AutoSize = true;
@@ -262,14 +265,17 @@
             // 
             Msk_Telefone.Font = new Font("Arial", 12F);
             Msk_Telefone.Location = new Point(102, 112);
+            Msk_Telefone.Mask = "00000-9999";
             Msk_Telefone.Name = "Msk_Telefone";
             Msk_Telefone.Size = new Size(307, 26);
             Msk_Telefone.TabIndex = 2;
+            Msk_Telefone.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
             // Txt_nome
             // 
             Txt_nome.Font = new Font("Arial", 12F);
             Txt_nome.Location = new Point(260, 51);
+            Txt_nome.MaxLength = 100;
             Txt_nome.Name = "Txt_nome";
             Txt_nome.Size = new Size(724, 26);
             Txt_nome.TabIndex = 1;

@@ -107,11 +107,13 @@ namespace Barbearia
 
         private void Btn_Pesquisar_Click(object sender, EventArgs e)
         {
+            Btn_Cadastrar.Visible = true;
+            Btn_Cadastrar.Enabled = true;
             Gpb_Pesquisar.Visible = true;
 
             if (rdbCodigo.Checked)
             {
-                pesquisarPorCodigo(Convert.ToInt16(Txt_Descricao.Text));
+                pesquisarPorCodigo((Txt_Descricao.Text));
             }
             else if (rdbNome.Checked)
             {
@@ -179,7 +181,7 @@ namespace Barbearia
         {
 
             if (Txt_nome.Text.Equals("") ||
-                Msk_Telefone.Text.Equals("     -") ||
+                !Msk_Telefone.MaskCompleted ||
                 (!rdbVipSim.Checked && !rdbVipNao.Checked))
             {
                 MessageBox.Show("Favor preencher todos os campos!!!");
@@ -222,7 +224,7 @@ namespace Barbearia
                 return;
             }
 
-            ltb_Pesquisar.Items.Clear(); // Limpa resultados anteriores
+            ltb_Pesquisar.Items.Clear();
 
             MySqlConnection conn = Conexao.obterConexao();
             MySqlCommand comm = new MySqlCommand();
@@ -295,7 +297,7 @@ namespace Barbearia
             {
                 comm.Connection = conn;
                 comm.CommandText = "SELECT nomeCli FROM Clientes WHERE vipCli = @vip";
-                comm.Parameters.Add("@vip", MySqlDbType.Bool).Value = isVip.Value;
+                comm.Parameters.Add("@vip", MySqlDbType.Int16).Value = isVip.Value;
 
                 using (MySqlDataReader DR = comm.ExecuteReader())
                 {
@@ -307,6 +309,110 @@ namespace Barbearia
             }
         }
 
+        private void ltb_Pesquisar_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ltb_Pesquisar.SelectedItem != null)
+            {
+                string nomeCliente = ltb_Pesquisar.SelectedItem.ToString();
+                CarregarDadosCliente(nomeCliente);
+                HabilitarCampos();
+                Btn_Alterar.Enabled = true;
+                Btn_Cadastrar.Enabled = false;
+            }
+
+        }
+        public void CarregarDadosCliente(string nomeCliente)
+        {
+            MySqlCommand comm = new MySqlCommand();
+            comm.CommandText = "SELECT idCli, nomeCli, TelCelCli, vipCli FROM Clientes WHERE nomeCli = @nome;";
+            comm.Parameters.Add("@nome", MySqlDbType.VarChar, 100).Value = nomeCliente;
+            comm.Connection = Conexao.obterConexao();
+
+            MySqlDataReader DR = comm.ExecuteReader();
+
+            if (DR.Read())
+            {
+                Txt_Codigo.Text = DR["idCli"].ToString(); // Armazena o ID oculto
+                Txt_nome.Text = DR["nomeCli"].ToString();
+                Msk_Telefone.Text = DR["TelCelCli"].ToString();
+                rdbVipSim.Checked = Convert.ToBoolean(DR["vipCli"]);
+                rdbVipNao.Checked = !rdbVipSim.Checked;
+            }
+
+            Conexao.Fecharconexao();
+        }
+
+        private void Btn_Alterar_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(Txt_Codigo.Text))
+            {
+                MessageBox.Show("Selecione um cliente para editar!");
+                return;
+            }
+
+            if (AlterarCliente() == 1)
+            {
+                MessageBox.Show("Cliente atualizado com sucesso!");
+                limpar();
+                DesabilitarCampos();
+                Btn_Novo.Enabled = true; // Volta ao estado inicial
+            }
+            else
+            {
+                MessageBox.Show("Erro ao atualizar.");
+            }
+        }
+
+        public int AlterarCliente()
+        {
+            MySqlCommand comm = new MySqlCommand();
+            comm.CommandText = "UPDATE Clientes SET nomeCli = @nome, TelCelCli = @telefone, vipCli = @vip WHERE idCli = @id;";
+            comm.Parameters.Add("@id", MySqlDbType.Int32).Value = Convert.ToInt32(Txt_Codigo.Text);
+            comm.Parameters.Add("@nome", MySqlDbType.VarChar, 100).Value = Txt_nome.Text;
+            comm.Parameters.Add("@telefone", MySqlDbType.VarChar, 15).Value = Msk_Telefone.Text;
+            comm.Parameters.Add("@vip", MySqlDbType.Bit).Value = rdbVipSim.Checked ? 1 : 0;
+            comm.Connection = Conexao.obterConexao();
+
+            int resp = comm.ExecuteNonQuery();
+            Conexao.Fecharconexao();
+            return resp;
+        }
+
+        public int excluirFuncionarios(int codFunc)
+        {
+            MySqlCommand comm = new MySqlCommand();
+            comm.CommandText = "delete from tbFuncionarios where codFunc = @codFunc;";
+            comm.CommandType = CommandType.Text;
+            comm.Connection = Conexao.obterConexao();
+
+            comm.Parameters.Clear();
+            comm.Parameters.Add("@codFunc", MySqlDbType.Int32).Value = codFunc;
+
+            int resp = comm.ExecuteNonQuery();
+
+            Conexao.Fecharconexao();
+
+            return resp;
+        }
+
+        private void Btn_Excluir_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Deseja excluir?",
+                "Mensagem do sistema",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question,
+                MessageBoxDefaultButton.Button2);
+
+            if (result == DialogResult.Yes)
+            {
+                excluirFuncionarios(Convert.ToInt32(Txt_Codigo.Text));
+                limpar();
+            }
+            else
+            {
+
+            }
+        }
     }
 }
 
