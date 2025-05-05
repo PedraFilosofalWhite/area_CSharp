@@ -51,6 +51,7 @@
             Name = "frmVisualizarAgenda";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FrmCadastrarCliente";
+            Load += frmVisualizarAgenda_Load;
             ((System.ComponentModel.ISupportInitialize)dtpVizualizarAgenda).EndInit();
             ResumeLayout(false);
         }

@@ -9,11 +9,21 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using static System.Net.Mime.MediaTypeNames;
+using System.Runtime.InteropServices;
+using System.Globalization;
 
 namespace Barbearia
 {
     public partial class FrmEstoque : Form
     {
+
+        const int MF_BYCOMMAND = 0X400;
+        [DllImport("user32")]
+        static extern int RemoveMenu(IntPtr hMenu, int nPosition, int wFlags);
+        [DllImport("user32")]
+        static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
+        [DllImport("user32")]
+        static extern int GetMenuItemCount(IntPtr hWnd);
         public FrmEstoque()
         {
             InitializeComponent();
@@ -65,7 +75,7 @@ namespace Barbearia
         {
             Txt_Codigo.Clear();
             txtProduto.Clear();
-
+            cbxCategoria.SelectedIndex = -1;
             TxtDescricao.Clear();
             txtPreco.Clear();
             txtQuantidade.Clear();
@@ -133,6 +143,7 @@ namespace Barbearia
 
         }
 
+
         private void txtPreco_KeyPress(object sender, KeyPressEventArgs e)
         {
             {
@@ -168,6 +179,12 @@ namespace Barbearia
             }
         }
 
+        private void FrmEstoque_Load(object sender, EventArgs e)
+        {
+            IntPtr hMenu = GetSystemMenu(this.Handle, false);
+            int MenuCount = GetMenuItemCount(hMenu) - 1;
+            RemoveMenu(hMenu, MenuCount, MF_BYCOMMAND);
+        }
     }
 }
 

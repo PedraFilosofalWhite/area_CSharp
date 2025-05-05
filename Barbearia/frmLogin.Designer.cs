@@ -57,7 +57,7 @@
             Panel_1.Controls.Add(Tb_Usuario);
             Panel_1.Controls.Add(label2);
             Panel_1.Controls.Add(label1);
-            Panel_1.Location = new Point(291, 351);
+            Panel_1.Location = new Point(291, 166);
             Panel_1.Name = "Panel_1";
             Panel_1.Size = new Size(669, 237);
             Panel_1.TabIndex = 0;

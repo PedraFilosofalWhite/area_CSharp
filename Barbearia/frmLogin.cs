@@ -1,10 +1,19 @@
 using MySql.Data.MySqlClient;
 using System.Data;
+using System.Runtime.InteropServices;
+using System.Globalization;
 
 namespace Barbearia
 {
     public partial class Login : Form
     {
+        const int MF_BYCOMMAND = 0X400;
+        [DllImport("user32")]
+        static extern int RemoveMenu(IntPtr hMenu, int nPosition, int wFlags);
+        [DllImport("user32")]
+        static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
+        [DllImport("user32")]
+        static extern int GetMenuItemCount(IntPtr hWnd);
         public Login()
         {
             InitializeComponent();
@@ -18,7 +27,9 @@ namespace Barbearia
         }
         private void Login_Load(object sender, EventArgs e)
         {
-
+            IntPtr hMenu = GetSystemMenu(this.Handle, false);
+            int MenuCount = GetMenuItemCount(hMenu) - 1;
+            RemoveMenu(hMenu, MenuCount, MF_BYCOMMAND);
         }
 
         private void Bt_Sair_Click(object sender, EventArgs e)

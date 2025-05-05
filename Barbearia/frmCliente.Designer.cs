@@ -28,19 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Gpb_Cadastrar = new GroupBox();
-            Gpb_Sexo = new GroupBox();
-            Rb_NaoInfo = new RadioButton();
-            Rb_Feminino = new RadioButton();
-            Rb_Masculino = new RadioButton();
-            Txt_Email = new TextBox();
-            Txt_nome = new TextBox();
-            Msk_Telefone = new MaskedTextBox();
-            Txt_Codigo = new TextBox();
-            lblTelefone = new Label();
-            lblEmail = new Label();
-            lblNome = new Label();
-            lblCodigo = new Label();
             Btn_Novo = new Button();
             Btn_Cadastrar = new Button();
             Btn_Alterar = new Button();
@@ -49,153 +36,27 @@
             Btn_Pesquisar = new Button();
             Btn_Voltar = new Button();
             Gpb_Pesquisar = new GroupBox();
+            rdbVip = new RadioButton();
             ltb_Pesquisar = new ListBox();
             Txt_Descricao = new TextBox();
             lblDescricao = new Label();
-            Rb_Codigo = new RadioButton();
-            Rb_Nome = new RadioButton();
+            rdbCodigo = new RadioButton();
+            rdbNome = new RadioButton();
             btn_voltar2 = new Button();
-            Gpb_Cadastrar.SuspendLayout();
-            Gpb_Sexo.SuspendLayout();
+            lblCodigo = new Label();
+            lblNome = new Label();
+            lblTelefone = new Label();
+            Txt_Codigo = new TextBox();
+            Msk_Telefone = new MaskedTextBox();
+            Txt_nome = new TextBox();
+            gpbVip = new GroupBox();
+            rdbVipNao = new RadioButton();
+            rdbVipSim = new RadioButton();
+            Gpb_Cadastrar = new GroupBox();
             Gpb_Pesquisar.SuspendLayout();
+            gpbVip.SuspendLayout();
+            Gpb_Cadastrar.SuspendLayout();
             SuspendLayout();
-            // 
-            // Gpb_Cadastrar
-            // 
-            Gpb_Cadastrar.BackColor = SystemColors.ControlLightLight;
-            Gpb_Cadastrar.Controls.Add(Gpb_Sexo);
-            Gpb_Cadastrar.Controls.Add(Txt_Email);
-            Gpb_Cadastrar.Controls.Add(Txt_nome);
-            Gpb_Cadastrar.Controls.Add(Msk_Telefone);
-            Gpb_Cadastrar.Controls.Add(Txt_Codigo);
-            Gpb_Cadastrar.Controls.Add(lblTelefone);
-            Gpb_Cadastrar.Controls.Add(lblEmail);
-            Gpb_Cadastrar.Controls.Add(lblNome);
-            Gpb_Cadastrar.Controls.Add(lblCodigo);
-            Gpb_Cadastrar.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Gpb_Cadastrar.Location = new Point(12, 13);
-            Gpb_Cadastrar.Margin = new Padding(4);
-            Gpb_Cadastrar.Name = "Gpb_Cadastrar";
-            Gpb_Cadastrar.Padding = new Padding(4);
-            Gpb_Cadastrar.Size = new Size(1236, 164);
-            Gpb_Cadastrar.TabIndex = 0;
-            Gpb_Cadastrar.TabStop = false;
-            Gpb_Cadastrar.Text = "Cadastro";
-            // 
-            // Gpb_Sexo
-            // 
-            Gpb_Sexo.Controls.Add(Rb_NaoInfo);
-            Gpb_Sexo.Controls.Add(Rb_Feminino);
-            Gpb_Sexo.Controls.Add(Rb_Masculino);
-            Gpb_Sexo.Location = new Point(1026, 26);
-            Gpb_Sexo.Name = "Gpb_Sexo";
-            Gpb_Sexo.Size = new Size(193, 120);
-            Gpb_Sexo.TabIndex = 12;
-            Gpb_Sexo.TabStop = false;
-            Gpb_Sexo.Text = "Sexo";
-            // 
-            // Rb_NaoInfo
-            // 
-            Rb_NaoInfo.AutoSize = true;
-            Rb_NaoInfo.Location = new Point(16, 85);
-            Rb_NaoInfo.Name = "Rb_NaoInfo";
-            Rb_NaoInfo.Size = new Size(130, 22);
-            Rb_NaoInfo.TabIndex = 6;
-            Rb_NaoInfo.TabStop = true;
-            Rb_NaoInfo.Text = "Não Informar";
-            Rb_NaoInfo.UseVisualStyleBackColor = true;
-            // 
-            // Rb_Feminino
-            // 
-            Rb_Feminino.AutoSize = true;
-            Rb_Feminino.Location = new Point(16, 58);
-            Rb_Feminino.Name = "Rb_Feminino";
-            Rb_Feminino.Size = new Size(98, 22);
-            Rb_Feminino.TabIndex = 5;
-            Rb_Feminino.TabStop = true;
-            Rb_Feminino.Text = "Feminino";
-            Rb_Feminino.UseVisualStyleBackColor = true;
-            // 
-            // Rb_Masculino
-            // 
-            Rb_Masculino.AutoSize = true;
-            Rb_Masculino.Location = new Point(16, 30);
-            Rb_Masculino.Name = "Rb_Masculino";
-            Rb_Masculino.Size = new Size(106, 22);
-            Rb_Masculino.TabIndex = 4;
-            Rb_Masculino.TabStop = true;
-            Rb_Masculino.Text = "Masculino";
-            Rb_Masculino.UseVisualStyleBackColor = true;
-            // 
-            // Txt_Email
-            // 
-            Txt_Email.Font = new Font("Arial", 12F);
-            Txt_Email.Location = new Point(477, 110);
-            Txt_Email.Name = "Txt_Email";
-            Txt_Email.Size = new Size(525, 26);
-            Txt_Email.TabIndex = 3;
-            Txt_Email.TextChanged += Txt_Email_TextChanged;
-            // 
-            // Txt_nome
-            // 
-            Txt_nome.Font = new Font("Arial", 12F);
-            Txt_nome.Location = new Point(278, 52);
-            Txt_nome.Name = "Txt_nome";
-            Txt_nome.Size = new Size(724, 26);
-            Txt_nome.TabIndex = 1;
-            // 
-            // Msk_Telefone
-            // 
-            Msk_Telefone.Font = new Font("Arial", 12F);
-            Msk_Telefone.Location = new Point(102, 112);
-            Msk_Telefone.Name = "Msk_Telefone";
-            Msk_Telefone.Size = new Size(307, 26);
-            Msk_Telefone.TabIndex = 2;
-            // 
-            // Txt_Codigo
-            // 
-            Txt_Codigo.Font = new Font("Arial", 12F);
-            Txt_Codigo.Location = new Point(89, 52);
-            Txt_Codigo.Name = "Txt_Codigo";
-            Txt_Codigo.Size = new Size(100, 26);
-            Txt_Codigo.TabIndex = 7;
-            Txt_Codigo.TextChanged += Txt_Codigo_TextChanged;
-            // 
-            // lblTelefone
-            // 
-            lblTelefone.AutoSize = true;
-            lblTelefone.Location = new Point(10, 115);
-            lblTelefone.Name = "lblTelefone";
-            lblTelefone.Size = new Size(86, 18);
-            lblTelefone.TabIndex = 4;
-            lblTelefone.Text = "Telefone :";
-            // 
-            // lblEmail
-            // 
-            lblEmail.AutoSize = true;
-            lblEmail.Location = new Point(415, 115);
-            lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(56, 18);
-            lblEmail.TabIndex = 3;
-            lblEmail.Text = "Email:";
-            // 
-            // lblNome
-            // 
-            lblNome.AutoSize = true;
-            lblNome.Location = new Point(209, 55);
-            lblNome.Name = "lblNome";
-            lblNome.Size = new Size(63, 18);
-            lblNome.TabIndex = 2;
-            lblNome.Text = "Nome :";
-            // 
-            // lblCodigo
-            // 
-            lblCodigo.AutoSize = true;
-            lblCodigo.Location = new Point(10, 55);
-            lblCodigo.Name = "lblCodigo";
-            lblCodigo.Size = new Size(73, 18);
-            lblCodigo.TabIndex = 0;
-            lblCodigo.Text = "Código :";
             // 
             // Btn_Novo
             // 
@@ -217,6 +78,7 @@
             Btn_Cadastrar.TabIndex = 13;
             Btn_Cadastrar.Text = "&Cadastrar";
             Btn_Cadastrar.UseVisualStyleBackColor = false;
+            Btn_Cadastrar.Click += Btn_Cadastrar_Click;
             // 
             // Btn_Alterar
             // 
@@ -227,6 +89,7 @@
             Btn_Alterar.TabIndex = 15;
             Btn_Alterar.Text = "&Alterar";
             Btn_Alterar.UseVisualStyleBackColor = false;
+            Btn_Alterar.Click += Btn_Alterar_Click;
             // 
             // Btn_Excluir
             // 
@@ -237,6 +100,7 @@
             Btn_Excluir.TabIndex = 17;
             Btn_Excluir.Text = "&Excluir";
             Btn_Excluir.UseVisualStyleBackColor = false;
+            Btn_Excluir.Click += Btn_Excluir_Click;
             // 
             // Btn_Limpar
             // 
@@ -273,17 +137,30 @@
             // Gpb_Pesquisar
             // 
             Gpb_Pesquisar.BackColor = SystemColors.ControlLightLight;
+            Gpb_Pesquisar.Controls.Add(rdbVip);
             Gpb_Pesquisar.Controls.Add(ltb_Pesquisar);
             Gpb_Pesquisar.Controls.Add(Txt_Descricao);
             Gpb_Pesquisar.Controls.Add(lblDescricao);
-            Gpb_Pesquisar.Controls.Add(Rb_Codigo);
-            Gpb_Pesquisar.Controls.Add(Rb_Nome);
+            Gpb_Pesquisar.Controls.Add(rdbCodigo);
+            Gpb_Pesquisar.Controls.Add(rdbNome);
             Gpb_Pesquisar.Location = new Point(12, 190);
             Gpb_Pesquisar.Name = "Gpb_Pesquisar";
             Gpb_Pesquisar.Size = new Size(1236, 404);
             Gpb_Pesquisar.TabIndex = 7;
             Gpb_Pesquisar.TabStop = false;
             Gpb_Pesquisar.Text = "Pesquisar por";
+            // 
+            // rdbVip
+            // 
+            rdbVip.AutoSize = true;
+            rdbVip.Font = new Font("Arial Rounded MT Bold", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            rdbVip.Location = new Point(709, 25);
+            rdbVip.Name = "rdbVip";
+            rdbVip.Size = new Size(61, 28);
+            rdbVip.TabIndex = 14;
+            rdbVip.TabStop = true;
+            rdbVip.Text = "Vip";
+            rdbVip.UseVisualStyleBackColor = true;
             // 
             // ltb_Pesquisar
             // 
@@ -294,6 +171,7 @@
             ltb_Pesquisar.Name = "ltb_Pesquisar";
             ltb_Pesquisar.Size = new Size(1209, 274);
             ltb_Pesquisar.TabIndex = 11;
+            ltb_Pesquisar.SelectedIndexChanged += ltb_Pesquisar_SelectedIndexChanged;
             // 
             // Txt_Descricao
             // 
@@ -312,29 +190,29 @@
             lblDescricao.TabIndex = 13;
             lblDescricao.Text = "Descrição :";
             // 
-            // Rb_Codigo
+            // rdbCodigo
             // 
-            Rb_Codigo.AutoSize = true;
-            Rb_Codigo.Font = new Font("Arial Rounded MT Bold", 16F);
-            Rb_Codigo.Location = new Point(621, 25);
-            Rb_Codigo.Name = "Rb_Codigo";
-            Rb_Codigo.Size = new Size(106, 30);
-            Rb_Codigo.TabIndex = 9;
-            Rb_Codigo.TabStop = true;
-            Rb_Codigo.Text = "Código";
-            Rb_Codigo.UseVisualStyleBackColor = true;
+            rdbCodigo.AutoSize = true;
+            rdbCodigo.Font = new Font("Arial Rounded MT Bold", 16F);
+            rdbCodigo.Location = new Point(577, 25);
+            rdbCodigo.Name = "rdbCodigo";
+            rdbCodigo.Size = new Size(106, 30);
+            rdbCodigo.TabIndex = 9;
+            rdbCodigo.TabStop = true;
+            rdbCodigo.Text = "Código";
+            rdbCodigo.UseVisualStyleBackColor = true;
             // 
-            // Rb_Nome
+            // rdbNome
             // 
-            Rb_Nome.AutoSize = true;
-            Rb_Nome.Font = new Font("Arial Rounded MT Bold", 16F);
-            Rb_Nome.Location = new Point(466, 25);
-            Rb_Nome.Name = "Rb_Nome";
-            Rb_Nome.Size = new Size(92, 30);
-            Rb_Nome.TabIndex = 8;
-            Rb_Nome.TabStop = true;
-            Rb_Nome.Text = "Nome";
-            Rb_Nome.UseVisualStyleBackColor = true;
+            rdbNome.AutoSize = true;
+            rdbNome.Font = new Font("Arial Rounded MT Bold", 16F);
+            rdbNome.Location = new Point(461, 23);
+            rdbNome.Name = "rdbNome";
+            rdbNome.Size = new Size(92, 30);
+            rdbNome.TabIndex = 8;
+            rdbNome.TabStop = true;
+            rdbNome.Text = "Nome";
+            rdbNome.UseVisualStyleBackColor = true;
             // 
             // btn_voltar2
             // 
@@ -347,6 +225,113 @@
             btn_voltar2.UseVisualStyleBackColor = false;
             btn_voltar2.Visible = false;
             btn_voltar2.Click += btn_voltar2_Click;
+            // 
+            // lblCodigo
+            // 
+            lblCodigo.AutoSize = true;
+            lblCodigo.Location = new Point(10, 55);
+            lblCodigo.Name = "lblCodigo";
+            lblCodigo.Size = new Size(73, 18);
+            lblCodigo.TabIndex = 0;
+            lblCodigo.Text = "Código :";
+            // 
+            // lblNome
+            // 
+            lblNome.AutoSize = true;
+            lblNome.Location = new Point(191, 54);
+            lblNome.Name = "lblNome";
+            lblNome.Size = new Size(63, 18);
+            lblNome.TabIndex = 2;
+            lblNome.Text = "Nome :";
+            // 
+            // lblTelefone
+            // 
+            lblTelefone.AutoSize = true;
+            lblTelefone.Location = new Point(10, 115);
+            lblTelefone.Name = "lblTelefone";
+            lblTelefone.Size = new Size(86, 18);
+            lblTelefone.TabIndex = 4;
+            lblTelefone.Text = "Telefone :";
+            // 
+            // Txt_Codigo
+            // 
+            Txt_Codigo.Font = new Font("Arial", 12F);
+            Txt_Codigo.Location = new Point(89, 52);
+            Txt_Codigo.Name = "Txt_Codigo";
+            Txt_Codigo.Size = new Size(100, 26);
+            Txt_Codigo.TabIndex = 7;
+            // 
+            // Msk_Telefone
+            // 
+            Msk_Telefone.Font = new Font("Arial", 12F);
+            Msk_Telefone.Location = new Point(102, 112);
+            Msk_Telefone.Mask = "00000-9999";
+            Msk_Telefone.Name = "Msk_Telefone";
+            Msk_Telefone.Size = new Size(307, 26);
+            Msk_Telefone.TabIndex = 2;
+            Msk_Telefone.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            // 
+            // Txt_nome
+            // 
+            Txt_nome.Font = new Font("Arial", 12F);
+            Txt_nome.Location = new Point(260, 51);
+            Txt_nome.MaxLength = 100;
+            Txt_nome.Name = "Txt_nome";
+            Txt_nome.Size = new Size(724, 26);
+            Txt_nome.TabIndex = 1;
+            // 
+            // gpbVip
+            // 
+            gpbVip.Controls.Add(rdbVipNao);
+            gpbVip.Controls.Add(rdbVipSim);
+            gpbVip.Location = new Point(528, 92);
+            gpbVip.Name = "gpbVip";
+            gpbVip.Size = new Size(292, 65);
+            gpbVip.TabIndex = 12;
+            gpbVip.TabStop = false;
+            gpbVip.Text = "Vip";
+            // 
+            // rdbVipNao
+            // 
+            rdbVipNao.AutoSize = true;
+            rdbVipNao.Location = new Point(189, 27);
+            rdbVipNao.Name = "rdbVipNao";
+            rdbVipNao.Size = new Size(58, 22);
+            rdbVipNao.TabIndex = 5;
+            rdbVipNao.TabStop = true;
+            rdbVipNao.Text = "Não";
+            rdbVipNao.UseVisualStyleBackColor = true;
+            // 
+            // rdbVipSim
+            // 
+            rdbVipSim.AutoSize = true;
+            rdbVipSim.Location = new Point(63, 29);
+            rdbVipSim.Name = "rdbVipSim";
+            rdbVipSim.Size = new Size(55, 22);
+            rdbVipSim.TabIndex = 4;
+            rdbVipSim.TabStop = true;
+            rdbVipSim.Text = "Sim";
+            rdbVipSim.UseVisualStyleBackColor = true;
+            // 
+            // Gpb_Cadastrar
+            // 
+            Gpb_Cadastrar.BackColor = SystemColors.ControlLightLight;
+            Gpb_Cadastrar.Controls.Add(gpbVip);
+            Gpb_Cadastrar.Controls.Add(Txt_nome);
+            Gpb_Cadastrar.Controls.Add(Msk_Telefone);
+            Gpb_Cadastrar.Controls.Add(Txt_Codigo);
+            Gpb_Cadastrar.Controls.Add(lblTelefone);
+            Gpb_Cadastrar.Controls.Add(lblNome);
+            Gpb_Cadastrar.Controls.Add(lblCodigo);
+            Gpb_Cadastrar.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Gpb_Cadastrar.Location = new Point(12, 13);
+            Gpb_Cadastrar.Margin = new Padding(4);
+            Gpb_Cadastrar.Name = "Gpb_Cadastrar";
+            Gpb_Cadastrar.Padding = new Padding(4);
+            Gpb_Cadastrar.Size = new Size(1236, 164);
+            Gpb_Cadastrar.TabIndex = 0;
+            Gpb_Cadastrar.TabStop = false;
+            Gpb_Cadastrar.Text = "Cadastro";
             // 
             // Cliente
             // 
@@ -371,19 +356,16 @@
             Name = "Cliente";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Cliente";
-            Load += Cliente_Load;
-            Gpb_Cadastrar.ResumeLayout(false);
-            Gpb_Cadastrar.PerformLayout();
-            Gpb_Sexo.ResumeLayout(false);
-            Gpb_Sexo.PerformLayout();
             Gpb_Pesquisar.ResumeLayout(false);
             Gpb_Pesquisar.PerformLayout();
+            gpbVip.ResumeLayout(false);
+            gpbVip.PerformLayout();
+            Gpb_Cadastrar.ResumeLayout(false);
+            Gpb_Cadastrar.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
-
-        private GroupBox Gpb_Cadastrar;
         private Button Btn_Novo;
         private Button Btn_Cadastrar;
         private Button Btn_Alterar;
@@ -391,24 +373,23 @@
         private Button Btn_Limpar;
         private Button Btn_Pesquisar;
         private Button Btn_Voltar;
-        private TextBox Txt_Codigo;
-        private Label lblTelefone;
-        private Label lblEmail;
-        private Label lblNome;
-        private Label lblCodigo;
-        private TextBox Txt_Email;
-        private TextBox Txt_nome;
-        private MaskedTextBox Msk_Telefone;
-        private GroupBox Gpb_Sexo;
-        private RadioButton Rb_NaoInfo;
-        private RadioButton Rb_Feminino;
-        private RadioButton Rb_Masculino;
         private GroupBox Gpb_Pesquisar;
         private ListBox ltb_Pesquisar;
         private TextBox Txt_Descricao;
         private Label lblDescricao;
-        private RadioButton Rb_Codigo;
-        private RadioButton Rb_Nome;
         private Button btn_voltar2;
+        private RadioButton rdbVip;
+        private RadioButton rdbCodigo;
+        private RadioButton rdbNome;
+        private Label lblCodigo;
+        private Label lblNome;
+        private Label lblTelefone;
+        private TextBox Txt_Codigo;
+        private MaskedTextBox Msk_Telefone;
+        private TextBox Txt_nome;
+        private GroupBox gpbVip;
+        private RadioButton rdbVipNao;
+        private RadioButton rdbVipSim;
+        private GroupBox Gpb_Cadastrar;
     }
 }

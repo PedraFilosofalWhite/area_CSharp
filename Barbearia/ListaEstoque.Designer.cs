@@ -235,6 +235,7 @@
             Name = "FrmListaEstoque";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Lista Estoque";
+            Load += FrmListaEstoque_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pctFotocubo).EndInit();
             Gpb_Pesquisar.ResumeLayout(false);
