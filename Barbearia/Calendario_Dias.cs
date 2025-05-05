@@ -12,6 +12,8 @@ namespace Barbearia
 {
     public partial class Calendario_Dias : UserControl
     {
+        public static string static_dia;
+
         public Calendario_Dias()
         {
             InitializeComponent();
@@ -19,6 +21,19 @@ namespace Barbearia
         public void Dias(int NumeroDias)
         {
             Lb_Dias.Text = NumeroDias + "";
+        }
+
+        private void Calendario_Dias_Click(object sender, EventArgs e)
+        {
+            static_dia = Lb_Dias.Text;
+            frmAgenda frmAgenda = new frmAgenda();
+            frmAgenda.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            frmVisualizarAgenda frmVisual = new frmVisualizarAgenda();
+            frmVisual.Show();
         }
     }
 }
