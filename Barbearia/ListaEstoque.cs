@@ -48,6 +48,10 @@ namespace Barbearia
 
         private void btnCarregaGridView_Click(object sender, EventArgs e)
         {
+
+
+
+
             try
             {
                 using (var conexao = Conexao.obterConexao())
@@ -65,12 +69,20 @@ namespace Barbearia
             {
                 MessageBox.Show("Erro: " + ex.Message);
             }
-        }     
+        }
         private void FrmListaEstoque_Load(object sender, EventArgs e)
         {
             IntPtr hMenu = GetSystemMenu(this.Handle, false);
             int MenuCount = GetMenuItemCount(hMenu) - 1;
             RemoveMenu(hMenu, MenuCount, MF_BYCOMMAND);
+        }
+
+        private void btnPesquisar_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(TxtNome.Text) || cbxCategoria.SelectedIndex == -1)
+            {
+                MessageBox.Show("Favor preencher todos os campos!!!");
+            }
         }
     }
 }

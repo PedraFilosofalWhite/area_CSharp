@@ -103,6 +103,7 @@
             // 
             Txt_Descricao.Font = new Font("Arial", 12F);
             Txt_Descricao.Location = new Point(115, 74);
+            Txt_Descricao.MaxLength = 100;
             Txt_Descricao.Name = "Txt_Descricao";
             Txt_Descricao.Size = new Size(1104, 26);
             Txt_Descricao.TabIndex = 10;
@@ -246,9 +247,11 @@
             // 
             // txtSenha
             // 
+
             txtSenha.Font = new Font("Arial Narrow", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtSenha.Location = new Point(779, 112);
             txtSenha.MaxLength = 10;
+
             txtSenha.Name = "txtSenha";
             txtSenha.Size = new Size(440, 26);
             txtSenha.TabIndex = 7;

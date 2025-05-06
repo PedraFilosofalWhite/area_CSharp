@@ -160,6 +160,7 @@
             btnPesquisar.TabIndex = 10;
             btnPesquisar.Text = "Pesquisar";
             btnPesquisar.UseVisualStyleBackColor = false;
+            btnPesquisar.Click += btnPesquisar_Click;
             // 
             // lblCategoria
             // 

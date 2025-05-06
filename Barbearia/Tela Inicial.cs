@@ -15,6 +15,7 @@ namespace Barbearia
     public partial class frmTela_Inicial : Form
     {
         int mes, ano;
+        public static int static_mes, static_ano;
 
 
 
@@ -81,7 +82,7 @@ namespace Barbearia
         {
             frmAgenda agenda = new frmAgenda();
             agenda.Show();
-            this.Hide();
+
         }
 
         private void Menu_cliente_Click(object sender, EventArgs e)
@@ -125,8 +126,10 @@ namespace Barbearia
             ano = now.Year;
 
             string nomemes = DateTimeFormatInfo.CurrentInfo.GetMonthName(mes);
-
             Lb_mes.Text = nomemes + " " + ano;
+
+            static_mes = mes;
+            static_ano = ano;
 
             // Primeiro dia do mês
             DateTime Primeirodia = new DateTime(now.Year, now.Month, 1);
@@ -162,6 +165,11 @@ namespace Barbearia
             {
                 DateTime now = DateTime.Now;
                 mes++;
+
+                static_mes = mes;
+                static_ano = ano;
+
+
                 string nomemes = DateTimeFormatInfo.CurrentInfo.GetMonthName(mes);
 
                 Lb_mes.Text = nomemes + "  " + ano;
@@ -198,6 +206,9 @@ namespace Barbearia
                 MessageBox.Show("Data muito extensa para o periodo atual", "Informação ", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DateTime now = DateTime.Now;
                 mes--;
+                static_mes = mes;
+                static_ano = ano;
+
                 string nomemes = DateTimeFormatInfo.CurrentInfo.GetMonthName(mes);
 
                 Lb_mes.Text = nomemes + "   " + ano;
@@ -309,11 +320,11 @@ namespace Barbearia
             }
         }
 
-            private void menuVizualizarAgenda_Click(object sender, EventArgs e)
-            {
-                frmVisualizarAgenda abrir = new frmVisualizarAgenda();
-                abrir.Show();
-            }
+        private void menuVizualizarAgenda_Click(object sender, EventArgs e)
+        {
+            frmVisualizarAgenda abrir = new frmVisualizarAgenda();
+            abrir.Show();
         }
-    } 
+    }
+} 
 
