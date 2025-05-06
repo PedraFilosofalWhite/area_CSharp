@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTela_Inicial));
             msNavBar = new MenuStrip();
-            Menu_Agenda = new ToolStripMenuItem();
             menuVizualizarAgenda = new ToolStripMenuItem();
             Menu_cliente = new ToolStripMenuItem();
             Menu_Estoque = new ToolStripMenuItem();
@@ -57,20 +56,13 @@
             // msNavBar
             // 
             msNavBar.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            msNavBar.Items.AddRange(new ToolStripItem[] { Menu_Agenda, menuVizualizarAgenda, Menu_cliente, Menu_Estoque, Menu_Funcionario, Menu_Financa, Menu_Sair });
+            msNavBar.Items.AddRange(new ToolStripItem[] { menuVizualizarAgenda, Menu_cliente, Menu_Estoque, Menu_Funcionario, Menu_Financa, Menu_Sair });
             msNavBar.Location = new Point(0, 0);
             msNavBar.Name = "msNavBar";
             msNavBar.RenderMode = ToolStripRenderMode.Professional;
             msNavBar.Size = new Size(1260, 26);
             msNavBar.TabIndex = 5;
             msNavBar.Text = "menuStrip1";
-            // 
-            // Menu_Agenda
-            // 
-            Menu_Agenda.Name = "Menu_Agenda";
-            Menu_Agenda.Size = new Size(89, 22);
-            Menu_Agenda.Text = "&Agendar";
-            Menu_Agenda.Click += Menu_Agenda_Click;
             // 
             // menuVizualizarAgenda
             // 
@@ -277,7 +269,6 @@
 
         #endregion
         private MenuStrip msNavBar;
-        private ToolStripMenuItem Menu_Agenda;
         private ToolStripMenuItem Menu_cliente;
         private ToolStripMenuItem Menu_Estoque;
         private ToolStripMenuItem Menu_Funcionario;

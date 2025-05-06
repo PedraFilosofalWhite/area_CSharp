@@ -15,7 +15,7 @@ namespace Barbearia
     public partial class frmTela_Inicial : Form
     {
         int mes, ano;
-        public static int static_mes , static_ano ;
+        public static int static_mes, static_ano;
 
 
 
@@ -82,7 +82,7 @@ namespace Barbearia
         {
             frmAgenda agenda = new frmAgenda();
             agenda.Show();
-            
+
         }
 
         private void Menu_cliente_Click(object sender, EventArgs e)
@@ -165,7 +165,7 @@ namespace Barbearia
             {
                 DateTime now = DateTime.Now;
                 mes++;
-                
+
                 static_mes = mes;
                 static_ano = ano;
 
@@ -320,11 +320,11 @@ namespace Barbearia
             }
         }
 
-            private void menuVizualizarAgenda_Click(object sender, EventArgs e)
-            {
-                frmVisualizarAgenda abrir = new frmVisualizarAgenda();
-                abrir.Show();
-            }
+        private void menuVizualizarAgenda_Click(object sender, EventArgs e)
+        {
+            frmVisualizarAgenda abrir = new frmVisualizarAgenda();
+            abrir.Show();
         }
-    } 
+    }
+} 
 

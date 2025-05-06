@@ -177,6 +177,7 @@
             // 
             Txt_Descricao.Font = new Font("Arial", 12F);
             Txt_Descricao.Location = new Point(115, 74);
+            Txt_Descricao.MaxLength = 100;
             Txt_Descricao.Name = "Txt_Descricao";
             Txt_Descricao.Size = new Size(1104, 26);
             Txt_Descricao.TabIndex = 10;

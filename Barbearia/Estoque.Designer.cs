@@ -93,6 +93,7 @@
             // 
             txtProduto.Location = new Point(113, 97);
             txtProduto.Margin = new Padding(4);
+            txtProduto.MaxLength = 50;
             txtProduto.Name = "txtProduto";
             txtProduto.Size = new Size(210, 26);
             txtProduto.TabIndex = 1;
