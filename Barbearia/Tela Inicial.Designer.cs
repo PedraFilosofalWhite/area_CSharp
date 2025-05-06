@@ -67,8 +67,8 @@
             // menuVizualizarAgenda
             // 
             menuVizualizarAgenda.Name = "menuVizualizarAgenda";
-            menuVizualizarAgenda.Size = new Size(162, 22);
-            menuVizualizarAgenda.Text = "Vizualizar Agenda";
+            menuVizualizarAgenda.Size = new Size(163, 22);
+            menuVizualizarAgenda.Text = "Visualizar Agenda";
             menuVizualizarAgenda.Click += menuVizualizarAgenda_Click;
             // 
             // Menu_cliente
