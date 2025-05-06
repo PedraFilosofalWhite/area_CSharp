@@ -76,7 +76,7 @@ namespace Barbearia
         public Boolean BuscarFunc (string usuario, string senha)
         {
             MySqlCommand comm = new MySqlCommand();
-            comm.CommandText = "select * from Funcionarios where loginFunc = @nomeFunc and senhaFunc = @senhaFunc;";
+            comm.CommandText = "select * from Funcionarios where loginFunc = @nomeFunc and senhaFunc = @senhaFunc and ativoFunc = true;";
             comm.CommandType = CommandType.Text;
             comm.Connection = Conexao.obterConexao();
 

@@ -101,7 +101,7 @@
             // 
             txtPreco.Location = new Point(678, 55);
             txtPreco.Margin = new Padding(4);
-            txtPreco.Mask = "000,000";
+            txtPreco.Mask = "$000.00";
             txtPreco.Name = "txtPreco";
             txtPreco.Size = new Size(135, 26);
             txtPreco.TabIndex = 3;
@@ -303,6 +303,7 @@
             Controls.Add(Btn_Novo);
             Controls.Add(Gpb_Estoque);
             Font = new Font("Arial Rounded MT Bold", 12F);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
             Name = "FrmEstoque";
             StartPosition = FormStartPosition.CenterScreen;

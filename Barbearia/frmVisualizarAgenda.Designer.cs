@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmVisualizarAgenda));
             dtpVizualizarAgenda = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)dtpVizualizarAgenda).BeginInit();
             SuspendLayout();
@@ -48,9 +49,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1264, 681);
             Controls.Add(dtpVizualizarAgenda);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "frmVisualizarAgenda";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "VisualizarAgenda";
+            Text = "Visualizar Agenda";
             Load += frmVisualizarAgenda_Load;
             ((System.ComponentModel.ISupportInitialize)dtpVizualizarAgenda).EndInit();
             ResumeLayout(false);

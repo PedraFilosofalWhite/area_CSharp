@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Cliente));
             Btn_Novo = new Button();
             Btn_Cadastrar = new Button();
             Btn_Alterar = new Button();
@@ -126,12 +127,13 @@
             // 
             // Btn_Voltar
             // 
+            Btn_Voltar.BackColor = SystemColors.ControlLightLight;
             Btn_Voltar.Location = new Point(1083, 600);
             Btn_Voltar.Name = "Btn_Voltar";
             Btn_Voltar.Size = new Size(175, 75);
             Btn_Voltar.TabIndex = 18;
             Btn_Voltar.Text = "&Voltar";
-            Btn_Voltar.UseVisualStyleBackColor = true;
+            Btn_Voltar.UseVisualStyleBackColor = false;
             Btn_Voltar.Click += Btn_Voltar_Click;
             // 
             // Gpb_Pesquisar
@@ -351,6 +353,7 @@
             Controls.Add(Gpb_Cadastrar);
             Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.Fixed3D;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
             MaximizeBox = false;
             Name = "Cliente";

@@ -266,7 +266,7 @@
             MaximizeBox = false;
             Name = "frmTela_Inicial";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Menu inicial";
+            Text = "Tela inicial";
             Load += Tela_Inicial_Load;
             msNavBar.ResumeLayout(false);
             msNavBar.PerformLayout();

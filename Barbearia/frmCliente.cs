@@ -63,6 +63,7 @@ namespace Barbearia
             rdbCodigo.Checked = false;
             rdbNome.Checked = false;
             rdbVip.Checked = false;
+            Txt_Descricao.Clear();
         }
         private void Cliente_Load(object sender, EventArgs e)
         {
@@ -110,6 +111,7 @@ namespace Barbearia
             Btn_Cadastrar.Visible = true;
             Btn_Cadastrar.Enabled = false;
             Gpb_Pesquisar.Visible = true;
+            
 
             if (rdbCodigo.Checked)
             {
@@ -318,6 +320,7 @@ namespace Barbearia
                 HabilitarCampos();
                 Btn_Alterar.Enabled = true;
                 Btn_Cadastrar.Enabled = false;
+                Btn_Pesquisar.Enabled = false;
             }
 
         }
@@ -332,7 +335,7 @@ namespace Barbearia
 
             if (DR.Read())
             {
-                Txt_Codigo.Text = DR["idCli"].ToString(); // Armazena o ID oculto
+                Txt_Codigo.Text = DR["idCli"].ToString();
                 Txt_nome.Text = DR["nomeCli"].ToString();
                 Msk_Telefone.Text = DR["TelCelCli"].ToString();
                 rdbVipSim.Checked = Convert.ToBoolean(DR["vipCli"]);
@@ -345,7 +348,7 @@ namespace Barbearia
         private void Btn_Alterar_Click(object sender, EventArgs e)
         {
             if (Txt_nome.Text.Equals("") ||
-                !Msk_Telefone.MaskCompleted ||
+                !Msk_Telefone.MaskFull ||
                 (!rdbVipSim.Checked && !rdbVipNao.Checked))
             {
                 MessageBox.Show("Favor preencher todos os campos!!!");
@@ -357,17 +360,15 @@ namespace Barbearia
                     MessageBox.Show("Cliente atualizado com sucesso!");
                     limpar();
                     DesabilitarCampos();
-                    Btn_Novo.Enabled = true; // Volta ao estado inicial
+                    Btn_Novo.Enabled = true;
+                    Btn_Pesquisar.Enabled = true;
+                    Gpb_Pesquisar.Visible = true;
                 }
                 else
                 {
                     MessageBox.Show("Erro ao atualizar.");
                 }
-
             }
-
-
-
         }
 
         public int AlterarCliente()
@@ -415,7 +416,12 @@ namespace Barbearia
             if (result == DialogResult.Yes)
             {
                 excluirClientes(Convert.ToInt32(Txt_Codigo.Text));
+                MessageBox.Show("Cliente Excluido com sucesso!");
                 limpar();
+                DesabilitarCampos();
+                Btn_Novo.Enabled = true;
+                Btn_Pesquisar.Enabled = true;
+                Gpb_Pesquisar.Visible = true;
             }
             else
             {
