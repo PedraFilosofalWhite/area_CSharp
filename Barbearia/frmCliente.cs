@@ -63,6 +63,7 @@ namespace Barbearia
             rdbCodigo.Checked = false;
             rdbNome.Checked = false;
             rdbVip.Checked = false;
+            Txt_Descricao.Clear();
         }
         private void Cliente_Load(object sender, EventArgs e)
         {
@@ -110,6 +111,7 @@ namespace Barbearia
             Btn_Cadastrar.Visible = true;
             Btn_Cadastrar.Enabled = false;
             Gpb_Pesquisar.Visible = true;
+            
 
             if (rdbCodigo.Checked)
             {
@@ -230,7 +232,7 @@ namespace Barbearia
             MySqlCommand comm = new MySqlCommand();
             {
                 comm.Connection = conn;
-                comm.CommandText = "SELECT nomeCli FROM Clientes WHERE nomeCli LIKE CONCAT('%', @nome, '%')";
+                comm.CommandText = "SELECT nomeCli FROM Clientes WHERE nomeCli LIKE CONCAT('%', @nome, '%') and ativoCli = true";
                 comm.Parameters.Add("@nome", MySqlDbType.VarChar, 100).Value = descricao;
 
                 using (MySqlDataReader DR = comm.ExecuteReader())
@@ -258,7 +260,7 @@ namespace Barbearia
             MySqlCommand comm = new MySqlCommand();
             {
                 comm.Connection = conn;
-                comm.CommandText = "SELECT nomeCli FROM Clientes WHERE idCli = @idCliente";
+                comm.CommandText = "SELECT nomeCli FROM Clientes WHERE idCli = @idCliente and ativoCli = true;";
                 comm.Parameters.Add("@idCliente", MySqlDbType.Int32).Value = idCliente;
 
                 using (MySqlDataReader DR = comm.ExecuteReader())
@@ -296,7 +298,7 @@ namespace Barbearia
             using (MySqlCommand comm = new MySqlCommand())
             {
                 comm.Connection = conn;
-                comm.CommandText = "SELECT nomeCli FROM Clientes WHERE vipCli = @vip";
+                comm.CommandText = "SELECT nomeCli FROM Clientes WHERE vipCli = @vip and ativoCli = true";
                 comm.Parameters.Add("@vip", MySqlDbType.Int16).Value = isVip.Value;
 
                 using (MySqlDataReader DR = comm.ExecuteReader())
@@ -318,6 +320,7 @@ namespace Barbearia
                 HabilitarCampos();
                 Btn_Alterar.Enabled = true;
                 Btn_Cadastrar.Enabled = false;
+                Btn_Pesquisar.Enabled = false;
             }
 
         }
@@ -332,7 +335,7 @@ namespace Barbearia
 
             if (DR.Read())
             {
-                Txt_Codigo.Text = DR["idCli"].ToString(); // Armazena o ID oculto
+                Txt_Codigo.Text = DR["idCli"].ToString();
                 Txt_nome.Text = DR["nomeCli"].ToString();
                 Msk_Telefone.Text = DR["TelCelCli"].ToString();
                 rdbVipSim.Checked = Convert.ToBoolean(DR["vipCli"]);
@@ -344,22 +347,27 @@ namespace Barbearia
 
         private void Btn_Alterar_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(Txt_Codigo.Text))
+            if (Txt_nome.Text.Equals("") ||
+                !Msk_Telefone.MaskFull ||
+                (!rdbVipSim.Checked && !rdbVipNao.Checked))
             {
-                MessageBox.Show("Selecione um cliente para editar!");
-                return;
-            }
-
-            if (AlterarCliente() == 1)
-            {
-                MessageBox.Show("Cliente atualizado com sucesso!");
-                limpar();
-                DesabilitarCampos();
-                Btn_Novo.Enabled = true; // Volta ao estado inicial
+                MessageBox.Show("Favor preencher todos os campos!!!");
             }
             else
             {
-                MessageBox.Show("Erro ao atualizar.");
+                if (AlterarCliente() == 1)
+                {
+                    MessageBox.Show("Cliente atualizado com sucesso!");
+                    limpar();
+                    DesabilitarCampos();
+                    Btn_Novo.Enabled = true;
+                    Btn_Pesquisar.Enabled = true;
+                    Gpb_Pesquisar.Visible = true;
+                }
+                else
+                {
+                    MessageBox.Show("Erro ao atualizar.");
+                }
             }
         }
 
@@ -378,15 +386,17 @@ namespace Barbearia
             return resp;
         }
 
-        public int excluirFuncionarios(int codFunc)
+        public int excluirClientes(int idCli)
         {
             MySqlCommand comm = new MySqlCommand();
-            comm.CommandText = "delete from tbFuncionarios where codFunc = @codFunc;";
+            comm.CommandText = "update Clientes " +
+                "set ativoCli = FALSE " +
+                "where idCli = @idCli;";
             comm.CommandType = CommandType.Text;
             comm.Connection = Conexao.obterConexao();
 
             comm.Parameters.Clear();
-            comm.Parameters.Add("@codFunc", MySqlDbType.Int32).Value = codFunc;
+            comm.Parameters.Add("@idCli", MySqlDbType.Int32).Value = idCli;
 
             int resp = comm.ExecuteNonQuery();
 
@@ -405,12 +415,21 @@ namespace Barbearia
 
             if (result == DialogResult.Yes)
             {
-                excluirFuncionarios(Convert.ToInt32(Txt_Codigo.Text));
+                excluirClientes(Convert.ToInt32(Txt_Codigo.Text));
+                MessageBox.Show("Cliente Excluido com sucesso!");
                 limpar();
+                DesabilitarCampos();
+                Btn_Novo.Enabled = true;
+                Btn_Pesquisar.Enabled = true;
+                Gpb_Pesquisar.Visible = true;
             }
             else
             {
-
+                MessageBox.Show("Operação Abortada",
+                "Mensagem do sistema",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information,
+                MessageBoxDefaultButton.Button1);
             }
         }
 

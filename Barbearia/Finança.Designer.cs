@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Finança));
             Btn_Voltar = new Button();
             lb_Ordens_de_serv = new Label();
             lbl_PeriodoDe = new Label();
@@ -472,10 +473,11 @@
             Controls.Add(Btn_Voltar);
             Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.Fixed3D;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
             Name = "Finança";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Finança";
+            Text = "Finanças";
             Load += Finança_Load;
             gpb_ResumoFinanceiro.ResumeLayout(false);
             gpb_ResumoFinanceiro.PerformLayout();

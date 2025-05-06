@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmFuncionario));
             btn_voltar2 = new Button();
             Gpb_Pesquisar = new GroupBox();
             ltb_Pesquisar = new ListBox();
@@ -96,6 +97,7 @@
             ltb_Pesquisar.Name = "ltb_Pesquisar";
             ltb_Pesquisar.Size = new Size(1209, 274);
             ltb_Pesquisar.TabIndex = 11;
+            ltb_Pesquisar.SelectedIndexChanged += ltb_Pesquisar_SelectedIndexChanged;
             // 
             // Txt_Descricao
             // 
@@ -141,12 +143,13 @@
             // 
             // Btn_Voltar
             // 
+            Btn_Voltar.BackColor = SystemColors.ControlLightLight;
             Btn_Voltar.Location = new Point(1083, 600);
             Btn_Voltar.Name = "Btn_Voltar";
             Btn_Voltar.Size = new Size(175, 75);
             Btn_Voltar.TabIndex = 28;
             Btn_Voltar.Text = "&Voltar";
-            Btn_Voltar.UseVisualStyleBackColor = true;
+            Btn_Voltar.UseVisualStyleBackColor = false;
             Btn_Voltar.Click += Btn_Voltar_Click;
             // 
             // Btn_Pesquisar
@@ -180,6 +183,7 @@
             Btn_Excluir.TabIndex = 27;
             Btn_Excluir.Text = "&Excluir";
             Btn_Excluir.UseVisualStyleBackColor = false;
+            Btn_Excluir.Click += Btn_Excluir_Click;
             // 
             // Btn_Alterar
             // 
@@ -190,6 +194,7 @@
             Btn_Alterar.TabIndex = 25;
             Btn_Alterar.Text = "&Alterar";
             Btn_Alterar.UseVisualStyleBackColor = false;
+            Btn_Alterar.Click += Btn_Alterar_Click;
             // 
             // Btn_Cadastrar
             // 
@@ -242,8 +247,11 @@
             // 
             // txtSenha
             // 
-            txtSenha.Location = new Point(779, 116);
-            txtSenha.MaxLength = 12;
+
+            txtSenha.Font = new Font("Arial Narrow", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtSenha.Location = new Point(779, 112);
+            txtSenha.MaxLength = 10;
+
             txtSenha.Name = "txtSenha";
             txtSenha.Size = new Size(440, 26);
             txtSenha.TabIndex = 7;
@@ -251,7 +259,7 @@
             // lblSenha
             // 
             lblSenha.AutoSize = true;
-            lblSenha.Location = new Point(709, 117);
+            lblSenha.Location = new Point(709, 116);
             lblSenha.Name = "lblSenha";
             lblSenha.Size = new Size(64, 18);
             lblSenha.TabIndex = 14;
@@ -259,6 +267,7 @@
             // 
             // txtLogin
             // 
+            txtLogin.Font = new Font("Arial Narrow", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtLogin.Location = new Point(721, 52);
             txtLogin.MaxLength = 50;
             txtLogin.Name = "txtLogin";
@@ -277,7 +286,7 @@
             // mskAluguel
             // 
             mskAluguel.Font = new Font("Arial", 12F);
-            mskAluguel.Location = new Point(376, 116);
+            mskAluguel.Location = new Point(376, 112);
             mskAluguel.Mask = "$000.00";
             mskAluguel.Name = "mskAluguel";
             mskAluguel.Size = new Size(106, 26);
@@ -295,7 +304,7 @@
             // mskCPF
             // 
             mskCPF.Font = new Font("Arial", 12F);
-            mskCPF.Location = new Point(539, 116);
+            mskCPF.Location = new Point(539, 112);
             mskCPF.Mask = "000,000,000-99";
             mskCPF.Name = "mskCPF";
             mskCPF.Size = new Size(164, 26);
@@ -304,7 +313,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(488, 120);
+            label1.Location = new Point(488, 116);
             label1.Name = "label1";
             label1.Size = new Size(50, 18);
             label1.TabIndex = 9;
@@ -323,7 +332,7 @@
             // 
             Msk_Telefone.Font = new Font("Arial", 12F);
             Msk_Telefone.Location = new Point(103, 112);
-            Msk_Telefone.Mask = "00000-9999";
+            Msk_Telefone.Mask = "99999-9999";
             Msk_Telefone.Name = "Msk_Telefone";
             Msk_Telefone.Size = new Size(99, 26);
             Msk_Telefone.TabIndex = 4;
@@ -380,10 +389,12 @@
             Controls.Add(Gpb_Cadastrar);
             Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.Fixed3D;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
             MaximizeBox = false;
             Name = "FrmFuncionario";
-            Text = "Funcionarios";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Funcionários";
             Load += FrmFuncionario_Load;
             Gpb_Pesquisar.ResumeLayout(false);
             Gpb_Pesquisar.PerformLayout();
