@@ -57,6 +57,8 @@ namespace Barbearia
             Btn_Cadastrar.Location = new Point(11, 593);
             Btn_Limpar.Location = new Point(194, 593);
             Btn_Pesquisar.Location = new Point(377, 593);
+
+
         }
 
         private void Btn_Pesquisar_Click(object sender, EventArgs e)
@@ -77,8 +79,8 @@ namespace Barbearia
             txtProduto.Clear();
             cbxCategoria.SelectedIndex = -1;
             TxtDescricao.Clear();
-            txtPreco.Clear();
-            txtQuantidade.Clear();
+            mskPreco.Clear();
+            mskQuantidade.Clear();
         }
 
         private void Btn_Cadastrar_Click(object sender, EventArgs e)
@@ -87,47 +89,34 @@ namespace Barbearia
             Btn_Voltar.Visible = false;
             Btn_voltar2.Visible = true;
 
-
-            if (Txt_Codigo.Text.Equals("") ||
-                txtProduto.Text.Equals("") ||
-                TxtDescricao.Text.Equals("") ||
-                txtPreco.Text.Equals("") ||
-                txtQuantidade.Equals("") ||
-                cbxCategoria.Equals(""))
+            if (txtProduto.Text.Equals("") || TxtDescricao.Text.Equals("") || !mskPreco.MaskFull || !mskQuantidade.MaskFull || string.IsNullOrWhiteSpace(cbxCategoria.Text))
             {
-                MessageBox.Show("Favor preencher os campos!!!");
+                MessageBox.Show("Favor preencher todos os campos!!!");
+                return;
             }
-            try
+            else
             {
-                string produto = txtProduto.Text;
-                string descricao = TxtDescricao.Text;
-                decimal preco = decimal.Parse(txtPreco.Text);
-                int quantidade = int.Parse(txtQuantidade.Text);
-                string categoria = cbxCategoria.Text;
-                using (MySqlConnection conexao = Conexao.obterConexao())
+                int idCategoria = obterIdCategoria();
+                if (idCategoria == -1)
                 {
-                    string sql = "INSERT INTO Produtos (nome, descricao, preco, quantidade, categoria) " +
-                                 "VALUES (@nome, @descricao, @preco, @quantidade, @categoria)";
-                    using (MySqlCommand comando = new MySqlCommand(sql, conexao))
-                    {
-                        comando.Parameters.AddWithValue("@nome", produto);
-                        comando.Parameters.AddWithValue("@descricao", descricao);
-                        comando.Parameters.AddWithValue("@preco", preco);
-                        comando.Parameters.AddWithValue("@quantidade", quantidade);
-                        comando.Parameters.AddWithValue("@categoria", categoria);
-                        comando.ExecuteNonQuery();
-                    }
-                    MessageBox.Show("Produto cadastrado com sucesso!");
+                    MessageBox.Show("Selecione uma categoria válida!");
+                    return;
+                } else if (cadastrarProduto(idCategoria) == 1)
+                {
+                    MessageBox.Show("Cadastrado com sucesso!!!");
+                    LimparCampos();
+                    DesabilitarCampos();
+                } else
+                {
+                    MessageBox.Show("Erro ao cadastrar!!!");
                 }
-                LimparCampos(); // se quiser limpar os campos após o cadastro
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erro ao cadastrar: " + ex.Message);
-            }
 
+
+
+            }
         }
-       
+
+
 
         private void Btn_voltar2_Click(object sender, EventArgs e)
         {
@@ -168,22 +157,88 @@ namespace Barbearia
             }
 
         }
-        public static class Conexao
-        {
-            public static MySqlConnection obterConexao()
-            {
-                string connStr = "server=localhost;user=root;database=barbearia;password=;";
-                MySqlConnection conn = new MySqlConnection(connStr);
-                conn.Open();
-                return conn;
-            }
-        }
 
         private void FrmEstoque_Load(object sender, EventArgs e)
         {
             IntPtr hMenu = GetSystemMenu(this.Handle, false);
             int MenuCount = GetMenuItemCount(hMenu) - 1;
             RemoveMenu(hMenu, MenuCount, MF_BYCOMMAND);
+
+            CarregarNomesCategorias();
+        }
+
+        private void CarregarNomesCategorias()
+        {
+            cbxCategoria.Items.Clear();
+
+            MySqlCommand comm = new MySqlCommand();
+
+            comm.CommandText = "select idCategoria, nomeCategoria from categorias order by nomeCategoria asc;";
+            comm.CommandType = CommandType.Text;
+
+            comm.Connection = Conexao.obterConexao();
+
+            MySqlDataReader DR = comm.ExecuteReader();
+
+            while (DR.Read())
+            {
+                cbxCategoria.Items.Add(DR["nomeCategoria"].ToString());
+            }
+            Conexao.Fecharconexao();
+        }
+        private int obterIdCategoria()
+        {
+            int idCategoria = -1;
+
+            MySqlCommand comm = new MySqlCommand();
+
+            if (cbxCategoria.SelectedItem == null)
+            {
+                return -1;
+            }
+            else
+            {
+                comm.Connection = Conexao.obterConexao();
+                comm.CommandText = "SELECT idCategoria FROM categorias WHERE nomeCategoria = @nomeCategoria";
+                comm.CommandType = CommandType.Text;
+
+                comm.Parameters.Clear();
+                comm.Parameters.Add("@nomeCategoria", MySqlDbType.VarChar, 20).Value = cbxCategoria.Text;
+
+                object result = comm.ExecuteScalar();
+
+                if (result != null)
+                {
+                    idCategoria = Convert.ToInt32(result);
+                }
+            }
+            Conexao.Fecharconexao();
+            return idCategoria;
+        }
+
+        public int cadastrarProduto(int idCategoria)
+        {
+            MySqlCommand comm = new MySqlCommand();
+
+            comm.CommandText = "insert into produtos (nomeProd, descProd, precoUnitario, qtdProd, idCategoria)" +
+                " values (@nomeProd, @descProd, @precoUnitario, @qtdProd, @idCategoria);";
+            comm.CommandType = CommandType.Text;
+
+            comm.Parameters.Clear();
+            comm.Parameters.Add("nomeProd", MySqlDbType.VarChar, 100).Value = txtProduto.Text;
+            comm.Parameters.Add("descProd", MySqlDbType.VarChar, 255).Value = TxtDescricao.Text;
+            comm.Parameters.Add("precoUnitario", MySqlDbType.Decimal).Value = decimal.Parse(mskPreco.Text, NumberStyles.Currency, CultureInfo.GetCultureInfo("pt-BR"));
+            comm.Parameters.Add("qtdProd", MySqlDbType.Int32).Value = mskQuantidade.Text;
+            comm.Parameters.Add("idCategoria", MySqlDbType.Int32).Value = idCategoria;
+
+            comm.Connection = Conexao.obterConexao();
+
+            int resp = comm.ExecuteNonQuery();
+
+            Conexao.Fecharconexao();
+
+            return resp;
+
         }
     }
 }

@@ -32,9 +32,9 @@
             Gpb_Estoque = new GroupBox();
             pctFotocubo = new PictureBox();
             txtProduto = new TextBox();
-            txtPreco = new MaskedTextBox();
+            mskPreco = new MaskedTextBox();
             lblPreco = new Label();
-            txtQuantidade = new MaskedTextBox();
+            mskQuantidade = new MaskedTextBox();
             TxtDescricao = new MaskedTextBox();
             lbldescricao = new Label();
             lblQuantidade = new Label();
@@ -57,9 +57,9 @@
             // 
             Gpb_Estoque.Controls.Add(pctFotocubo);
             Gpb_Estoque.Controls.Add(txtProduto);
-            Gpb_Estoque.Controls.Add(txtPreco);
+            Gpb_Estoque.Controls.Add(mskPreco);
             Gpb_Estoque.Controls.Add(lblPreco);
-            Gpb_Estoque.Controls.Add(txtQuantidade);
+            Gpb_Estoque.Controls.Add(mskQuantidade);
             Gpb_Estoque.Controls.Add(TxtDescricao);
             Gpb_Estoque.Controls.Add(lbldescricao);
             Gpb_Estoque.Controls.Add(lblQuantidade);
@@ -98,16 +98,16 @@
             txtProduto.Size = new Size(210, 26);
             txtProduto.TabIndex = 1;
             // 
-            // txtPreco
+            // mskPreco
             // 
-            txtPreco.Location = new Point(678, 55);
-            txtPreco.Margin = new Padding(4);
-            txtPreco.Mask = "$000.00";
-            txtPreco.Name = "txtPreco";
-            txtPreco.Size = new Size(135, 26);
-            txtPreco.TabIndex = 3;
-            txtPreco.ValidatingType = typeof(int);
-            txtPreco.KeyPress += txtPreco_KeyPress;
+            mskPreco.Location = new Point(678, 55);
+            mskPreco.Margin = new Padding(4);
+            mskPreco.Mask = "$000.00";
+            mskPreco.Name = "mskPreco";
+            mskPreco.Size = new Size(135, 26);
+            mskPreco.TabIndex = 3;
+            mskPreco.ValidatingType = typeof(int);
+            mskPreco.KeyPress += txtPreco_KeyPress;
             // 
             // lblPreco
             // 
@@ -120,16 +120,16 @@
             lblPreco.TabIndex = 14;
             lblPreco.Text = "Preço:";
             // 
-            // txtQuantidade
+            // mskQuantidade
             // 
-            txtQuantidade.Location = new Point(678, 97);
-            txtQuantidade.Margin = new Padding(4);
-            txtQuantidade.Mask = "00000";
-            txtQuantidade.Name = "txtQuantidade";
-            txtQuantidade.Size = new Size(135, 26);
-            txtQuantidade.TabIndex = 4;
-            txtQuantidade.ValidatingType = typeof(int);
-            txtQuantidade.KeyPress += txtQuantidade_KeyPress;
+            mskQuantidade.Location = new Point(678, 97);
+            mskQuantidade.Margin = new Padding(4);
+            mskQuantidade.Mask = "00000";
+            mskQuantidade.Name = "mskQuantidade";
+            mskQuantidade.Size = new Size(135, 26);
+            mskQuantidade.TabIndex = 4;
+            mskQuantidade.ValidatingType = typeof(int);
+            mskQuantidade.KeyPress += txtQuantidade_KeyPress;
             // 
             // TxtDescricao
             // 
@@ -338,10 +338,10 @@
         private Button Btn_Limpar;
         private Button Btn_Cadastrar;
         private Button Btn_Novo;
-        private MaskedTextBox txtQuantidade;
+        private MaskedTextBox mskQuantidade;
         private MaskedTextBox TxtDescricao;
         private Label lblQuantidade;
-        private MaskedTextBox txtPreco;
+        private MaskedTextBox mskPreco;
         private Label lblPreco;
         private TextBox txtProduto;
         public PictureBox pctFotocubo;

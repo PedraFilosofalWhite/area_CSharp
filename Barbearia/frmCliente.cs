@@ -183,7 +183,7 @@ namespace Barbearia
         {
 
             if (Txt_nome.Text.Equals("") ||
-                !Msk_Telefone.MaskCompleted ||
+                !Msk_Telefone.MaskFull ||
                 (!rdbVipSim.Checked && !rdbVipNao.Checked))
             {
                 MessageBox.Show("Favor preencher todos os campos!!!");
