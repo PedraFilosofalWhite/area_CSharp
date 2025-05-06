@@ -233,6 +233,7 @@
             Controls.Add(BtnVoltar);
             Controls.Add(btnCarregaGridView);
             Controls.Add(dataGridView1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FrmListaEstoque";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Lista Estoque";

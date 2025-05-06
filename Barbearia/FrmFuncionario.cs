@@ -301,12 +301,15 @@ namespace Barbearia
         private void Btn_Alterar_Click(object sender, EventArgs e)
         {
             if (Txt_nome.Text.Equals("") ||
-                !Msk_Telefone.MaskCompleted ||
-                !mskAluguel.MaskCompleted ||
-                !mskCPF.MaskCompleted)
+                !Msk_Telefone.MaskFull ||
+                !mskAluguel.MaskFull||
+                !mskCPF.MaskFull ||
+                txtLogin.Text.Equals("") ||
+                txtSenha.Text.Equals("") )
             {
                 MessageBox.Show("Favor preencher todos os campos!!!");
-            } else
+            }
+            else
             {
                 if (AlterarFuncionarios() == 1)
                 {
@@ -314,6 +317,8 @@ namespace Barbearia
                     limpar();
                     DesabilitarCampos();
                     Btn_Novo.Enabled = true;
+                    Btn_Pesquisar.Enabled = true;
+                    Gpb_Pesquisar.Visible = true;
                 }
                 else
                 {
@@ -332,16 +337,18 @@ namespace Barbearia
                 "senhaFunc = @senhaFunc," +
                 "cpfFunc = @cpfFunc," +
                 "aluguel_cadeira = @aluguel_cadeira," +
-                "telCelFunc = @telCelFunc," +
+                "telCelFunc = @telCelFunc " +
                 "where idFunc = @idFunc;";
 
             comm.Parameters.Clear();
+            comm.Parameters.Add("idFunc", MySqlDbType.Int32).Value = Convert.ToInt32(Txt_Codigo.Text);
             comm.Parameters.Add("@nomeFunc", MySqlDbType.VarChar, 100).Value = Txt_nome.Text;
             comm.Parameters.Add("@telCelFunc", MySqlDbType.VarChar, 10).Value = Msk_Telefone.Text;
             comm.Parameters.Add("LoginFunc", MySqlDbType.VarChar, 50).Value = txtLogin.Text;
             comm.Parameters.Add("senhaFunc", MySqlDbType.VarChar, 10).Value = txtSenha.Text;
             comm.Parameters.Add("cpfFunc", MySqlDbType.VarChar, 14).Value = mskCPF.Text;
-            comm.Parameters.Add("aluguel", MySqlDbType.Decimal).Value = decimal.Parse(mskAluguel.Text, NumberStyles.Currency, CultureInfo.GetCultureInfo("pt-BR"));
+            comm.Parameters.Add("aluguel_cadeira", MySqlDbType.Decimal).Value = decimal.Parse(mskAluguel.Text, NumberStyles.Currency, CultureInfo.GetCultureInfo("pt-BR"));
+            comm.Connection = Conexao.obterConexao();
 
             int resp = comm.ExecuteNonQuery();
             Conexao.Fecharconexao();
@@ -359,7 +366,12 @@ namespace Barbearia
             if (result == DialogResult.Yes)
             {
                 excluirFuncionarios(Convert.ToInt32(Txt_Codigo.Text));
+                MessageBox.Show("Funcionário excluido com sucesso!");
                 limpar();
+                DesabilitarCampos();
+                Btn_Novo.Enabled = true;
+                Btn_Pesquisar.Enabled = true;
+                Gpb_Pesquisar.Visible = true;
             }
             else
             {
@@ -387,6 +399,44 @@ namespace Barbearia
             Conexao.Fecharconexao();
 
             return resp;
+        }
+
+        private void ltb_Pesquisar_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (ltb_Pesquisar.SelectedItem != null)
+            {
+                string nomeFunc= ltb_Pesquisar.SelectedItem.ToString();
+                CarregarDadosFuncionario(nomeFunc);
+                HabilitarCampos();
+                Btn_Alterar.Enabled = true;
+                Btn_Cadastrar.Enabled = false;
+                Btn_Pesquisar.Enabled = false;
+            }
+        }
+
+        public void CarregarDadosFuncionario(string nomeFunc)
+        {
+            MySqlCommand comm = new MySqlCommand();
+            comm.CommandText = "SELECT idFunc, nomeFunc, loginFunc, telCelFunc, aluguel_cadeira, cpfFunc, senhaFunc FROM funcionarios WHERE nomeFunc = @nome;";
+            comm.Parameters.Add("@nome", MySqlDbType.VarChar, 100).Value = nomeFunc;
+            comm.Connection = Conexao.obterConexao();
+
+            MySqlDataReader DR = comm.ExecuteReader();
+
+            if (DR.Read())
+            {
+                Txt_Codigo.Text = DR["idFunc"].ToString();
+                Txt_nome.Text = DR["nomeFunc"].ToString();
+                Msk_Telefone.Text = DR["TelCelFunc"].ToString();
+                mskAluguel.Text = DR["aluguel_cadeira"].ToString();
+                mskCPF.Text = DR["cpfFunc"].ToString();
+                txtSenha.Text = DR["senhaFunc"].ToString();
+                txtLogin.Text = DR["loginFunc"].ToString();
+                
+            }
+
+            Conexao.Fecharconexao();
         }
     }
 }
