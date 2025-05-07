@@ -15,7 +15,7 @@ using System.Globalization;
 
 namespace Barbearia
 {
-    public partial class Cliente : Form
+    public partial class frmCliente : Form
     {
 
 
@@ -27,7 +27,7 @@ namespace Barbearia
         [DllImport("user32")]
         static extern int GetMenuItemCount(IntPtr hWnd);
 
-        public Cliente()
+        public frmCliente()
         {
             InitializeComponent();
             DesabilitarCampos();
@@ -65,24 +65,6 @@ namespace Barbearia
             rdbVip.Checked = false;
             Txt_Descricao.Clear();
         }
-        private void Cliente_Load(object sender, EventArgs e)
-        {
-            IntPtr hMenu = GetSystemMenu(this.Handle, false);
-            int MenuCount = GetMenuItemCount(hMenu) - 1;
-            RemoveMenu(hMenu, MenuCount, MF_BYCOMMAND);
-            rdbVipNao.Checked = false;
-            rdbVipSim.Checked = false;
-            rdbVipNao.Checked = false;
-
-            Txt_Descricao.Clear();
-            rdbCodigo.Checked = false;
-            rdbNome.Checked = false;
-            rdbVip.Checked = false;
-
-            ltb_Pesquisar.Items.Clear();
-
-            Txt_nome.Focus();
-        }
 
         private void Btn_Voltar_Click(object sender, EventArgs e)
         {
@@ -111,7 +93,7 @@ namespace Barbearia
             Btn_Cadastrar.Visible = true;
             Btn_Cadastrar.Enabled = false;
             Gpb_Pesquisar.Visible = true;
-            
+
 
             if (rdbCodigo.Checked)
             {
@@ -253,7 +235,7 @@ namespace Barbearia
                 Txt_Descricao.Focus();
                 return;
             }
-            
+
             ltb_Pesquisar.Items.Clear();
 
             MySqlConnection conn = Conexao.obterConexao();
@@ -433,9 +415,23 @@ namespace Barbearia
             }
         }
 
-        private void Cliente_Load_1(object sender, EventArgs e)
+        private void frmCliente_Load(object sender, EventArgs e)
         {
+            IntPtr hMenu = GetSystemMenu(this.Handle, false);
+            int MenuCount = GetMenuItemCount(hMenu) - 1;
+            RemoveMenu(hMenu, MenuCount, MF_BYCOMMAND);
+            rdbVipNao.Checked = false;
+            rdbVipSim.Checked = false;
+            rdbVipNao.Checked = false;
 
+            Txt_Descricao.Clear();
+            rdbCodigo.Checked = false;
+            rdbNome.Checked = false;
+            rdbVip.Checked = false;
+
+            ltb_Pesquisar.Items.Clear();
+
+            Txt_nome.Focus();
         }
     }
 }

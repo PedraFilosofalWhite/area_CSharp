@@ -1,6 +1,6 @@
 ﻿namespace Barbearia
 {
-    partial class Cliente
+    partial class frmCliente
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Cliente));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCliente));
             Btn_Novo = new Button();
             Btn_Cadastrar = new Button();
             Btn_Alterar = new Button();
@@ -336,7 +336,7 @@
             Gpb_Cadastrar.TabStop = false;
             Gpb_Cadastrar.Text = "Cadastro";
             // 
-            // Cliente
+            // frmCliente
             // 
             AutoScaleDimensions = new SizeF(10F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -357,10 +357,10 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
             MaximizeBox = false;
-            Name = "Cliente";
+            Name = "frmCliente";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Cliente";
-            Load += Cliente_Load_1;
+            Load += frmCliente_Load;
             Gpb_Pesquisar.ResumeLayout(false);
             Gpb_Pesquisar.PerformLayout();
             gpbVip.ResumeLayout(false);

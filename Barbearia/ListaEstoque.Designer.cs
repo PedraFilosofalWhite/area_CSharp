@@ -43,7 +43,8 @@
             button1 = new Button();
             Btn_Excluir = new Button();
             Btn_Alterar = new Button();
-            ltbPesquisar = new ListBox();
+            ltbNomeProdutos = new ListBox();
+            ltbQtdProd = new ListBox();
             Gpb_Pesquisar.SuspendLayout();
             SuspendLayout();
             // 
@@ -57,7 +58,7 @@
             btnCarregaGridView.TabIndex = 1;
             btnCarregaGridView.Text = "Carregar Produtos";
             btnCarregaGridView.UseVisualStyleBackColor = false;
-            btnCarregaGridView.Click += btnCarregaGridView_Click;
+            btnCarregaGridView.Click += btnCarregaProdutos_Click;
             // 
             // lblCodigo
             // 
@@ -127,6 +128,7 @@
             rdbCategoria.TabStop = true;
             rdbCategoria.Text = "Categoria";
             rdbCategoria.UseVisualStyleBackColor = true;
+            rdbCategoria.CheckedChanged += rdbCategoria_CheckedChanged;
             // 
             // rdbNome
             // 
@@ -138,6 +140,7 @@
             rdbNome.TabStop = true;
             rdbNome.Text = "Nome";
             rdbNome.UseVisualStyleBackColor = true;
+            rdbNome.CheckedChanged += rdbNome_CheckedChanged;
             // 
             // btn_Limpar
             // 
@@ -211,22 +214,33 @@
             Btn_Alterar.Text = "Alterar";
             Btn_Alterar.UseVisualStyleBackColor = false;
             // 
-            // ltbPesquisar
+            // ltbNomeProdutos
             // 
-            ltbPesquisar.Font = new Font("Arial Narrow", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ltbPesquisar.FormattingEnabled = true;
-            ltbPesquisar.ItemHeight = 29;
-            ltbPesquisar.Location = new Point(15, 233);
-            ltbPesquisar.Name = "ltbPesquisar";
-            ltbPesquisar.Size = new Size(1237, 352);
-            ltbPesquisar.TabIndex = 28;
+            ltbNomeProdutos.Font = new Font("Arial", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ltbNomeProdutos.FormattingEnabled = true;
+            ltbNomeProdutos.ItemHeight = 27;
+            ltbNomeProdutos.Location = new Point(14, 218);
+            ltbNomeProdutos.Name = "ltbNomeProdutos";
+            ltbNomeProdutos.Size = new Size(611, 355);
+            ltbNomeProdutos.TabIndex = 28;
+            // 
+            // ltbQtdProd
+            // 
+            ltbQtdProd.Font = new Font("Arial", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ltbQtdProd.FormattingEnabled = true;
+            ltbQtdProd.ItemHeight = 27;
+            ltbQtdProd.Location = new Point(259, 218);
+            ltbQtdProd.Name = "ltbQtdProd";
+            ltbQtdProd.Size = new Size(993, 355);
+            ltbQtdProd.TabIndex = 29;
             // 
             // FrmListaEstoque
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1264, 681);
-            Controls.Add(ltbPesquisar);
+            Controls.Add(ltbQtdProd);
+            Controls.Add(ltbNomeProdutos);
             Controls.Add(button1);
             Controls.Add(Btn_Excluir);
             Controls.Add(Btn_Alterar);
@@ -259,6 +273,7 @@
         private Button Btn_Alterar;
         private RadioButton rdbCategoria;
         private RadioButton rdbNome;
-        private ListBox ltbPesquisar;
+        private ListBox ltbNomeProdutos;
+        private ListBox ltbQtdProd;
     }
 }

@@ -45,29 +45,17 @@ namespace Barbearia
             TxtNome.Focus();
         }
 
-        public void selecaoDePesquisa()
-        {
-
-
-            if (rdbCategoria.Checked)
-            {
-                TxtNome.Enabled = false;
-                cbxCategoria.Enabled = true;
-                cbxCategoria.SelectedIndex = -1;
-            }
-            else if (rdbNome.Checked)
-            {
-                TxtNome.Enabled = true;
-                cbxCategoria.Enabled = false;
-                cbxCategoria.SelectedIndex = -1;
-            }
-        }
-
         private void FrmListaEstoque_Load(object sender, EventArgs e)
         {
+            IntPtr hMenu = GetSystemMenu(this.Handle, false);
+            int MenuCount = GetMenuItemCount(hMenu) - 1;
+            RemoveMenu(hMenu, MenuCount, MF_BYCOMMAND);
+
+
+
             TxtNome.Enabled = false;
             cbxCategoria.Enabled = false;
-            selecaoDePesquisa();
+            CarregarNomesCategorias();
         }
 
         public void pesquisarPorNome(string descricao)
@@ -78,20 +66,53 @@ namespace Barbearia
                 return;
             }
 
-            ltbPesquisar.Items.Clear();
+            ltbNomeProdutos.Items.Clear();
+            ltbQtdProd.Items.Clear();
 
             MySqlConnection conn = Conexao.obterConexao();
             MySqlCommand comm = new MySqlCommand();
 
             comm.Connection = conn;
-            comm.CommandText = "select nomeProd from produtos WHERE nomeProd LIKE '%@nomeProd%';";
-            comm.Parameters.Add("@nomeProd", MySqlDbType.VarChar, 100).Value = descricao;
+            comm.CommandText = "SELECT nomeProd, qtdProd FROM produtos WHERE nomeProd LIKE @NomeProd;";
+            comm.Parameters.Add("@NomeProd", MySqlDbType.VarChar).Value = $"%{descricao}%";
 
             MySqlDataReader DR = comm.ExecuteReader();
 
+
             while (DR.Read())
             {
-                ltbPesquisar.Items.Add(DR.GetString(0));
+                ltbNomeProdutos.Items.Add(DR.GetString(0));
+                ltbQtdProd.Items.Add(DR.GetInt32(1));
+            }
+
+
+
+            Conexao.Fecharconexao();
+        }
+
+        public void pesquisarPorCategoria(int categoria)
+        {
+
+
+            ltbNomeProdutos.Items.Clear();
+            ltbQtdProd.Items.Clear();
+
+            MySqlConnection conn = Conexao.obterConexao();
+            MySqlCommand comm = new MySqlCommand();
+            {
+                comm.Connection = conn;
+                comm.CommandText = "select nomeProd, qtdProd from Produtos where idCategoria = @idCategoria;";
+                comm.Parameters.Add("@idCategoria", MySqlDbType.Int32).Value = categoria;
+
+                MySqlDataReader DR = comm.ExecuteReader();
+
+                while (DR.Read())
+                {
+                    ltbNomeProdutos.Items.Add(DR.GetString(0));
+                    ltbQtdProd.Items.Add(DR.GetInt32(1));
+                }
+                Conexao.Fecharconexao();
+
             }
         }
 
@@ -144,12 +165,33 @@ namespace Barbearia
             return idCategoria;
         }
 
-        private void btnCarregaGridView_Click(object sender, EventArgs e)
+
+        private void rdbNome_CheckedChanged(object sender, EventArgs e)
         {
+            TxtNome.Clear();
+            TxtNome.Enabled = true;
+            cbxCategoria.Enabled = false;
+        }
+
+        private void rdbCategoria_CheckedChanged(object sender, EventArgs e)
+        {
+            cbxCategoria.SelectedIndex = -1;
+            TxtNome.Enabled = false;
+            cbxCategoria.Enabled = true;
+
+        }
+
+        private void btnCarregaProdutos_Click(object sender, EventArgs e)
+        {
+            int categoria = obterIdCategoria();
             if (rdbNome.Checked)
             {
                 pesquisarPorNome(TxtNome.Text);
-            } else if (rdbCategoria.Text) { }
+            }
+            else if (rdbCategoria.Checked)
+            {
+                pesquisarPorCategoria(categoria);
+            }
         }
     }
 }

@@ -59,7 +59,7 @@ namespace Barbearia
 
         private void Bt_Cliente_Click(object sender, EventArgs e)
         {
-            Cliente cliente = new Cliente();
+            frmCliente cliente = new frmCliente();
             cliente.Show();
             this.Hide();
         }
@@ -87,7 +87,7 @@ namespace Barbearia
 
         private void Menu_cliente_Click(object sender, EventArgs e)
         {
-            Cliente cliente = new Cliente();
+            frmCliente cliente = new frmCliente();
             cliente.Show();
             this.Hide();
         }
