@@ -253,7 +253,7 @@ namespace Barbearia
                 Txt_Descricao.Focus();
                 return;
             }
-
+            
             ltb_Pesquisar.Items.Clear();
 
             MySqlConnection conn = Conexao.obterConexao();

@@ -29,33 +29,23 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmListaEstoque));
-            dataGridView1 = new DataGridView();
             btnCarregaGridView = new Button();
             lblCodigo = new Label();
             cbxCategoria = new ComboBox();
             lblNome = new Label();
             TxtNome = new MaskedTextBox();
-            pctFotocubo = new PictureBox();
             Gpb_Pesquisar = new GroupBox();
+            rdbCategoria = new RadioButton();
+            rdbNome = new RadioButton();
             btn_Limpar = new Button();
-            btnPesquisar = new Button();
             lblCategoria = new Label();
             BtnVoltar = new Button();
             button1 = new Button();
             Btn_Excluir = new Button();
             Btn_Alterar = new Button();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pctFotocubo).BeginInit();
+            ltbPesquisar = new ListBox();
             Gpb_Pesquisar.SuspendLayout();
             SuspendLayout();
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(15, 233);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(1237, 355);
-            dataGridView1.TabIndex = 0;
             // 
             // btnCarregaGridView
             // 
@@ -82,7 +72,7 @@
             // cbxCategoria
             // 
             cbxCategoria.FormattingEnabled = true;
-            cbxCategoria.Location = new Point(561, 61);
+            cbxCategoria.Location = new Point(619, 99);
             cbxCategoria.Margin = new Padding(4);
             cbxCategoria.Name = "cbxCategoria";
             cbxCategoria.Size = new Size(215, 26);
@@ -92,7 +82,7 @@
             // 
             lblNome.AutoSize = true;
             lblNome.Font = new Font("Arial Rounded MT Bold", 12F);
-            lblNome.Location = new Point(98, 69);
+            lblNome.Location = new Point(117, 103);
             lblNome.Margin = new Padding(4, 0, 4, 0);
             lblNome.Name = "lblNome";
             lblNome.Size = new Size(59, 18);
@@ -101,28 +91,17 @@
             // 
             // TxtNome
             // 
-            TxtNome.Location = new Point(165, 61);
+            TxtNome.Location = new Point(184, 99);
             TxtNome.Margin = new Padding(4);
             TxtNome.Name = "TxtNome";
             TxtNome.Size = new Size(210, 26);
             TxtNome.TabIndex = 12;
             // 
-            // pctFotocubo
-            // 
-            pctFotocubo.Image = (Image)resources.GetObject("pctFotocubo.Image");
-            pctFotocubo.Location = new Point(843, 15);
-            pctFotocubo.Margin = new Padding(4);
-            pctFotocubo.Name = "pctFotocubo";
-            pctFotocubo.Size = new Size(72, 72);
-            pctFotocubo.SizeMode = PictureBoxSizeMode.AutoSize;
-            pctFotocubo.TabIndex = 17;
-            pctFotocubo.TabStop = false;
-            // 
             // Gpb_Pesquisar
             // 
+            Gpb_Pesquisar.Controls.Add(rdbCategoria);
+            Gpb_Pesquisar.Controls.Add(rdbNome);
             Gpb_Pesquisar.Controls.Add(btn_Limpar);
-            Gpb_Pesquisar.Controls.Add(btnPesquisar);
-            Gpb_Pesquisar.Controls.Add(pctFotocubo);
             Gpb_Pesquisar.Controls.Add(TxtNome);
             Gpb_Pesquisar.Controls.Add(lblNome);
             Gpb_Pesquisar.Controls.Add(cbxCategoria);
@@ -138,11 +117,33 @@
             Gpb_Pesquisar.TabStop = false;
             Gpb_Pesquisar.Text = "Pesquisar Produtos:";
             // 
+            // rdbCategoria
+            // 
+            rdbCategoria.AutoSize = true;
+            rdbCategoria.Location = new Point(519, 40);
+            rdbCategoria.Name = "rdbCategoria";
+            rdbCategoria.Size = new Size(105, 22);
+            rdbCategoria.TabIndex = 20;
+            rdbCategoria.TabStop = true;
+            rdbCategoria.Text = "Categoria";
+            rdbCategoria.UseVisualStyleBackColor = true;
+            // 
+            // rdbNome
+            // 
+            rdbNome.AutoSize = true;
+            rdbNome.Location = new Point(322, 40);
+            rdbNome.Name = "rdbNome";
+            rdbNome.Size = new Size(72, 22);
+            rdbNome.TabIndex = 19;
+            rdbNome.TabStop = true;
+            rdbNome.Text = "Nome";
+            rdbNome.UseVisualStyleBackColor = true;
+            // 
             // btn_Limpar
             // 
             btn_Limpar.BackColor = SystemColors.ControlLightLight;
             btn_Limpar.Font = new Font("Arial Rounded MT Bold", 12F);
-            btn_Limpar.Location = new Point(451, 147);
+            btn_Limpar.Location = new Point(390, 147);
             btn_Limpar.Name = "btn_Limpar";
             btn_Limpar.Size = new Size(129, 41);
             btn_Limpar.TabIndex = 18;
@@ -150,23 +151,11 @@
             btn_Limpar.UseVisualStyleBackColor = false;
             btn_Limpar.Click += btn_Limpar_Click;
             // 
-            // btnPesquisar
-            // 
-            btnPesquisar.BackColor = SystemColors.ControlLightLight;
-            btnPesquisar.Font = new Font("Arial Rounded MT Bold", 12F);
-            btnPesquisar.Location = new Point(316, 147);
-            btnPesquisar.Name = "btnPesquisar";
-            btnPesquisar.Size = new Size(129, 41);
-            btnPesquisar.TabIndex = 10;
-            btnPesquisar.Text = "Pesquisar";
-            btnPesquisar.UseVisualStyleBackColor = false;
-            btnPesquisar.Click += btnPesquisar_Click;
-            // 
             // lblCategoria
             // 
             lblCategoria.AutoSize = true;
             lblCategoria.Font = new Font("Arial Rounded MT Bold", 12F);
-            lblCategoria.Location = new Point(461, 69);
+            lblCategoria.Location = new Point(519, 102);
             lblCategoria.Margin = new Padding(4, 0, 4, 0);
             lblCategoria.Name = "lblCategoria";
             lblCategoria.Size = new Size(92, 18);
@@ -222,47 +211,54 @@
             Btn_Alterar.Text = "Alterar";
             Btn_Alterar.UseVisualStyleBackColor = false;
             // 
+            // ltbPesquisar
+            // 
+            ltbPesquisar.Font = new Font("Arial Narrow", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ltbPesquisar.FormattingEnabled = true;
+            ltbPesquisar.ItemHeight = 29;
+            ltbPesquisar.Location = new Point(15, 233);
+            ltbPesquisar.Name = "ltbPesquisar";
+            ltbPesquisar.Size = new Size(1237, 352);
+            ltbPesquisar.TabIndex = 28;
+            // 
             // FrmListaEstoque
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1264, 681);
+            Controls.Add(ltbPesquisar);
             Controls.Add(button1);
             Controls.Add(Btn_Excluir);
             Controls.Add(Btn_Alterar);
             Controls.Add(Gpb_Pesquisar);
             Controls.Add(BtnVoltar);
             Controls.Add(btnCarregaGridView);
-            Controls.Add(dataGridView1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FrmListaEstoque";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Lista Estoque";
             Load += FrmListaEstoque_Load;
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pctFotocubo).EndInit();
             Gpb_Pesquisar.ResumeLayout(false);
             Gpb_Pesquisar.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
-
-        private DataGridView dataGridView1;
         private Button btnCarregaGridView;
         private Label lblCodigo;
         private ComboBox cbxCategoria;
         private Label lblNome;
         private MaskedTextBox TxtNome;
-        public PictureBox pctFotocubo;
         private GroupBox Gpb_Pesquisar;
         private Button button3;
         private Button BtnVoltar;
-        private Button btnPesquisar;
         private Label lblCategoria;
         private Button btn_Limpar;
         private Button button1;
         private Button Btn_Excluir;
         private Button Btn_Alterar;
+        private RadioButton rdbCategoria;
+        private RadioButton rdbNome;
+        private ListBox ltbPesquisar;
     }
 }

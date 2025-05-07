@@ -166,9 +166,9 @@
             // 
             // ltb_Pesquisar
             // 
-            ltb_Pesquisar.Font = new Font("Arial", 12F);
+            ltb_Pesquisar.Font = new Font("Arial", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
             ltb_Pesquisar.FormattingEnabled = true;
-            ltb_Pesquisar.ItemHeight = 18;
+            ltb_Pesquisar.ItemHeight = 27;
             ltb_Pesquisar.Location = new Point(10, 106);
             ltb_Pesquisar.Name = "ltb_Pesquisar";
             ltb_Pesquisar.Size = new Size(1209, 274);

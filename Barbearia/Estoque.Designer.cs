@@ -106,6 +106,7 @@
             mskPreco.Name = "mskPreco";
             mskPreco.Size = new Size(135, 26);
             mskPreco.TabIndex = 3;
+            mskPreco.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             mskPreco.ValidatingType = typeof(int);
             mskPreco.KeyPress += txtPreco_KeyPress;
             // 
@@ -124,10 +125,11 @@
             // 
             mskQuantidade.Location = new Point(678, 97);
             mskQuantidade.Margin = new Padding(4);
-            mskQuantidade.Mask = "00000";
+            mskQuantidade.Mask = "000";
             mskQuantidade.Name = "mskQuantidade";
             mskQuantidade.Size = new Size(135, 26);
             mskQuantidade.TabIndex = 4;
+            mskQuantidade.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             mskQuantidade.ValidatingType = typeof(int);
             mskQuantidade.KeyPress += txtQuantidade_KeyPress;
             // 

@@ -89,10 +89,22 @@ namespace Barbearia
             Btn_Voltar.Visible = false;
             Btn_voltar2.Visible = true;
 
-            if (txtProduto.Text.Equals("") || TxtDescricao.Text.Equals("") || !mskPreco.MaskFull || !mskQuantidade.MaskFull || string.IsNullOrWhiteSpace(cbxCategoria.Text))
+            if (txtProduto.Text.Equals("") || TxtDescricao.Text.Equals("") || string.IsNullOrWhiteSpace(cbxCategoria.Text))
             {
-                MessageBox.Show("Favor preencher todos os campos!!!");
+                MessageBox.Show("Favor preencher todos os campos");
                 return;
+            }
+            decimal preco;
+            if (!decimal.TryParse(mskPreco.Text.Replace("R$", "").Trim(),
+                                NumberStyles.Currency,
+                                CultureInfo.GetCultureInfo("pt-BR"),
+                                out preco) || preco <= 0)
+            {
+                MessageBox.Show("Favor preencher informe um valor maior que R$00,00!!!");
+            }
+            else if (Convert.ToInt32(mskQuantidade.Text) <= 0)
+            {
+                MessageBox.Show("Favor preencher informe um valor maior que 0!!!");
             }
             else
             {

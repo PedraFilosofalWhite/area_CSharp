@@ -45,44 +45,112 @@ namespace Barbearia
             TxtNome.Focus();
         }
 
+        public void selecaoDePesquisa()
+        {
+
+
+            if (rdbCategoria.Checked)
+            {
+                TxtNome.Enabled = false;
+                cbxCategoria.Enabled = true;
+                cbxCategoria.SelectedIndex = -1;
+            }
+            else if (rdbNome.Checked)
+            {
+                TxtNome.Enabled = true;
+                cbxCategoria.Enabled = false;
+                cbxCategoria.SelectedIndex = -1;
+            }
+        }
+
+        private void FrmListaEstoque_Load(object sender, EventArgs e)
+        {
+            TxtNome.Enabled = false;
+            cbxCategoria.Enabled = false;
+            selecaoDePesquisa();
+        }
+
+        public void pesquisarPorNome(string descricao)
+        {
+            if (string.IsNullOrWhiteSpace(descricao))
+            {
+                MessageBox.Show("Por favor, informe um nome para pesquisa");
+                return;
+            }
+
+            ltbPesquisar.Items.Clear();
+
+            MySqlConnection conn = Conexao.obterConexao();
+            MySqlCommand comm = new MySqlCommand();
+
+            comm.Connection = conn;
+            comm.CommandText = "select nomeProd from produtos WHERE nomeProd LIKE '%@nomeProd%';";
+            comm.Parameters.Add("@nomeProd", MySqlDbType.VarChar, 100).Value = descricao;
+
+            MySqlDataReader DR = comm.ExecuteReader();
+
+            while (DR.Read())
+            {
+                ltbPesquisar.Items.Add(DR.GetString(0));
+            }
+        }
+
+        private void CarregarNomesCategorias()
+        {
+            cbxCategoria.Items.Clear();
+
+            MySqlCommand comm = new MySqlCommand();
+
+            comm.CommandText = "select idCategoria, nomeCategoria from categorias order by nomeCategoria asc;";
+            comm.CommandType = CommandType.Text;
+
+            comm.Connection = Conexao.obterConexao();
+
+            MySqlDataReader DR = comm.ExecuteReader();
+
+            while (DR.Read())
+            {
+                cbxCategoria.Items.Add(DR["nomeCategoria"].ToString());
+            }
+            Conexao.Fecharconexao();
+        }
+        private int obterIdCategoria()
+        {
+            int idCategoria = -1;
+
+            MySqlCommand comm = new MySqlCommand();
+
+            if (cbxCategoria.SelectedItem == null)
+            {
+                return -1;
+            }
+            else
+            {
+                comm.Connection = Conexao.obterConexao();
+                comm.CommandText = "SELECT idCategoria FROM categorias WHERE nomeCategoria = @nomeCategoria";
+                comm.CommandType = CommandType.Text;
+
+                comm.Parameters.Clear();
+                comm.Parameters.Add("@nomeCategoria", MySqlDbType.VarChar, 20).Value = cbxCategoria.Text;
+
+                object result = comm.ExecuteScalar();
+
+                if (result != null)
+                {
+                    idCategoria = Convert.ToInt32(result);
+                }
+            }
+            Conexao.Fecharconexao();
+            return idCategoria;
+        }
 
         private void btnCarregaGridView_Click(object sender, EventArgs e)
         {
-
-
-
-
-            try
+            if (rdbNome.Checked)
             {
-                using (var conexao = Conexao.obterConexao())
-                {
-                    string query = "SELECT codfunc as Codigo, Produto, Descrição, Preço, Quantidade FROM Produtos";
-                    MySqlCommand comando = new MySqlCommand(query, conexao);
-                    MySqlDataReader reader = comando.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        MessageBox.Show($"Código: {reader["Codigo"]} => Produto: {reader["Produto"]}");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erro: " + ex.Message);
-            }
-        }
-        private void FrmListaEstoque_Load(object sender, EventArgs e)
-        {
-            IntPtr hMenu = GetSystemMenu(this.Handle, false);
-            int MenuCount = GetMenuItemCount(hMenu) - 1;
-            RemoveMenu(hMenu, MenuCount, MF_BYCOMMAND);
-        }
-
-        private void btnPesquisar_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(TxtNome.Text) || cbxCategoria.SelectedIndex == -1)
-            {
-                MessageBox.Show("Favor preencher todos os campos!!!");
-            }
+                pesquisarPorNome(TxtNome.Text);
+            } else if (rdbCategoria.Text) { }
         }
     }
 }
+
