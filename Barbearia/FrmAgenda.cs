@@ -156,9 +156,9 @@ namespace Barbearia
 
         private void Nup_Quantidade_ValueChanged(object sender, EventArgs e)
         {
-           /* int quantidade;
-            Nup_Quantidade.Value = quantidade;
-            //value é a quantidade selecionado */
+            /* int quantidade;
+             Nup_Quantidade.Value = quantidade;
+             //value é a quantidade selecionado */
         }
     }
 

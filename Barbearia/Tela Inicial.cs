@@ -138,7 +138,7 @@ namespace Barbearia
             int dias = DateTime.DaysInMonth(now.Year, now.Month);
 
             //conversão para deixar inteiro 
-            int primeirosdias = Convert.ToInt32(Primeirodia.DayOfWeek.ToString("d")) + 1;
+            int primeirosdias = Convert.ToInt32(Primeirodia.DayOfWeek.ToString("D")) + 1;
 
             // Ultilizando o userCalendario em branco
 

@@ -35,5 +35,10 @@ namespace Barbearia
             frmVisualizarAgenda frmVisual = new frmVisualizarAgenda();
             frmVisual.Show();
         }
+
+        private void Calendario_Dias_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
