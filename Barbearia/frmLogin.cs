@@ -76,16 +76,16 @@ namespace Barbearia
         public Boolean BuscarFunc (string usuario, string senha)
         {
             MySqlCommand comm = new MySqlCommand();
+            comm.Connection = Conexao.obterConexao();
             comm.CommandText = "select * from Funcionarios where loginFunc = @nomeFunc and senhaFunc = @senhaFunc and ativoFunc = true;";
             comm.CommandType = CommandType.Text;
-            comm.Connection = Conexao.obterConexao();
+            
 
             comm.Parameters.Clear();
             comm.Parameters.Add("@nomeFunc", MySqlDbType.VarChar, 50).Value = usuario;
             comm.Parameters.Add("@senhaFunc", MySqlDbType.VarChar, 12).Value = senha;
 
-            MySqlDataReader DR;
-            DR = comm.ExecuteReader();
+            MySqlDataReader DR = comm.ExecuteReader();
             DR.Read();
 
             bool resp = DR.HasRows;

@@ -11,7 +11,7 @@ namespace Barbearia
     public class Conexao
     {
 
-        private static string stringConn = "Server=localhost;port=3307;database=barbearia;uid=root;pwd='';";
+        private static string stringConn = "Server=localhost;port=3306;database=barbearia1;uid=root;pwd='P@$$w0rd';";
 
         private static MySqlConnection conn = null;
 
@@ -21,11 +21,14 @@ namespace Barbearia
             try
             {
                 conn.Open();
+                MessageBox.Show("Conexão Ok");
+
 
             }
             catch (MySqlException)
             {
                 conn = null;
+                MessageBox.Show("Conexão Falhou");            
             }
             return conn;
         }
