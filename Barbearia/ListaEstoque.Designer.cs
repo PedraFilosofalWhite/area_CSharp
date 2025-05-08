@@ -223,6 +223,7 @@
             ltbNomeProdutos.Name = "ltbNomeProdutos";
             ltbNomeProdutos.Size = new Size(611, 355);
             ltbNomeProdutos.TabIndex = 28;
+            ltbNomeProdutos.SelectedIndexChanged += ltbNomeProdutos_SelectedIndexChanged;
             // 
             // ltbQtdProd
             // 

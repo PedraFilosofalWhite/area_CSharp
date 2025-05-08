@@ -49,6 +49,8 @@
             Btn_Cadastrar = new Button();
             Btn_Novo = new Button();
             Btn_voltar2 = new Button();
+            Btn_Excluir = new Button();
+            Btn_Alterar = new Button();
             Gpb_Estoque.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pctFotocubo).BeginInit();
             SuspendLayout();
@@ -108,7 +110,6 @@
             mskPreco.TabIndex = 3;
             mskPreco.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             mskPreco.ValidatingType = typeof(int);
-            mskPreco.KeyPress += txtPreco_KeyPress;
             // 
             // lblPreco
             // 
@@ -218,7 +219,7 @@
             // 
             Btn_Voltar.BackColor = SystemColors.ControlLightLight;
             Btn_Voltar.Font = new Font("Arial Rounded MT Bold", 12F);
-            Btn_Voltar.Location = new Point(1076, 593);
+            Btn_Voltar.Location = new Point(1078, 593);
             Btn_Voltar.Margin = new Padding(4);
             Btn_Voltar.Name = "Btn_Voltar";
             Btn_Voltar.Size = new Size(175, 75);
@@ -231,7 +232,7 @@
             // 
             Btn_Pesquisar.BackColor = SystemColors.ControlLightLight;
             Btn_Pesquisar.Font = new Font("Arial Rounded MT Bold", 12F);
-            Btn_Pesquisar.Location = new Point(560, 593);
+            Btn_Pesquisar.Location = new Point(542, 593);
             Btn_Pesquisar.Margin = new Padding(4);
             Btn_Pesquisar.Name = "Btn_Pesquisar";
             Btn_Pesquisar.Size = new Size(175, 75);
@@ -244,7 +245,7 @@
             // 
             Btn_Limpar.BackColor = SystemColors.ControlLightLight;
             Btn_Limpar.Font = new Font("Arial Rounded MT Bold", 12F);
-            Btn_Limpar.Location = new Point(377, 593);
+            Btn_Limpar.Location = new Point(365, 593);
             Btn_Limpar.Margin = new Padding(4);
             Btn_Limpar.Name = "Btn_Limpar";
             Btn_Limpar.Size = new Size(175, 75);
@@ -257,7 +258,7 @@
             // 
             Btn_Cadastrar.BackColor = SystemColors.ControlLightLight;
             Btn_Cadastrar.Font = new Font("Arial Rounded MT Bold", 12F);
-            Btn_Cadastrar.Location = new Point(194, 593);
+            Btn_Cadastrar.Location = new Point(188, 593);
             Btn_Cadastrar.Margin = new Padding(4);
             Btn_Cadastrar.Name = "Btn_Cadastrar";
             Btn_Cadastrar.Size = new Size(175, 75);
@@ -283,7 +284,7 @@
             // 
             Btn_voltar2.BackColor = SystemColors.ControlLightLight;
             Btn_voltar2.Font = new Font("Arial Rounded MT Bold", 12F);
-            Btn_voltar2.Location = new Point(1076, 593);
+            Btn_voltar2.Location = new Point(1077, 593);
             Btn_voltar2.Margin = new Padding(4);
             Btn_voltar2.Name = "Btn_voltar2";
             Btn_voltar2.Size = new Size(175, 75);
@@ -292,12 +293,40 @@
             Btn_voltar2.UseVisualStyleBackColor = false;
             Btn_voltar2.Click += Btn_voltar2_Click;
             // 
+            // Btn_Excluir
+            // 
+            Btn_Excluir.BackColor = SystemColors.ControlLightLight;
+            Btn_Excluir.Font = new Font("Arial Rounded MT Bold", 12F);
+            Btn_Excluir.Location = new Point(893, 593);
+            Btn_Excluir.Margin = new Padding(4);
+            Btn_Excluir.Name = "Btn_Excluir";
+            Btn_Excluir.Size = new Size(175, 75);
+            Btn_Excluir.TabIndex = 29;
+            Btn_Excluir.Text = "Excluir";
+            Btn_Excluir.UseVisualStyleBackColor = false;
+            // 
+            // Btn_Alterar
+            // 
+            Btn_Alterar.BackColor = SystemColors.ControlLightLight;
+            Btn_Alterar.Font = new Font("Arial Rounded MT Bold", 12F);
+            Btn_Alterar.ImageAlign = ContentAlignment.MiddleLeft;
+            Btn_Alterar.Location = new Point(718, 593);
+            Btn_Alterar.Margin = new Padding(4);
+            Btn_Alterar.Name = "Btn_Alterar";
+            Btn_Alterar.Size = new Size(175, 75);
+            Btn_Alterar.TabIndex = 28;
+            Btn_Alterar.Text = "Alterar";
+            Btn_Alterar.UseVisualStyleBackColor = false;
+            Btn_Alterar.Click += Btn_Alterar_Click;
+            // 
             // FrmEstoque
             // 
             AutoScaleDimensions = new SizeF(10F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLightLight;
             ClientSize = new Size(1264, 681);
+            Controls.Add(Btn_Excluir);
+            Controls.Add(Btn_Alterar);
             Controls.Add(Btn_voltar2);
             Controls.Add(Btn_Voltar);
             Controls.Add(Btn_Pesquisar);
@@ -348,5 +377,7 @@
         private TextBox txtProduto;
         public PictureBox pctFotocubo;
         private Button Btn_voltar2;
+        private Button Btn_Excluir;
+        private Button Btn_Alterar;
     }
 }

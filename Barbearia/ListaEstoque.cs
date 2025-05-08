@@ -193,6 +193,14 @@ namespace Barbearia
                 pesquisarPorCategoria(categoria);
             }
         }
+
+        private void ltbNomeProdutos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string descricao = ltbNomeProdutos.SelectedItem.ToString();
+            FrmEstoque abrir = new FrmEstoque(descricao);
+            abrir.Show();
+            this.Hide();
+        }
     }
 }
 
