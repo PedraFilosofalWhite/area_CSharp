@@ -35,12 +35,16 @@ namespace Barbearia
             Gpb_Estoque.Enabled = false;
             Btn_Limpar.Enabled = false;
             Btn_Cadastrar.Enabled = false;
+            Btn_Alterar.Enabled = false;
+            Btn_Excluir.Enabled = false;
         }
         public void HabilitarCampos()
         {
             Gpb_Estoque.Enabled = true;
             Btn_Limpar.Enabled = true;
             Btn_Cadastrar.Enabled = true;
+            Btn_Alterar.Enabled = true;
+            Btn_Excluir.Enabled = true;
         }
 
         private void Btn_Voltar_Click(object sender, EventArgs e)
@@ -54,6 +58,8 @@ namespace Barbearia
         {
             HabilitarCampos();
             Btn_Novo.Visible = false;
+            Btn_Excluir.Visible = false;
+            Btn_Alterar.Visible = false;
             Btn_Cadastrar.Location = new Point(11, 593);
             Btn_Limpar.Location = new Point(194, 593);
             Btn_Pesquisar.Location = new Point(377, 593);
@@ -61,10 +67,11 @@ namespace Barbearia
 
         private void Btn_Pesquisar_Click(object sender, EventArgs e)
         {
+            Gpb_Pesquisar.Visible = true;
+            Btn_Alterar.Enabled=true;
+            Btn_Excluir.Enabled=true;
+            
 
-            FrmListaEstoque lista = new FrmListaEstoque();
-            lista.Show();
-            this.Hide();
         }
 
         private void Btn_Limpar_Click(object sender, EventArgs e)
@@ -127,18 +134,21 @@ namespace Barbearia
             }
 
         }
-       
+
 
         private void Btn_voltar2_Click(object sender, EventArgs e)
         {
             Btn_Novo.Visible = true;
             Btn_Voltar.Visible = true;
+            Btn_Excluir.Visible = true;
+            Btn_Alterar.Visible = true;
             Btn_voltar2.Visible = false;
+            Btn_Pesquisar.Visible = true;
 
             Btn_Cadastrar.Location = new Point(194, 593);
             Btn_Limpar.Location = new Point(377, 593);
-            Btn_Pesquisar.Location = new Point(560, 593);
-
+            Btn_Pesquisar.Location = new Point(926, 593);
+            
             DesabilitarCampos();
 
         }
@@ -184,6 +194,16 @@ namespace Barbearia
             IntPtr hMenu = GetSystemMenu(this.Handle, false);
             int MenuCount = GetMenuItemCount(hMenu) - 1;
             RemoveMenu(hMenu, MenuCount, MF_BYCOMMAND);
+        }
+
+        private void txtQuantidade_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
+
+        private void cbxCategoria_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

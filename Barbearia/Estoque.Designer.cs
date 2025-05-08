@@ -49,8 +49,17 @@
             Btn_Cadastrar = new Button();
             Btn_Novo = new Button();
             Btn_voltar2 = new Button();
+            Gpb_Pesquisar = new GroupBox();
+            ltb_Pesquisar = new ListBox();
+            Txt_Descricao = new TextBox();
+            label1 = new Label();
+            rdbCodigo = new RadioButton();
+            rdbNome = new RadioButton();
+            Btn_Excluir = new Button();
+            Btn_Alterar = new Button();
             Gpb_Estoque.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pctFotocubo).BeginInit();
+            Gpb_Pesquisar.SuspendLayout();
             SuspendLayout();
             // 
             // Gpb_Estoque
@@ -69,7 +78,7 @@
             Gpb_Estoque.Controls.Add(lblCategoria);
             Gpb_Estoque.Controls.Add(lblCodigo);
             Gpb_Estoque.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Gpb_Estoque.Location = new Point(15, 14);
+            Gpb_Estoque.Location = new Point(5, 4);
             Gpb_Estoque.Margin = new Padding(6, 5, 6, 5);
             Gpb_Estoque.Name = "Gpb_Estoque";
             Gpb_Estoque.Padding = new Padding(6, 5, 6, 5);
@@ -129,6 +138,7 @@
             txtQuantidade.Size = new Size(135, 26);
             txtQuantidade.TabIndex = 4;
             txtQuantidade.ValidatingType = typeof(int);
+            txtQuantidade.MaskInputRejected += txtQuantidade_MaskInputRejected;
             txtQuantidade.KeyPress += txtQuantidade_KeyPress;
             // 
             // TxtDescricao
@@ -169,6 +179,7 @@
             cbxCategoria.Name = "cbxCategoria";
             cbxCategoria.Size = new Size(226, 26);
             cbxCategoria.TabIndex = 8;
+            cbxCategoria.SelectedIndexChanged += cbxCategoria_SelectedIndexChanged;
             // 
             // Txt_Codigo
             // 
@@ -216,10 +227,10 @@
             // 
             Btn_Voltar.BackColor = SystemColors.ControlLightLight;
             Btn_Voltar.Font = new Font("Arial Rounded MT Bold", 12F);
-            Btn_Voltar.Location = new Point(1076, 593);
+            Btn_Voltar.Location = new Point(1109, 593);
             Btn_Voltar.Margin = new Padding(4);
             Btn_Voltar.Name = "Btn_Voltar";
-            Btn_Voltar.Size = new Size(175, 75);
+            Btn_Voltar.Size = new Size(143, 75);
             Btn_Voltar.TabIndex = 5;
             Btn_Voltar.Text = "Voltar";
             Btn_Voltar.UseVisualStyleBackColor = false;
@@ -229,7 +240,7 @@
             // 
             Btn_Pesquisar.BackColor = SystemColors.ControlLightLight;
             Btn_Pesquisar.Font = new Font("Arial Rounded MT Bold", 12F);
-            Btn_Pesquisar.Location = new Point(560, 593);
+            Btn_Pesquisar.Location = new Point(926, 593);
             Btn_Pesquisar.Margin = new Padding(4);
             Btn_Pesquisar.Name = "Btn_Pesquisar";
             Btn_Pesquisar.Size = new Size(175, 75);
@@ -281,14 +292,107 @@
             // 
             Btn_voltar2.BackColor = SystemColors.ControlLightLight;
             Btn_voltar2.Font = new Font("Arial Rounded MT Bold", 12F);
-            Btn_voltar2.Location = new Point(1076, 593);
+            Btn_voltar2.Location = new Point(1109, 593);
             Btn_voltar2.Margin = new Padding(4);
             Btn_voltar2.Name = "Btn_voltar2";
-            Btn_voltar2.Size = new Size(175, 75);
+            Btn_voltar2.Size = new Size(143, 75);
             Btn_voltar2.TabIndex = 6;
             Btn_voltar2.Text = "Voltar";
             Btn_voltar2.UseVisualStyleBackColor = false;
             Btn_voltar2.Click += Btn_voltar2_Click;
+            // 
+            // Gpb_Pesquisar
+            // 
+            Gpb_Pesquisar.BackColor = SystemColors.ControlLightLight;
+            Gpb_Pesquisar.Controls.Add(ltb_Pesquisar);
+            Gpb_Pesquisar.Controls.Add(Txt_Descricao);
+            Gpb_Pesquisar.Controls.Add(label1);
+            Gpb_Pesquisar.Controls.Add(rdbCodigo);
+            Gpb_Pesquisar.Controls.Add(rdbNome);
+            Gpb_Pesquisar.Location = new Point(5, 209);
+            Gpb_Pesquisar.Name = "Gpb_Pesquisar";
+            Gpb_Pesquisar.Size = new Size(1246, 377);
+            Gpb_Pesquisar.TabIndex = 8;
+            Gpb_Pesquisar.TabStop = false;
+            Gpb_Pesquisar.Text = "Pesquisar por";
+            Gpb_Pesquisar.Visible = false;
+            // 
+            // ltb_Pesquisar
+            // 
+            ltb_Pesquisar.Font = new Font("Arial", 12F);
+            ltb_Pesquisar.FormattingEnabled = true;
+            ltb_Pesquisar.ItemHeight = 18;
+            ltb_Pesquisar.Location = new Point(10, 106);
+            ltb_Pesquisar.Name = "ltb_Pesquisar";
+            ltb_Pesquisar.Size = new Size(1209, 256);
+            ltb_Pesquisar.TabIndex = 11;
+            // 
+            // Txt_Descricao
+            // 
+            Txt_Descricao.Font = new Font("Arial", 12F);
+            Txt_Descricao.Location = new Point(115, 74);
+            Txt_Descricao.MaxLength = 100;
+            Txt_Descricao.Name = "Txt_Descricao";
+            Txt_Descricao.Size = new Size(1104, 26);
+            Txt_Descricao.TabIndex = 10;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(10, 74);
+            label1.Name = "label1";
+            label1.Size = new Size(99, 18);
+            label1.TabIndex = 13;
+            label1.Text = "Descrição :";
+            // 
+            // rdbCodigo
+            // 
+            rdbCodigo.AutoSize = true;
+            rdbCodigo.Font = new Font("Arial Rounded MT Bold", 16F);
+            rdbCodigo.Location = new Point(577, 25);
+            rdbCodigo.Name = "rdbCodigo";
+            rdbCodigo.Size = new Size(106, 30);
+            rdbCodigo.TabIndex = 9;
+            rdbCodigo.Text = "Código";
+            rdbCodigo.UseVisualStyleBackColor = true;
+            // 
+            // rdbNome
+            // 
+            rdbNome.AutoSize = true;
+            rdbNome.Checked = true;
+            rdbNome.Font = new Font("Arial Rounded MT Bold", 16F);
+            rdbNome.Location = new Point(461, 23);
+            rdbNome.Name = "rdbNome";
+            rdbNome.Size = new Size(92, 30);
+            rdbNome.TabIndex = 8;
+            rdbNome.TabStop = true;
+            rdbNome.Text = "Nome";
+            rdbNome.UseVisualStyleBackColor = true;
+            // 
+            // Btn_Excluir
+            // 
+            Btn_Excluir.BackColor = SystemColors.ControlLightLight;
+            Btn_Excluir.Font = new Font("Arial Rounded MT Bold", 12F);
+            Btn_Excluir.Location = new Point(743, 593);
+            Btn_Excluir.Margin = new Padding(4);
+            Btn_Excluir.Name = "Btn_Excluir";
+            Btn_Excluir.Size = new Size(175, 75);
+            Btn_Excluir.TabIndex = 29;
+            Btn_Excluir.Text = "Excluir";
+            Btn_Excluir.UseVisualStyleBackColor = false;
+            // 
+            // Btn_Alterar
+            // 
+            Btn_Alterar.BackColor = SystemColors.ControlLightLight;
+            Btn_Alterar.Font = new Font("Arial Rounded MT Bold", 12F);
+            Btn_Alterar.ImageAlign = ContentAlignment.MiddleLeft;
+            Btn_Alterar.Location = new Point(560, 593);
+            Btn_Alterar.Margin = new Padding(4);
+            Btn_Alterar.Name = "Btn_Alterar";
+            Btn_Alterar.Size = new Size(175, 75);
+            Btn_Alterar.TabIndex = 28;
+            Btn_Alterar.Text = "Alterar";
+            Btn_Alterar.UseVisualStyleBackColor = false;
             // 
             // FrmEstoque
             // 
@@ -296,6 +400,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLightLight;
             ClientSize = new Size(1264, 681);
+            Controls.Add(Btn_Excluir);
+            Controls.Add(Btn_Alterar);
+            Controls.Add(Gpb_Pesquisar);
             Controls.Add(Btn_voltar2);
             Controls.Add(Btn_Voltar);
             Controls.Add(Btn_Pesquisar);
@@ -313,12 +420,12 @@
             Gpb_Estoque.ResumeLayout(false);
             Gpb_Estoque.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pctFotocubo).EndInit();
+            Gpb_Pesquisar.ResumeLayout(false);
+            Gpb_Pesquisar.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
-
-        private GroupBox Gpb_Pesquisar;
         private ListBox ltb_Pesquisar;
         private TextBox Txt_Descricao;
         private Label lbldescricao;
@@ -346,5 +453,11 @@
         private TextBox txtProduto;
         public PictureBox pctFotocubo;
         private Button Btn_voltar2;
+        private GroupBox Gpb_Pesquisar;
+        private Label label1;
+        private RadioButton rdbCodigo;
+        private RadioButton rdbNome;
+        private Button Btn_Excluir;
+        private Button Btn_Alterar;
     }
 }
