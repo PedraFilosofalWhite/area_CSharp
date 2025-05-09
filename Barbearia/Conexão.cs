@@ -11,7 +11,7 @@ namespace Barbearia
     public class Conexao
     {
 
-        private static string stringConn = "Server=localhost;port=3306;database=barbearia;uid=root;pwd='Ph230905?';";
+        private static string stringConn = "Server=localhost;port=3307;database=barbearia;uid=root;pwd='';";
 
         private static MySqlConnection conn = null;
 

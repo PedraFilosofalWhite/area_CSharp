@@ -18,18 +18,29 @@ namespace Barbearia
     public partial class frmAgenda : Form
     {
 
+        private int _idFunc;
+
         public void tela_inicial()
         {
             frmTela_Inicial tela_Inicial = new frmTela_Inicial();
             tela_Inicial.Show();
             this.Hide();
-
-
         }
-        public frmAgenda()
+        public frmAgenda(int idFunc)
         {
             InitializeComponent();
+            _idFunc = idFunc;
             Rb_Nao.Checked = true;
+            Txt_dias.Text = Calendario_Dias.static_dia + "/" + frmTela_Inicial.static_mes + "/" + frmTela_Inicial.static_ano;
+
+            // Limpa todos os controles antes de recarregar
+            LimparCampos();
+
+            // Recarrega os dados com o novo idFunc
+            gerarHorarios();
+            carregarFuncionarios();
+            carregarServicos();
+            CarregarHorarios();
         }
         public void checagem()
         {
@@ -69,38 +80,18 @@ namespace Barbearia
         private void Agenda_Load(object sender, EventArgs e)
         {
 
-            Txt_dias.Text = Calendario_Dias.static_dia + "/" + frmTela_Inicial.static_mes + "/" + frmTela_Inicial.static_ano;
-            gerarHorarios();
-            CarregarHorarios();
-            carregarFuncionarios();
-            carregarServicos();
-
 
         }
         private void Btn_limpar_Click(object sender, EventArgs e)
         {
             LimparCampos();
         }
-        private void CB_Serviços_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-        }
-        private void CB_horarios_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-        }
         private void CB_horarios_KeyDown(object sender, KeyEventArgs e)
         {
-            e.SuppressKeyPress = true; // Bloqueia a tecla
-        }
-        private void CB_Serviços_KeyDown(object sender, KeyEventArgs e)
-        {
-            e.SuppressKeyPress = true; // Bloqueia a tecla
+            e.SuppressKeyPress = true;
         }
         private void Btn_Agendar_Click(object sender, EventArgs e)
         {
-
-            // Validação simplificada e focada no essencial
             if (string.IsNullOrWhiteSpace(CB_horarios.Text))
             {
                 MessageBox.Show("Selecione um horário disponível!");
@@ -127,9 +118,7 @@ namespace Barbearia
 
             try
             {
-                string nomeCliente = ltbPesquisar.SelectedItem?.ToString() ?? Txt_Pesquisar.Text;
-
-                // Resto do código de agendamento...
+                string nomeCliente = ltbPesquisar.SelectedItem.ToString();
                 string intervaloHorario = CB_horarios.Text;
                 string horarioSelecionado = intervaloHorario.Split('-')[0].Trim();
                 string servicoSelecionado = CB_Servicos.Text;
@@ -140,14 +129,14 @@ namespace Barbearia
                 DateTime dataHoraAgendamento = data.Date + hora;
 
                 int idCliente = obterIdCliente(nomeCliente);
-                int idFuncionario = obterIdFunc(funcionarioSelecionado);
+                int idFuncionario = _idFunc;
                 int idServico = obterIdServ(servicoSelecionado);
 
-                if (Agendar(idFuncionario, idServico, idCliente, dataHoraAgendamento))
+                if (Agendar(idServico, idCliente, dataHoraAgendamento))
                 {
                     MessageBox.Show("Agendamento realizado com sucesso!");
                     LimparCampos();
-                    CarregarHorarios();
+                    this.Close();
                 }
             }
             catch (Exception ex)
@@ -281,12 +270,6 @@ namespace Barbearia
                 MessageBox.Show("Selecione o nome do Cliente ou Código ");
             }
         }
-        private void Nup_Quantidade_ValueChanged(object sender, EventArgs e)
-        {
-            /* int quantidade;
-             Nup_Quantidade.Value = quantidade;
-             //value é a quantidade selecionado */
-        }
         private void CarregarHorarios()
         {
 
@@ -297,10 +280,11 @@ namespace Barbearia
             CB_horarios.Items.Clear();
 
             MySqlCommand comm = new MySqlCommand();
-            comm.CommandText = "SELECT hd.idHorario,f.nomeFunc AS funcionario,CONCAT(DATE_FORMAT(hd.dataHorario, '%H:%i'),' - ',DATE_FORMAT(ADDTIME(hd.dataHorario, '00:50:00'), '%H:%i')) AS intervalo_disponivel,DATE_FORMAT(hd.dataHorario, '%d/%m/%Y') AS data_formatada FROM horarios_disponiveis hd JOIN Funcionarios f ON hd.idFunc = f.idFunc WHERE hd.disponivel = TRUE AND f.ativoFunc = true AND DATE(hd.dataHorario) = @data ORDER BY hd.dataHorario;";
+            comm.CommandText = "SELECT hd.idHorario,f.nomeFunc AS funcionario,CONCAT(DATE_FORMAT(hd.dataHorario, '%H:%i'),' - ',DATE_FORMAT(ADDTIME(hd.dataHorario, '00:50:00'), '%H:%i')) AS intervalo_disponivel,DATE_FORMAT(hd.dataHorario, '%d/%m/%Y') AS data_formatada FROM horarios_disponiveis hd JOIN Funcionarios f ON hd.idFunc = f.idFunc WHERE hd.disponivel = TRUE AND f.idFunc = @idFunc AND f.ativoFunc = true AND DATE(hd.dataHorario) = @data ORDER BY hd.dataHorario;";
 
             comm.Parameters.Clear();
             comm.Parameters.Add("@data", MySqlDbType.Date).Value = data;
+            comm.Parameters.Add("@idFunc", MySqlDbType.Int32).Value = _idFunc;
 
 
             comm.CommandType = CommandType.Text;
@@ -317,10 +301,12 @@ namespace Barbearia
         }
         private void carregarFuncionarios()
         {
-
+            cbxFuncionarios.Items.Clear(); // Limpa antes de adicionar
 
             MySqlCommand comm = new MySqlCommand();
-            comm.CommandText = "select nomeFunc from funcionarios;";
+            comm.CommandText = "SELECT nomeFunc FROM funcionarios WHERE idFunc = @idFunc;";
+            comm.Parameters.Clear();
+            comm.Parameters.Add("@idFunc", MySqlDbType.Int32).Value = _idFunc;
 
             comm.Connection = Conexao.obterConexao();
 
@@ -330,8 +316,14 @@ namespace Barbearia
             {
                 cbxFuncionarios.Items.Add(DR["nomeFunc"].ToString());
             }
-            Conexao.Fecharconexao();
 
+            // Seleciona automaticamente o funcionário
+            if (cbxFuncionarios.Items.Count > 0)
+            {
+                cbxFuncionarios.SelectedIndex = 0;
+            }
+
+            Conexao.Fecharconexao();
         }
         private void carregarServicos()
         {
@@ -356,35 +348,31 @@ namespace Barbearia
         {
             string dataSelecionada = Txt_dias.Text;
             DateTime data = DateTime.ParseExact(dataSelecionada, "d/M/yyyy", CultureInfo.InvariantCulture);
-            string dataMySql = data.ToString("yyyy-MM-dd");
 
             MySqlCommand comm = new MySqlCommand();
             comm.CommandText = @"INSERT INTO Horarios_Disponiveis (idFunc, dataHorario, disponivel) 
-                    SELECT f.idFunc, 
-                           TIMESTAMP(@data, h.horario) AS dataHorario, 
-                           TRUE AS disponivel 
-                    FROM Horarios_Fixos h 
-                    CROSS JOIN Funcionarios f 
-                    WHERE f.ativoFunc = TRUE 
-                    AND NOT EXISTS (
-                        SELECT 1 
-                        FROM Horarios_Disponiveis hd 
-                        WHERE hd.idFunc = f.idFunc 
-                        AND hd.dataHorario = TIMESTAMP(@data, h.horario)
-                    );";
-
-            comm.CommandType = CommandType.Text;
-
-            comm.Connection = Conexao.obterConexao();
+            SELECT @idFunc, 
+                   TIMESTAMP(@data, h.horario) AS dataHorario, 
+                   TRUE AS disponivel 
+            FROM Horarios_Fixos h 
+            WHERE NOT EXISTS (
+                SELECT 1 
+                FROM Horarios_Disponiveis hd 
+                WHERE hd.idFunc = @idFunc 
+                AND hd.dataHorario = TIMESTAMP(@data, h.horario)
+            );";
 
             comm.Parameters.Clear();
             comm.Parameters.Add("@data", MySqlDbType.Date).Value = data;
+            comm.Parameters.Add("@idFunc", MySqlDbType.Int32).Value = _idFunc;
 
-            int resp = comm.ExecuteNonQuery();
+            comm.Connection = Conexao.obterConexao();
+            comm.ExecuteNonQuery();
             Conexao.Fecharconexao();
         }
         private void Btn_Procurar_Click(object sender, EventArgs e)
         {
+            ltbPesquisar.Visible = true;
             if (rdbCodigo.Checked)
             {
                 pesquisarPorCodigo((Txt_Pesquisar.Text));
@@ -397,30 +385,6 @@ namespace Barbearia
             {
                 pesquisarVip(Txt_Pesquisar.Text);
             }
-        }
-        public int obterIdFunc(string nomeFunc)
-        {
-            int idFunc = 0;
-            MySqlCommand comm = new MySqlCommand();
-            comm.CommandText = "select idFunc from funcionarios where nomeFunc = @nome;";
-            comm.CommandType = CommandType.Text;
-
-            comm.Parameters.Clear();
-            comm.Parameters.Add("@nome", MySqlDbType.VarChar, 100).Value = nomeFunc;
-
-            comm.Connection = Conexao.obterConexao();
-            comm.ExecuteNonQuery();
-
-            MySqlDataReader DR = comm.ExecuteReader();
-
-            if (DR.Read())
-            {
-                idFunc = DR.GetInt32(0);
-            }
-
-
-            return idFunc;
-
         }
         public int obterIdServ(string descServ)
         {
@@ -470,7 +434,7 @@ namespace Barbearia
             return idClie;
 
         }
-        public bool Agendar(int idFunc, int idServ, int idCliente, DateTime dataHora)
+        public bool Agendar(int idServ, int idCliente, DateTime dataHora)
         {
             MySqlConnection conn = Conexao.obterConexao();
 
@@ -484,16 +448,16 @@ namespace Barbearia
                     comm.Transaction = transaction;
 
                     comm.CommandText = @"INSERT INTO Agendamentos 
-                            (dataAgendamento, idCli, statusAgendamento) 
-                            VALUES (@dataHora, @idCliente, 'agendado');
+                            (dataAgendamento, idCli, idFunc, statusAgendamento) 
+                            VALUES (@dataHora, @idCliente,@idFunc, 'agendado');
                             SELECT LAST_INSERT_ID();";
-
+                    comm.Parameters.Clear();
                     comm.Parameters.AddWithValue("@dataHora", dataHora);
                     comm.Parameters.AddWithValue("@idCliente", idCliente);
+                    comm.Parameters.AddWithValue("@idFunc", _idFunc);
 
                     int idAgendamento = Convert.ToInt32(comm.ExecuteScalar());
 
-                    // 2. Adicionar serviço ao agendamento
                     comm.CommandText = @"INSERT INTO Detalhes_Agendamentos 
                             (idAgendamento, idServ, idProd, qtdServicoAgendamento, 
                              qtdProdutoAgendamento, subtotalDetalhe)
@@ -544,7 +508,7 @@ namespace Barbearia
                     comm.CommandText = "UPDATE Horarios_Disponiveis SET disponivel = FALSE WHERE dataHorario = @dataHora AND idFunc = @idFunc";
                     comm.Parameters.Clear();
                     comm.Parameters.AddWithValue("@dataHora", dataHora);
-                    comm.Parameters.AddWithValue("@idFunc", idFunc);
+                    comm.Parameters.AddWithValue("@idFunc", _idFunc);
                     comm.ExecuteNonQuery();
 
                     transaction.Commit();
@@ -553,7 +517,7 @@ namespace Barbearia
                 catch (Exception ex)
                 {
                     transaction.Rollback();
-                    MessageBox.Show($"Erro na transação: {ex.Message}\n\nVerifique se todos os produtos e serviços estão cadastrados corretamente.");
+                    MessageBox.Show($"Erro na transação: {ex.Message} Verifique se todos os produtos e serviços estão cadastrados corretamente.");
                     return false;
                 }
 
@@ -582,8 +546,11 @@ namespace Barbearia
         }
         private void LimparCampos()
         {
+            CB_horarios.Items.Clear();
             CB_horarios.SelectedIndex = -1;
+            CB_Servicos.Items.Clear();
             CB_Servicos.SelectedIndex = -1;
+            cbxFuncionarios.Items.Clear();
             cbxFuncionarios.SelectedIndex = -1;
             ltbPesquisar.Items.Clear();
             Txt_Pesquisar.Clear();
@@ -593,6 +560,15 @@ namespace Barbearia
             Rb_Nao.Checked = true;
             Txt_Pesquisa_prod.Clear();
             Nup_Quantidade.Value = 0;
+        }
+        private void CB_Servicos_KeyDown_1(object sender, KeyEventArgs e)
+        {
+            e.SuppressKeyPress = true;
+        }
+        private void ltbPesquisar_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Txt_Pesquisar.Text = ltbPesquisar.SelectedItem.ToString();
+            ltbPesquisar.Visible = false;
         }
     }
 }

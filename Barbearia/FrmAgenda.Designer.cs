@@ -127,7 +127,7 @@
             ltbPesquisar.Name = "ltbPesquisar";
             ltbPesquisar.Size = new Size(449, 58);
             ltbPesquisar.TabIndex = 42;
-         
+            ltbPesquisar.SelectedIndexChanged += ltbPesquisar_SelectedIndexChanged;
             // 
             // cbxFuncionarios
             // 
@@ -173,8 +173,7 @@
             CB_Servicos.Name = "CB_Servicos";
             CB_Servicos.Size = new Size(452, 26);
             CB_Servicos.TabIndex = 36;
-            CB_Servicos.KeyDown += CB_Serviços_KeyDown;
-            CB_Servicos.KeyPress += CB_Serviços_KeyPress;
+            CB_Servicos.KeyDown += CB_Servicos_KeyDown_1;
             // 
             // label4
             // 
@@ -331,7 +330,6 @@
             Nup_Quantidade.Name = "Nup_Quantidade";
             Nup_Quantidade.Size = new Size(109, 26);
             Nup_Quantidade.TabIndex = 45;
-            Nup_Quantidade.ValueChanged += Nup_Quantidade_ValueChanged;
             // 
             // label6
             // 
