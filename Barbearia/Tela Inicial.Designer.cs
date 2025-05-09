@@ -193,7 +193,7 @@
             // 
             Flp_Calendario.Location = new Point(8, 115);
             Flp_Calendario.Name = "Flp_Calendario";
-            Flp_Calendario.Size = new Size(1240, 571);
+            Flp_Calendario.Size = new Size(1240, 780);
             Flp_Calendario.TabIndex = 6;
             // 
             // Lb_mes
@@ -276,7 +276,6 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = msNavBar;
             Margin = new Padding(4);
-            MaximizeBox = false;
             Name = "frmTela_Inicial";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Tela inicial";
