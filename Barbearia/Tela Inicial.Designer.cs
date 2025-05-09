@@ -49,6 +49,8 @@
             Btn_avançar_mes = new Button();
             Btn_retornar = new Button();
             fileSystemWatcher1 = new FileSystemWatcher();
+            cbxFuncionarios = new ComboBox();
+            lblFuncionario = new Label();
             msNavBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)fileSystemWatcher1).BeginInit();
             SuspendLayout();
@@ -232,11 +234,30 @@
             fileSystemWatcher1.EnableRaisingEvents = true;
             fileSystemWatcher1.SynchronizingObject = this;
             // 
+            // cbxFuncionarios
+            // 
+            cbxFuncionarios.FormattingEnabled = true;
+            cbxFuncionarios.Location = new Point(907, 47);
+            cbxFuncionarios.Name = "cbxFuncionarios";
+            cbxFuncionarios.Size = new Size(341, 26);
+            cbxFuncionarios.TabIndex = 43;
+            // 
+            // lblFuncionario
+            // 
+            lblFuncionario.AutoSize = true;
+            lblFuncionario.Location = new Point(1031, 26);
+            lblFuncionario.Name = "lblFuncionario";
+            lblFuncionario.Size = new Size(112, 18);
+            lblFuncionario.TabIndex = 42;
+            lblFuncionario.Text = "Funcionario :";
+            // 
             // frmTela_Inicial
             // 
             AutoScaleDimensions = new SizeF(10F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1260, 677);
+            Controls.Add(cbxFuncionarios);
+            Controls.Add(lblFuncionario);
             Controls.Add(Btn_retornar);
             Controls.Add(Btn_avançar_mes);
             Controls.Add(Lb_mes);
@@ -287,5 +308,7 @@
         private Button Btn_retornar;
         private FileSystemWatcher fileSystemWatcher1;
         private ToolStripMenuItem menuVizualizarAgenda;
+        private Label lblFuncionario;
+        public ComboBox cbxFuncionarios;
     }
 }

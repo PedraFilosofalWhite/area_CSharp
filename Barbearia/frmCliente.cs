@@ -83,7 +83,6 @@ namespace Barbearia
 
             Txt_nome.Focus();
         }
-
         private void Btn_Voltar_Click(object sender, EventArgs e)
         {
             frmTela_Inicial tela = new frmTela_Inicial();
@@ -91,7 +90,6 @@ namespace Barbearia
             this.Hide();
 
         }
-
         private void Btn_Novo_Click(object sender, EventArgs e)
         {
             HabilitarCampos();
@@ -99,8 +97,8 @@ namespace Barbearia
             Btn_Limpar.Location = new Point(183, 600);
             Btn_Pesquisar.Location = new Point(364, 600);
             Btn_Novo.Visible = false;
-            Btn_Alterar.Visible = false;
-            Btn_Excluir.Visible = false;
+            Btn_Alterar.Visible = true;
+            Btn_Excluir.Visible = true;
             btn_voltar2.Visible = true;
             Btn_Voltar.Visible = false;
             btn_voltar2.Location = new Point(1083, 600);

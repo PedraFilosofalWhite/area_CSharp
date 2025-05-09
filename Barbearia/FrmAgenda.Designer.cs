@@ -32,10 +32,12 @@
             label1 = new Label();
             lbl_PeriodoDe = new Label();
             panel1 = new Panel();
-            Dgv_Pesquisar_cliente = new DataGridView();
+            ltbPesquisar = new ListBox();
+            cbxFuncionarios = new ComboBox();
+            lblFuncionario = new Label();
             Txt_dias = new TextBox();
             Btn_Procurar = new Button();
-            CB_Serviços = new ComboBox();
+            CB_Servicos = new ComboBox();
             label4 = new Label();
             CB_horarios = new ComboBox();
             label3 = new Label();
@@ -68,7 +70,6 @@
             Rb_Sim = new RadioButton();
             Btn_registrar = new Button();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)Dgv_Pesquisar_cliente).BeginInit();
             Gb_Produtos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Nup_Quantidade).BeginInit();
@@ -98,10 +99,12 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(Dgv_Pesquisar_cliente);
+            panel1.Controls.Add(ltbPesquisar);
+            panel1.Controls.Add(cbxFuncionarios);
+            panel1.Controls.Add(lblFuncionario);
             panel1.Controls.Add(Txt_dias);
             panel1.Controls.Add(Btn_Procurar);
-            panel1.Controls.Add(CB_Serviços);
+            panel1.Controls.Add(CB_Servicos);
             panel1.Controls.Add(label4);
             panel1.Controls.Add(CB_horarios);
             panel1.Controls.Add(label3);
@@ -116,13 +119,32 @@
             panel1.Size = new Size(483, 526);
             panel1.TabIndex = 28;
             // 
-            // Dgv_Pesquisar_cliente
+            // ltbPesquisar
             // 
-            Dgv_Pesquisar_cliente.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            Dgv_Pesquisar_cliente.Location = new Point(16, 325);
-            Dgv_Pesquisar_cliente.Name = "Dgv_Pesquisar_cliente";
-            Dgv_Pesquisar_cliente.Size = new Size(449, 50);
-            Dgv_Pesquisar_cliente.TabIndex = 39;
+            ltbPesquisar.FormattingEnabled = true;
+            ltbPesquisar.ItemHeight = 18;
+            ltbPesquisar.Location = new Point(18, 377);
+            ltbPesquisar.Name = "ltbPesquisar";
+            ltbPesquisar.Size = new Size(449, 58);
+            ltbPesquisar.TabIndex = 42;
+            ltbPesquisar.SelectedIndexChanged += ltbPesquisar_SelectedIndexChanged;
+            // 
+            // cbxFuncionarios
+            // 
+            cbxFuncionarios.FormattingEnabled = true;
+            cbxFuncionarios.Location = new Point(14, 226);
+            cbxFuncionarios.Name = "cbxFuncionarios";
+            cbxFuncionarios.Size = new Size(451, 26);
+            cbxFuncionarios.TabIndex = 41;
+            // 
+            // lblFuncionario
+            // 
+            lblFuncionario.AutoSize = true;
+            lblFuncionario.Location = new Point(12, 205);
+            lblFuncionario.Name = "lblFuncionario";
+            lblFuncionario.Size = new Size(112, 18);
+            lblFuncionario.TabIndex = 40;
+            lblFuncionario.Text = "Funcionario :";
             // 
             // Txt_dias
             // 
@@ -136,27 +158,27 @@
             // 
             // Btn_Procurar
             // 
-            Btn_Procurar.Location = new Point(14, 381);
+            Btn_Procurar.Location = new Point(18, 436);
             Btn_Procurar.Name = "Btn_Procurar";
             Btn_Procurar.Size = new Size(107, 32);
             Btn_Procurar.TabIndex = 38;
             Btn_Procurar.Text = "Procurar";
             Btn_Procurar.UseVisualStyleBackColor = true;
+            Btn_Procurar.Click += Btn_Procurar_Click;
             // 
-            // CB_Serviços
+            // CB_Servicos
             // 
-            CB_Serviços.FormattingEnabled = true;
-            CB_Serviços.Location = new Point(15, 464);
-            CB_Serviços.Name = "CB_Serviços";
-            CB_Serviços.Size = new Size(452, 26);
-            CB_Serviços.TabIndex = 36;
-            CB_Serviços.KeyDown += CB_Serviços_KeyDown;
-            CB_Serviços.KeyPress += CB_Serviços_KeyPress;
+            CB_Servicos.FormattingEnabled = true;
+            CB_Servicos.Location = new Point(18, 492);
+            CB_Servicos.Name = "CB_Servicos";
+            CB_Servicos.Size = new Size(452, 26);
+            CB_Servicos.TabIndex = 36;
+            CB_Servicos.KeyDown += CB_Servicos_KeyDown_1;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(13, 432);
+            label4.Location = new Point(16, 471);
             label4.Name = "label4";
             label4.Size = new Size(78, 18);
             label4.TabIndex = 35;
@@ -165,7 +187,6 @@
             // CB_horarios
             // 
             CB_horarios.FormattingEnabled = true;
-            CB_horarios.Items.AddRange(new object[] { "05:00 - 05:50  ", "05:50 - 06:40  ", "06:40 - 07:30  ", "07:30 - 08:20  ", "08:20 - 09:10  ", "09:10 - 10:00  ", "10:00 - 10:50  ", "10:50 - 11:40  ", "11:40 - 12:30  ", "12:30 - 13:20  ", "13:20 - 14:10  ", "14:10 - 15:00  ", "15:00 - 15:50  ", "15:50 - 16:40  ", "16:40 - 17:30  ", "17:30 - 18:20  ", "18:20 - 19:10  ", "19:10 - 20:00  ", "20:00 - 20:50  ", "20:50 - 21:40  ", "21:40 - 22:30  ", "22:30 - 23:20" });
             CB_horarios.Location = new Point(16, 164);
             CB_horarios.Name = "CB_horarios";
             CB_horarios.Size = new Size(451, 26);
@@ -183,16 +204,16 @@
             // 
             // Txt_Pesquisar
             // 
-            Txt_Pesquisar.Location = new Point(16, 293);
+            Txt_Pesquisar.Location = new Point(18, 348);
             Txt_Pesquisar.MaxLength = 50;
             Txt_Pesquisar.Name = "Txt_Pesquisar";
-            Txt_Pesquisar.Size = new Size(451, 26);
+            Txt_Pesquisar.Size = new Size(449, 26);
             Txt_Pesquisar.TabIndex = 32;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(14, 231);
+            label2.Location = new Point(21, 275);
             label2.Name = "label2";
             label2.Size = new Size(161, 18);
             label2.TabIndex = 31;
@@ -202,7 +223,7 @@
             // 
             rdbVip.AutoSize = true;
             rdbVip.Font = new Font("Arial Rounded MT Bold", 12F);
-            rdbVip.Location = new Point(298, 265);
+            rdbVip.Location = new Point(305, 309);
             rdbVip.Name = "rdbVip";
             rdbVip.Size = new Size(51, 22);
             rdbVip.TabIndex = 30;
@@ -214,7 +235,7 @@
             // 
             rdbCodigo.AutoSize = true;
             rdbCodigo.Font = new Font("Arial Rounded MT Bold", 12F);
-            rdbCodigo.Location = new Point(170, 265);
+            rdbCodigo.Location = new Point(177, 309);
             rdbCodigo.Name = "rdbCodigo";
             rdbCodigo.Size = new Size(82, 22);
             rdbCodigo.TabIndex = 29;
@@ -226,7 +247,7 @@
             // 
             rdbNome.AutoSize = true;
             rdbNome.Font = new Font("Arial Rounded MT Bold", 12F);
-            rdbNome.Location = new Point(65, 265);
+            rdbNome.Location = new Point(72, 309);
             rdbNome.Name = "rdbNome";
             rdbNome.Size = new Size(72, 22);
             rdbNome.TabIndex = 28;
@@ -309,7 +330,6 @@
             Nup_Quantidade.Name = "Nup_Quantidade";
             Nup_Quantidade.Size = new Size(109, 26);
             Nup_Quantidade.TabIndex = 45;
-            Nup_Quantidade.ValueChanged += Nup_Quantidade_ValueChanged;
             // 
             // label6
             // 
@@ -500,7 +520,6 @@
             Load += Agenda_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)Dgv_Pesquisar_cliente).EndInit();
             Gb_Produtos.ResumeLayout(false);
             Gb_Produtos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
@@ -523,14 +542,13 @@
         private RadioButton rdbVip;
         private Label label3;
         private ComboBox CB_horarios;
-        private ComboBox CB_Serviços;
+        private ComboBox CB_Servicos;
         private Label label4;
         private MySql.Data.MySqlClient.MySqlCommand mySqlCommand1;
         private Button Btn_Procurar;
         private Button Btn_limpar;
         private Button Btn_Agendar;
         private TextBox Txt_dias;
-        private DataGridView Dgv_Pesquisar_cliente;
         private GroupBox Gb_Produtos;
         private Label label5;
         private NumericUpDown Nup_Quantidade;
@@ -551,5 +569,8 @@
         private RadioButton Rb_nome2;
         private Button Btn_registrar;
         private Button Btn_procura_cliente;
+        private ComboBox cbxFuncionarios;
+        private Label lblFuncionario;
+        private ListBox ltbPesquisar;
     }
 }

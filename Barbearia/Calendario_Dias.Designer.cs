@@ -61,6 +61,7 @@
             Controls.Add(Lb_Dias);
             Name = "Calendario_Dias";
             Size = new Size(171, 100);
+            Load += Calendario_Dias_Load;
             Click += Calendario_Dias_Click;
             ResumeLayout(false);
             PerformLayout();

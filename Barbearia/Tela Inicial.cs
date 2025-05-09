@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Globalization;
+using MySql.Data.MySqlClient;
 
 namespace Barbearia
 {
@@ -16,7 +17,16 @@ namespace Barbearia
     {
         int mes, ano;
         public static int static_mes, static_ano;
-
+        public bool FuncionarioSelecionado => cbxFuncionarios.SelectedIndex != -1;
+        public int IdFuncionarioSelecionado
+        {
+            get
+            {
+                if (cbxFuncionarios.SelectedIndex == -1)
+                    return 0;
+                return obterIdFunc(cbxFuncionarios.Text);
+            }
+        }
 
 
         const int MF_BYCOMMAND = 0X400;
@@ -29,6 +39,8 @@ namespace Barbearia
         public frmTela_Inicial()
         {
             InitializeComponent();
+            carregarFuncionarios();
+            int idFunc = obterIdFunc(cbxFuncionarios.Text);
         }
         public void voltar_login()
         {
@@ -44,80 +56,68 @@ namespace Barbearia
 
             displaydays();
         }
-
-        private void Bt_Voltar_Click(object sender, EventArgs e)
+        private void carregarFuncionarios()
         {
-            voltar_login();
-        }
+            MySqlCommand comm = new MySqlCommand();
+            comm.CommandText = "select nomeFunc from funcionarios;";
 
-        private void Bt_Agenda_Click(object sender, EventArgs e)
-        {
-            frmAgenda agenda = new frmAgenda();
-            agenda.Show();
-            this.Hide();
-        }
+            comm.Connection = Conexao.obterConexao();
 
-        private void Bt_Cliente_Click(object sender, EventArgs e)
-        {
-            Cliente cliente = new Cliente();
-            cliente.Show();
-            this.Hide();
-        }
+            MySqlDataReader DR = comm.ExecuteReader();
 
-        private void Bt_Estoque_Click(object sender, EventArgs e)
-        {
-            FrmEstoque estoque = new FrmEstoque();
-            estoque.Show();
-            this.Hide();
-        }
-
-        private void Bt_Finança_Click(object sender, EventArgs e)
-        {
-            Finança finança = new Finança();
-            finança.Show();
-            this.Hide();
-        }
-
-        private void Menu_Agenda_Click(object sender, EventArgs e)
-        {
-            frmAgenda agenda = new frmAgenda();
-            agenda.Show();
+            while (DR.Read())
+            {
+                cbxFuncionarios.Items.Add(DR["nomeFunc"].ToString());
+            }
+            Conexao.Fecharconexao();
 
         }
+        public int obterIdFunc(string nomeFunc)
+        {
+            int idFunc = 0;
+            MySqlCommand comm = new MySqlCommand();
+            comm.CommandText = "select idFunc from funcionarios where nomeFunc = @nome;";
+            comm.CommandType = CommandType.Text;
 
+            comm.Parameters.Add("@nome", MySqlDbType.VarChar, 100).Value = nomeFunc;
+            comm.Connection = Conexao.obterConexao();
+
+            MySqlDataReader DR = comm.ExecuteReader();
+            if (DR.Read())
+            {
+                idFunc = DR.GetInt32(0);
+            }
+            Conexao.Fecharconexao();
+            return idFunc;
+        }
         private void Menu_cliente_Click(object sender, EventArgs e)
         {
             Cliente cliente = new Cliente();
             cliente.Show();
             this.Hide();
         }
-
         private void Menu_Estoque_Click(object sender, EventArgs e)
         {
             FrmEstoque estoque = new FrmEstoque();
             estoque.Show();
             this.Hide();
         }
-
         private void Menu_Funcionario_Click(object sender, EventArgs e)
         {
             FrmFuncionario funcionario = new FrmFuncionario();
             funcionario.Show();
             this.Hide();
         }
-
         private void Menu_Financa_Click(object sender, EventArgs e)
         {
             Finança finança = new Finança();
             finança.Show();
             this.Hide();
         }
-
         private void Menu_Sair_Click(object sender, EventArgs e)
         {
             voltar_login();
         }
-
         private void displaydays()
         {
             DateTime now = DateTime.Now;
@@ -138,7 +138,7 @@ namespace Barbearia
             int dias = DateTime.DaysInMonth(now.Year, now.Month);
 
             //conversão para deixar inteiro 
-            int primeirosdias = Convert.ToInt32(Primeirodia.DayOfWeek.ToString("d")) + 1;
+            int primeirosdias = Convert.ToInt32(Primeirodia.DayOfWeek.ToString("D")) + 1;
 
             // Ultilizando o userCalendario em branco
 
@@ -158,7 +158,6 @@ namespace Barbearia
 
 
         }
-
         private void Btn_avançar_mes_Click(object sender, EventArgs e)
         {
             try
@@ -242,7 +241,6 @@ namespace Barbearia
                 return;
             }
         }
-
         private void Btn_retornar_Click(object sender, EventArgs e)
         {
 
@@ -319,7 +317,6 @@ namespace Barbearia
 
             }
         }
-
         private void menuVizualizarAgenda_Click(object sender, EventArgs e)
         {
             frmVisualizarAgenda abrir = new frmVisualizarAgenda();
