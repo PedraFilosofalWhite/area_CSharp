@@ -99,6 +99,8 @@ namespace Barbearia
             Btn_Novo.Visible = false;
             Btn_Alterar.Visible = true;
             Btn_Excluir.Visible = true;
+            Btn_Alterar.Enabled = false;
+            Btn_Excluir.Enabled = false;
             btn_voltar2.Visible = true;
             Btn_Voltar.Visible = false;
             btn_voltar2.Location = new Point(1083, 600);

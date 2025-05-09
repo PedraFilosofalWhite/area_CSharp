@@ -247,11 +247,9 @@
             // 
             // txtSenha
             // 
-
             txtSenha.Font = new Font("Arial Narrow", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtSenha.Location = new Point(779, 112);
             txtSenha.MaxLength = 10;
-
             txtSenha.Name = "txtSenha";
             txtSenha.Size = new Size(440, 26);
             txtSenha.TabIndex = 7;
@@ -291,6 +289,7 @@
             mskAluguel.Name = "mskAluguel";
             mskAluguel.Size = new Size(106, 26);
             mskAluguel.TabIndex = 5;
+            mskAluguel.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
             // label2
             // 

@@ -22,6 +22,7 @@ namespace Barbearia
         static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
         [DllImport("user32")]
         static extern int GetMenuItemCount(IntPtr hWnd);
+
         public FrmFuncionario()
         {
             InitializeComponent();
@@ -41,14 +42,12 @@ namespace Barbearia
 
 
         }
-
         private void Btn_Voltar_Click(object sender, EventArgs e)
         {
             frmTela_Inicial telaInicial = new frmTela_Inicial();
             telaInicial.Show();
             this.Hide();
         }
-
         private void FrmFuncionario_Load(object sender, EventArgs e)
         {
             IntPtr hMenu = GetSystemMenu(this.Handle, false);
@@ -59,13 +58,10 @@ namespace Barbearia
             ltb_Pesquisar.Items.Clear();
             Txt_nome.Focus();
         }
-
-
         public void Btn_Limpar_Click(object sender, EventArgs e)
         {
             limparCampos();
         }
-
         public void limparCampos()
         {
             Txt_nome.Clear();
@@ -84,7 +80,6 @@ namespace Barbearia
 
             Txt_nome.Focus();
         }
-
         private void Btn_Novo_Click(object sender, EventArgs e)
         {
             HabilitarCampos();
@@ -109,7 +104,6 @@ namespace Barbearia
             Btn_Novo.Enabled = false;
 
         }
-
         private void Btn_Cadastrar_Click(object sender, EventArgs e)
         {
             if (Txt_nome.Text.Equals("") ||
@@ -150,7 +144,6 @@ namespace Barbearia
             }
 
         }
-
         public void DesabilitarCampos()
         {
             Gpb_Cadastrar.Enabled = false;
@@ -174,7 +167,6 @@ namespace Barbearia
             txtLogin.Clear();
             txtSenha.Clear();
         }
-
         public int cadastrarFunc()
         {
             MySqlCommand comm = new MySqlCommand();
@@ -200,7 +192,6 @@ namespace Barbearia
 
 
         }
-
         private void btn_voltar2_Click(object sender, EventArgs e)
         {
             DesabilitarCampos();
@@ -217,7 +208,6 @@ namespace Barbearia
             Btn_Pesquisar.Location = new Point(902, 600);
             Btn_Novo.Enabled = true;
         }
-
         private void Btn_Pesquisar_Click(object sender, EventArgs e)
         {
             Btn_Cadastrar.Visible = true;
@@ -235,7 +225,6 @@ namespace Barbearia
 
 
         }
-
         public void pesquisarPorCodigo(string descricao)
         {
             if (!int.TryParse(descricao, out int idFunc))
@@ -270,7 +259,6 @@ namespace Barbearia
                 }
             }
         }
-
         public void pesquisarPorNome(string descricao)
         {
             if (string.IsNullOrWhiteSpace(descricao))
@@ -297,7 +285,6 @@ namespace Barbearia
                 }
             }
         }
-
         private void Btn_Alterar_Click(object sender, EventArgs e)
         {
             if (Txt_nome.Text.Equals("") ||
@@ -327,7 +314,6 @@ namespace Barbearia
 
             }
         }
-
         public int AlterarFuncionarios()
         {
             MySqlCommand comm = new MySqlCommand();
@@ -354,7 +340,6 @@ namespace Barbearia
             Conexao.Fecharconexao();
             return resp;
         }
-
         private void Btn_Excluir_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Deseja excluir?",
@@ -400,7 +385,6 @@ namespace Barbearia
 
             return resp;
         }
-
         private void ltb_Pesquisar_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -414,7 +398,6 @@ namespace Barbearia
                 Btn_Pesquisar.Enabled = false;
             }
         }
-
         public void CarregarDadosFuncionario(string nomeFunc)
         {
             MySqlCommand comm = new MySqlCommand();
@@ -424,17 +407,30 @@ namespace Barbearia
 
             MySqlDataReader DR = comm.ExecuteReader();
 
+            string aluguel = "";
+
             if (DR.Read())
             {
                 Txt_Codigo.Text = DR["idFunc"].ToString();
                 Txt_nome.Text = DR["nomeFunc"].ToString();
                 Msk_Telefone.Text = DR["TelCelFunc"].ToString();
-                mskAluguel.Text = DR["aluguel_cadeira"].ToString();
+                aluguel = DR["aluguel_cadeira"].ToString();
                 mskCPF.Text = DR["cpfFunc"].ToString();
                 txtSenha.Text = DR["senhaFunc"].ToString();
                 txtLogin.Text = DR["loginFunc"].ToString();
-                
             }
+             double aluguelDin = Convert.ToDouble(aluguel);
+
+            if (aluguelDin < 9)
+            {
+                aluguel = "00" + aluguel;
+            } else if (aluguelDin < 99 && aluguelDin > 9)
+            {
+                aluguel = "0" + aluguel;
+            }
+
+            mskAluguel.Text = aluguel;
+            
 
             Conexao.Fecharconexao();
         }
