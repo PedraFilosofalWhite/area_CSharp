@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Globalization;
 using MySql.Data.MySqlClient;
+using Google.Protobuf.WellKnownTypes;
 
 namespace Barbearia
 {
@@ -108,7 +109,7 @@ namespace Barbearia
         {
             if (Txt_nome.Text.Equals("") ||
                 !Msk_Telefone.MaskCompleted ||
-                !mskAluguel.MaskCompleted ||
+                string.IsNullOrWhiteSpace(mskAluguel.Text) ||
                 !mskCPF.MaskCompleted)
             {
                 MessageBox.Show("Favor preencher todos os campos!!!");
@@ -177,10 +178,10 @@ namespace Barbearia
             comm.Parameters.Clear();
             comm.Parameters.Add("@nomeFunc", MySqlDbType.VarChar, 100).Value = Txt_nome.Text;
             comm.Parameters.Add("@telCelFunc", MySqlDbType.VarChar, 10).Value = Msk_Telefone.Text;
-            comm.Parameters.Add("LoginFunc", MySqlDbType.VarChar, 50).Value = txtLogin.Text;
-            comm.Parameters.Add("senhaFunc", MySqlDbType.VarChar, 10).Value = txtSenha.Text;
-            comm.Parameters.Add("cpfFunc", MySqlDbType.VarChar, 14).Value = mskCPF.Text;
-            comm.Parameters.Add("aluguel", MySqlDbType.Decimal).Value = decimal.Parse(mskAluguel.Text, NumberStyles.Currency, CultureInfo.GetCultureInfo("pt-BR"));
+            comm.Parameters.Add("@LoginFunc", MySqlDbType.VarChar, 50).Value = txtLogin.Text;
+            comm.Parameters.Add("@senhaFunc", MySqlDbType.VarChar, 10).Value = txtSenha.Text;
+            comm.Parameters.Add("@cpfFunc", MySqlDbType.VarChar, 14).Value = mskCPF.Text;
+            comm.Parameters.Add("@aluguel", MySqlDbType.Decimal).Value = decimal.Parse(mskAluguel.Text);
 
             comm.Connection = Conexao.obterConexao();
 
@@ -289,10 +290,10 @@ namespace Barbearia
         {
             if (Txt_nome.Text.Equals("") ||
                 !Msk_Telefone.MaskFull ||
-                !mskAluguel.MaskFull||
+                string.IsNullOrWhiteSpace(mskAluguel.Text) ||
                 !mskCPF.MaskFull ||
                 txtLogin.Text.Equals("") ||
-                txtSenha.Text.Equals("") )
+                txtSenha.Text.Equals(""))
             {
                 MessageBox.Show("Favor preencher todos os campos!!!");
             }
@@ -333,7 +334,7 @@ namespace Barbearia
             comm.Parameters.Add("LoginFunc", MySqlDbType.VarChar, 50).Value = txtLogin.Text;
             comm.Parameters.Add("senhaFunc", MySqlDbType.VarChar, 10).Value = txtSenha.Text;
             comm.Parameters.Add("cpfFunc", MySqlDbType.VarChar, 14).Value = mskCPF.Text;
-            comm.Parameters.Add("aluguel_cadeira", MySqlDbType.Decimal).Value = decimal.Parse(mskAluguel.Text, NumberStyles.Currency, CultureInfo.GetCultureInfo("pt-BR"));
+            comm.Parameters.Add("@aluguel_cadeira", MySqlDbType.Decimal).Value = decimal.Parse(mskAluguel.Text);
             comm.Connection = Conexao.obterConexao();
 
             int resp = comm.ExecuteNonQuery();
@@ -390,7 +391,7 @@ namespace Barbearia
 
             if (ltb_Pesquisar.SelectedItem != null)
             {
-                string nomeFunc= ltb_Pesquisar.SelectedItem.ToString();
+                string nomeFunc = ltb_Pesquisar.SelectedItem.ToString();
                 CarregarDadosFuncionario(nomeFunc);
                 HabilitarCampos();
                 Btn_Alterar.Enabled = true;
@@ -419,21 +420,56 @@ namespace Barbearia
                 txtSenha.Text = DR["senhaFunc"].ToString();
                 txtLogin.Text = DR["loginFunc"].ToString();
             }
-             double aluguelDin = Convert.ToDouble(aluguel);
-
-            if (aluguelDin < 9)
-            {
-                aluguel = "00" + aluguel;
-            } else if (aluguelDin < 99 && aluguelDin > 9)
-            {
-                aluguel = "0" + aluguel;
-            }
 
             mskAluguel.Text = aluguel;
-            
+
+
 
             Conexao.Fecharconexao();
         }
+        private void mskAluguel_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            string textoAtual = textBox.Text.Replace(",", "");
+
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+                return;
+            }
+
+            string novoTxt;
+            if (e.KeyChar == '\b' && textoAtual.Length > 0)
+            {
+                novoTxt = textoAtual.Substring(0, textoAtual.Length - 1);
+            }
+            else if (e.KeyChar == '\b')
+            {
+                novoTxt = "";
+            }
+            else
+            {
+                if (textoAtual.Length >= 5)
+                {
+                    e.Handled = true;
+                    return;
+                }
+                novoTxt = textoAtual + e.KeyChar;
+            }
+
+            if (novoTxt.Length > 0)
+            {
+                decimal valor = decimal.Parse(novoTxt) / 100;
+                textBox.Text = valor.ToString("#0.00").Replace(".", ",");
+                textBox.SelectionStart = textBox.Text.Length;
+            }
+            else
+            {
+                textBox.Text = "";
+            }
+
+            e.Handled = true;
+        }
+
     }
 }
-
