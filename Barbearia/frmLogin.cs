@@ -2,6 +2,7 @@ using MySql.Data.MySqlClient;
 using System.Data;
 using System.Runtime.InteropServices;
 using System.Globalization;
+using Barbeariaz;
 
 namespace Barbearia
 {
@@ -91,7 +92,6 @@ namespace Barbearia
             bool resp = DR.HasRows;
 
             Conexao.Fecharconexao();
-
             return resp;
         }
     }

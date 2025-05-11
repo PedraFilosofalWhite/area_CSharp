@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             Lb_Dias = new Label();
-            button1 = new Button();
+            btnVizualizarAgenda = new Button();
             SuspendLayout();
             // 
             // Lb_Dias
@@ -42,22 +42,22 @@
             Lb_Dias.TabIndex = 0;
             Lb_Dias.Text = "00";
             // 
-            // button1
+            // btnVizualizarAgenda
             // 
-            button1.Location = new Point(3, 74);
-            button1.Name = "button1";
-            button1.Size = new Size(165, 23);
-            button1.TabIndex = 1;
-            button1.Text = "Visualizar agendamento";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            btnVizualizarAgenda.Location = new Point(3, 74);
+            btnVizualizarAgenda.Name = "btnVizualizarAgenda";
+            btnVizualizarAgenda.Size = new Size(165, 23);
+            btnVizualizarAgenda.TabIndex = 1;
+            btnVizualizarAgenda.Text = "Visualizar agendamento";
+            btnVizualizarAgenda.UseVisualStyleBackColor = true;
+            btnVizualizarAgenda.Click += btnVizualizarAgenda_Click;
             // 
             // Calendario_Dias
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            Controls.Add(button1);
+            Controls.Add(btnVizualizarAgenda);
             Controls.Add(Lb_Dias);
             Name = "Calendario_Dias";
             Size = new Size(171, 100);
@@ -70,6 +70,6 @@
         #endregion
 
         private Label Lb_Dias;
-        private Button button1;
+        private Button btnVizualizarAgenda;
     }
 }

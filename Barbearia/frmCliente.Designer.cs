@@ -360,7 +360,6 @@
             Name = "Cliente";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Cliente";
-            Load += Cliente_Load_1;
             Gpb_Pesquisar.ResumeLayout(false);
             Gpb_Pesquisar.PerformLayout();
             gpbVip.ResumeLayout(false);

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Globalization;
 using MySql.Data.MySqlClient;
+using Barbeariaz;
 
 namespace Barbearia
 {
@@ -39,8 +40,7 @@ namespace Barbearia
         public frmTela_Inicial()
         {
             InitializeComponent();
-            carregarFuncionarios();
-            int idFunc = obterIdFunc(cbxFuncionarios.Text);
+            
         }
         public void voltar_login()
         {
@@ -55,6 +55,8 @@ namespace Barbearia
             RemoveMenu(hMenu, MenuCount, MF_BYCOMMAND);
 
             displaydays();
+            carregarFuncionarios();
+            int idFunc = obterIdFunc(cbxFuncionarios.Text);
         }
         private void carregarFuncionarios()
         {
@@ -316,11 +318,6 @@ namespace Barbearia
                 }
 
             }
-        }
-        private void menuVizualizarAgenda_Click(object sender, EventArgs e)
-        {
-            frmVisualizarAgenda abrir = new frmVisualizarAgenda();
-            abrir.Show();
         }
     }
 } 

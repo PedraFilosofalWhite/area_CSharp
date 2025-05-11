@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Barbeariaz;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,10 +16,12 @@ namespace Barbearia
     public partial class Calendario_Dias : UserControl
     {
         public static string static_dia;
+        public DateTime _Dia;
 
         public Calendario_Dias()
         {
             InitializeComponent();
+            btnVizualizarAgenda.Enabled = false;
         }
         public void Dias(int NumeroDias)
         {
@@ -24,30 +29,42 @@ namespace Barbearia
         }
         private void Calendario_Dias_Click(object sender, EventArgs e)
         {
-            frmTela_Inicial telaPrincipal = Application.OpenForms.OfType<frmTela_Inicial>().FirstOrDefault();
+
+
+            frmTela_Inicial telaPrincipal = Application.OpenForms.OfType<frmTela_Inicial>().LastOrDefault();
 
             if (telaPrincipal == null || !telaPrincipal.FuncionarioSelecionado)
             {
                 MessageBox.Show("Escolha um Funcionário antes de prosseguir");
                 return;
             }
+            else
+            {
 
-            static_dia = Lb_Dias.Text;
+                btnVizualizarAgenda.Enabled = true;
+                static_dia = Lb_Dias.Text;
 
-            // Fecha qualquer instância existente de frmAgenda
-            var agendaAberta = Application.OpenForms.OfType<frmAgenda>().FirstOrDefault();
-            agendaAberta?.Close();
+                var agendaAberta = Application.OpenForms.OfType<frmAgenda>().FirstOrDefault();
+                agendaAberta?.Close();
 
-            // Cria nova instância com os dados atualizados
-            int idFunc = telaPrincipal.IdFuncionarioSelecionado;
-            frmAgenda frmAgenda = new frmAgenda(idFunc);
-            frmAgenda.Show();
+                // Cria nova instância com os dados atualizados
+                int idFunc = telaPrincipal.IdFuncionarioSelecionado;
+                frmAgenda frmAgenda = new frmAgenda(idFunc);
+                frmAgenda.Show();
+            }
+
         }
-        private void button1_Click(object sender, EventArgs e)
+        private void btnVizualizarAgenda_Click(object sender, EventArgs e)
         {
-            frmVisualizarAgenda frmVisual = new frmVisualizarAgenda();
+
+            frmTela_Inicial telaPrincipal = Application.OpenForms.OfType<frmTela_Inicial>().LastOrDefault();
+            int idFunc = telaPrincipal.IdFuncionarioSelecionado;
+            frmAgenda teste = new frmAgenda(idFunc);
+
+            frmVisualizarAgenda frmVisual = new frmVisualizarAgenda(teste.gerarHorarios());
             frmVisual.Show();
         }
+
         private void Calendario_Dias_Load(object sender, EventArgs e)
         {
 

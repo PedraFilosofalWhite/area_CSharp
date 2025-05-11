@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Runtime.InteropServices;
 using System.Globalization;
+using Barbeariaz;
 
 
 
@@ -99,6 +100,8 @@ namespace Barbearia
             Btn_Novo.Visible = false;
             Btn_Alterar.Visible = true;
             Btn_Excluir.Visible = true;
+            Btn_Alterar.Enabled = false;
+            Btn_Excluir.Enabled = false;
             btn_voltar2.Visible = true;
             Btn_Voltar.Visible = false;
             btn_voltar2.Location = new Point(1083, 600);
@@ -146,6 +149,8 @@ namespace Barbearia
             Btn_Excluir.Location = new Point(721, 600);
             Btn_Pesquisar.Location = new Point(902, 600);
             Btn_Novo.Enabled = true;
+            Btn_Pesquisar.Enabled = true;
+            Btn_Voltar.Enabled = true;
 
         }
         public int cadastrarCliente()
@@ -318,7 +323,11 @@ namespace Barbearia
                 HabilitarCampos();
                 Btn_Alterar.Enabled = true;
                 Btn_Cadastrar.Enabled = false;
-                Btn_Pesquisar.Enabled = false;
+                Btn_Pesquisar.Enabled = true;
+                btn_voltar2.Enabled = true;
+                btn_voltar2.Visible = true;
+                Btn_Voltar.Enabled = false;
+                Btn_Voltar.Visible = false;
             }
 
         }
@@ -429,11 +438,6 @@ namespace Barbearia
                 MessageBoxIcon.Information,
                 MessageBoxDefaultButton.Button1);
             }
-        }
-
-        private void Cliente_Load_1(object sender, EventArgs e)
-        {
-
         }
     }
 }

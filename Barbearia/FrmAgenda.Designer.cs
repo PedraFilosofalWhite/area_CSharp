@@ -517,7 +517,7 @@
             Name = "frmAgenda";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Agendamento";
-            Load += Agenda_Load;
+            Load += frmAgenda_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             Gb_Produtos.ResumeLayout(false);

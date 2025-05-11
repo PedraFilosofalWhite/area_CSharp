@@ -30,9 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmEstoque));
             Gpb_Estoque = new GroupBox();
+            txt_preco = new TextBox();
             pctFotocubo = new PictureBox();
             txtProduto = new TextBox();
-            txtPreco = new MaskedTextBox();
             lblPreco = new Label();
             txtQuantidade = new MaskedTextBox();
             TxtDescricao = new MaskedTextBox();
@@ -50,10 +50,11 @@
             Btn_Novo = new Button();
             Btn_voltar2 = new Button();
             Gpb_Pesquisar = new GroupBox();
+            cbxCategoriasDesc = new ComboBox();
             ltb_Pesquisar = new ListBox();
             Txt_Descricao = new TextBox();
             label1 = new Label();
-            rdbCodigo = new RadioButton();
+            rdbCategoria = new RadioButton();
             rdbNome = new RadioButton();
             Btn_Excluir = new Button();
             Btn_Alterar = new Button();
@@ -64,9 +65,9 @@
             // 
             // Gpb_Estoque
             // 
+            Gpb_Estoque.Controls.Add(txt_preco);
             Gpb_Estoque.Controls.Add(pctFotocubo);
             Gpb_Estoque.Controls.Add(txtProduto);
-            Gpb_Estoque.Controls.Add(txtPreco);
             Gpb_Estoque.Controls.Add(lblPreco);
             Gpb_Estoque.Controls.Add(txtQuantidade);
             Gpb_Estoque.Controls.Add(TxtDescricao);
@@ -86,6 +87,14 @@
             Gpb_Estoque.TabIndex = 1;
             Gpb_Estoque.TabStop = false;
             Gpb_Estoque.Text = "Cadastrar Produtos";
+            // 
+            // txt_preco
+            // 
+            txt_preco.Location = new Point(678, 54);
+            txt_preco.Name = "txt_preco";
+            txt_preco.Size = new Size(169, 26);
+            txt_preco.TabIndex = 3;
+            txt_preco.KeyPress += txt_preco_KeyPress;
             // 
             // pctFotocubo
             // 
@@ -107,17 +116,6 @@
             txtProduto.Size = new Size(210, 26);
             txtProduto.TabIndex = 1;
             // 
-            // txtPreco
-            // 
-            txtPreco.Location = new Point(678, 55);
-            txtPreco.Margin = new Padding(4);
-            txtPreco.Mask = "$000.00";
-            txtPreco.Name = "txtPreco";
-            txtPreco.Size = new Size(135, 26);
-            txtPreco.TabIndex = 3;
-            txtPreco.ValidatingType = typeof(int);
-            txtPreco.KeyPress += txtPreco_KeyPress;
-            // 
             // lblPreco
             // 
             lblPreco.AutoSize = true;
@@ -125,20 +123,19 @@
             lblPreco.Location = new Point(590, 58);
             lblPreco.Margin = new Padding(4, 0, 4, 0);
             lblPreco.Name = "lblPreco";
-            lblPreco.Size = new Size(61, 18);
+            lblPreco.Size = new Size(87, 18);
             lblPreco.TabIndex = 14;
-            lblPreco.Text = "Preço:";
+            lblPreco.Text = "Preço: R$";
             // 
             // txtQuantidade
             // 
             txtQuantidade.Location = new Point(678, 97);
             txtQuantidade.Margin = new Padding(4);
-            txtQuantidade.Mask = "00000";
+            txtQuantidade.Mask = "000";
             txtQuantidade.Name = "txtQuantidade";
-            txtQuantidade.Size = new Size(135, 26);
+            txtQuantidade.Size = new Size(52, 26);
             txtQuantidade.TabIndex = 4;
             txtQuantidade.ValidatingType = typeof(int);
-            txtQuantidade.MaskInputRejected += txtQuantidade_MaskInputRejected;
             txtQuantidade.KeyPress += txtQuantidade_KeyPress;
             // 
             // TxtDescricao
@@ -179,7 +176,6 @@
             cbxCategoria.Name = "cbxCategoria";
             cbxCategoria.Size = new Size(226, 26);
             cbxCategoria.TabIndex = 8;
-            cbxCategoria.SelectedIndexChanged += cbxCategoria_SelectedIndexChanged;
             // 
             // Txt_Codigo
             // 
@@ -304,10 +300,11 @@
             // Gpb_Pesquisar
             // 
             Gpb_Pesquisar.BackColor = SystemColors.ControlLightLight;
+            Gpb_Pesquisar.Controls.Add(cbxCategoriasDesc);
             Gpb_Pesquisar.Controls.Add(ltb_Pesquisar);
             Gpb_Pesquisar.Controls.Add(Txt_Descricao);
             Gpb_Pesquisar.Controls.Add(label1);
-            Gpb_Pesquisar.Controls.Add(rdbCodigo);
+            Gpb_Pesquisar.Controls.Add(rdbCategoria);
             Gpb_Pesquisar.Controls.Add(rdbNome);
             Gpb_Pesquisar.Location = new Point(5, 209);
             Gpb_Pesquisar.Name = "Gpb_Pesquisar";
@@ -317,18 +314,30 @@
             Gpb_Pesquisar.Text = "Pesquisar por";
             Gpb_Pesquisar.Visible = false;
             // 
+            // cbxCategoriasDesc
+            // 
+            cbxCategoriasDesc.BackColor = SystemColors.Menu;
+            cbxCategoriasDesc.FormattingEnabled = true;
+            cbxCategoriasDesc.Location = new Point(115, 74);
+            cbxCategoriasDesc.Name = "cbxCategoriasDesc";
+            cbxCategoriasDesc.Size = new Size(1106, 26);
+            cbxCategoriasDesc.TabIndex = 14;
+            cbxCategoriasDesc.Visible = false;
+            // 
             // ltb_Pesquisar
             // 
-            ltb_Pesquisar.Font = new Font("Arial", 12F);
+            ltb_Pesquisar.Font = new Font("Arial", 18F);
             ltb_Pesquisar.FormattingEnabled = true;
-            ltb_Pesquisar.ItemHeight = 18;
+            ltb_Pesquisar.ItemHeight = 27;
             ltb_Pesquisar.Location = new Point(10, 106);
             ltb_Pesquisar.Name = "ltb_Pesquisar";
-            ltb_Pesquisar.Size = new Size(1209, 256);
+            ltb_Pesquisar.Size = new Size(1209, 247);
             ltb_Pesquisar.TabIndex = 11;
+            ltb_Pesquisar.SelectedIndexChanged += ltb_Pesquisar_SelectedIndexChanged;
             // 
             // Txt_Descricao
             // 
+            Txt_Descricao.BackColor = SystemColors.Menu;
             Txt_Descricao.Font = new Font("Arial", 12F);
             Txt_Descricao.Location = new Point(115, 74);
             Txt_Descricao.MaxLength = 100;
@@ -345,29 +354,29 @@
             label1.TabIndex = 13;
             label1.Text = "Descrição :";
             // 
-            // rdbCodigo
+            // rdbCategoria
             // 
-            rdbCodigo.AutoSize = true;
-            rdbCodigo.Font = new Font("Arial Rounded MT Bold", 16F);
-            rdbCodigo.Location = new Point(577, 25);
-            rdbCodigo.Name = "rdbCodigo";
-            rdbCodigo.Size = new Size(106, 30);
-            rdbCodigo.TabIndex = 9;
-            rdbCodigo.Text = "Código";
-            rdbCodigo.UseVisualStyleBackColor = true;
+            rdbCategoria.AutoSize = true;
+            rdbCategoria.Font = new Font("Arial Rounded MT Bold", 16F);
+            rdbCategoria.Location = new Point(577, 25);
+            rdbCategoria.Name = "rdbCategoria";
+            rdbCategoria.Size = new Size(136, 30);
+            rdbCategoria.TabIndex = 9;
+            rdbCategoria.Text = "Categoria";
+            rdbCategoria.UseVisualStyleBackColor = true;
+            rdbCategoria.CheckedChanged += rdbCategoria_CheckedChanged;
             // 
             // rdbNome
             // 
             rdbNome.AutoSize = true;
-            rdbNome.Checked = true;
             rdbNome.Font = new Font("Arial Rounded MT Bold", 16F);
             rdbNome.Location = new Point(461, 23);
             rdbNome.Name = "rdbNome";
             rdbNome.Size = new Size(92, 30);
             rdbNome.TabIndex = 8;
-            rdbNome.TabStop = true;
             rdbNome.Text = "Nome";
             rdbNome.UseVisualStyleBackColor = true;
+            rdbNome.CheckedChanged += rdbNome_CheckedChanged;
             // 
             // Btn_Excluir
             // 
@@ -380,6 +389,7 @@
             Btn_Excluir.TabIndex = 29;
             Btn_Excluir.Text = "Excluir";
             Btn_Excluir.UseVisualStyleBackColor = false;
+            Btn_Excluir.Click += Btn_Excluir_Click;
             // 
             // Btn_Alterar
             // 
@@ -393,6 +403,7 @@
             Btn_Alterar.TabIndex = 28;
             Btn_Alterar.Text = "Alterar";
             Btn_Alterar.UseVisualStyleBackColor = false;
+            Btn_Alterar.Click += Btn_Alterar_Click;
             // 
             // FrmEstoque
             // 
@@ -448,16 +459,17 @@
         private MaskedTextBox txtQuantidade;
         private MaskedTextBox TxtDescricao;
         private Label lblQuantidade;
-        private MaskedTextBox txtPreco;
         private Label lblPreco;
         private TextBox txtProduto;
         public PictureBox pctFotocubo;
         private Button Btn_voltar2;
         private GroupBox Gpb_Pesquisar;
         private Label label1;
-        private RadioButton rdbCodigo;
+        private RadioButton rdbCategoria;
         private RadioButton rdbNome;
         private Button Btn_Excluir;
         private Button Btn_Alterar;
+        private TextBox txt_preco;
+        private ComboBox cbxCategoriasDesc;
     }
 }

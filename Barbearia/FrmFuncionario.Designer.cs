@@ -44,11 +44,11 @@
             Btn_Cadastrar = new Button();
             Btn_Novo = new Button();
             Gpb_Cadastrar = new GroupBox();
+            mskAluguel = new TextBox();
             txtSenha = new TextBox();
             lblSenha = new Label();
             txtLogin = new TextBox();
             lblLogin = new Label();
-            mskAluguel = new MaskedTextBox();
             label2 = new Label();
             mskCPF = new MaskedTextBox();
             label1 = new Label();
@@ -90,9 +90,9 @@
             // 
             // ltb_Pesquisar
             // 
-            ltb_Pesquisar.Font = new Font("Arial", 12F);
+            ltb_Pesquisar.Font = new Font("Arial", 18F);
             ltb_Pesquisar.FormattingEnabled = true;
-            ltb_Pesquisar.ItemHeight = 18;
+            ltb_Pesquisar.ItemHeight = 27;
             ltb_Pesquisar.Location = new Point(10, 106);
             ltb_Pesquisar.Name = "ltb_Pesquisar";
             ltb_Pesquisar.Size = new Size(1209, 274);
@@ -221,11 +221,11 @@
             // Gpb_Cadastrar
             // 
             Gpb_Cadastrar.BackColor = SystemColors.ControlLightLight;
+            Gpb_Cadastrar.Controls.Add(mskAluguel);
             Gpb_Cadastrar.Controls.Add(txtSenha);
             Gpb_Cadastrar.Controls.Add(lblSenha);
             Gpb_Cadastrar.Controls.Add(txtLogin);
             Gpb_Cadastrar.Controls.Add(lblLogin);
-            Gpb_Cadastrar.Controls.Add(mskAluguel);
             Gpb_Cadastrar.Controls.Add(label2);
             Gpb_Cadastrar.Controls.Add(mskCPF);
             Gpb_Cadastrar.Controls.Add(label1);
@@ -245,13 +245,21 @@
             Gpb_Cadastrar.TabStop = false;
             Gpb_Cadastrar.Text = "Cadastro";
             // 
+            // mskAluguel
+            // 
+            mskAluguel.Font = new Font("Arial", 12F);
+            mskAluguel.Location = new Point(393, 112);
+            mskAluguel.MaxLength = 5;
+            mskAluguel.Name = "mskAluguel";
+            mskAluguel.Size = new Size(89, 26);
+            mskAluguel.TabIndex = 5;
+            mskAluguel.KeyPress += mskAluguel_KeyPress;
+            // 
             // txtSenha
             // 
-
-            txtSenha.Font = new Font("Arial Narrow", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtSenha.Font = new Font("Arial", 12F);
             txtSenha.Location = new Point(779, 112);
             txtSenha.MaxLength = 10;
-
             txtSenha.Name = "txtSenha";
             txtSenha.Size = new Size(440, 26);
             txtSenha.TabIndex = 7;
@@ -267,7 +275,7 @@
             // 
             // txtLogin
             // 
-            txtLogin.Font = new Font("Arial Narrow", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtLogin.Font = new Font("Arial", 12F);
             txtLogin.Location = new Point(721, 52);
             txtLogin.MaxLength = 50;
             txtLogin.Name = "txtLogin";
@@ -283,23 +291,14 @@
             lblLogin.TabIndex = 12;
             lblLogin.Text = "Login:";
             // 
-            // mskAluguel
-            // 
-            mskAluguel.Font = new Font("Arial", 12F);
-            mskAluguel.Location = new Point(376, 112);
-            mskAluguel.Mask = "$000.00";
-            mskAluguel.Name = "mskAluguel";
-            mskAluguel.Size = new Size(106, 26);
-            mskAluguel.TabIndex = 5;
-            // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Location = new Point(208, 116);
             label2.Name = "label2";
-            label2.Size = new Size(172, 18);
+            label2.Size = new Size(194, 18);
             label2.TabIndex = 11;
-            label2.Text = "Aluguel da Cadeira : ";
+            label2.Text = "Aluguel da Cadeira: R$ ";
             // 
             // mskCPF
             // 
@@ -420,7 +419,6 @@
         private Button Btn_Cadastrar;
         private Button Btn_Novo;
         private GroupBox Gpb_Cadastrar;
-        private MaskedTextBox mskAluguel;
         private Label label2;
         private MaskedTextBox mskCPF;
         private Label label1;
@@ -434,5 +432,6 @@
         private TextBox txtSenha;
         private Label lblSenha;
         private TextBox txtLogin;
+        private TextBox mskAluguel;
     }
 }

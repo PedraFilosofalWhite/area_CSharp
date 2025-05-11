@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Globalization;
 using MySql.Data.MySqlClient;
+using Google.Protobuf.WellKnownTypes;
+using Barbeariaz;
 
 namespace Barbearia
 {
@@ -22,6 +24,7 @@ namespace Barbearia
         static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
         [DllImport("user32")]
         static extern int GetMenuItemCount(IntPtr hWnd);
+
         public FrmFuncionario()
         {
             InitializeComponent();
@@ -34,21 +37,13 @@ namespace Barbearia
             Gpb_Pesquisar.Visible = false;
             btn_voltar2.Visible = false;
 
-
-
-
-
-
-
         }
-
         private void Btn_Voltar_Click(object sender, EventArgs e)
         {
             frmTela_Inicial telaInicial = new frmTela_Inicial();
             telaInicial.Show();
             this.Hide();
         }
-
         private void FrmFuncionario_Load(object sender, EventArgs e)
         {
             IntPtr hMenu = GetSystemMenu(this.Handle, false);
@@ -59,13 +54,10 @@ namespace Barbearia
             ltb_Pesquisar.Items.Clear();
             Txt_nome.Focus();
         }
-
-
         public void Btn_Limpar_Click(object sender, EventArgs e)
         {
             limparCampos();
         }
-
         public void limparCampos()
         {
             Txt_nome.Clear();
@@ -84,7 +76,6 @@ namespace Barbearia
 
             Txt_nome.Focus();
         }
-
         private void Btn_Novo_Click(object sender, EventArgs e)
         {
             HabilitarCampos();
@@ -109,12 +100,11 @@ namespace Barbearia
             Btn_Novo.Enabled = false;
 
         }
-
         private void Btn_Cadastrar_Click(object sender, EventArgs e)
         {
             if (Txt_nome.Text.Equals("") ||
                 !Msk_Telefone.MaskCompleted ||
-                !mskAluguel.MaskCompleted ||
+                string.IsNullOrWhiteSpace(mskAluguel.Text) ||
                 !mskCPF.MaskCompleted)
             {
                 MessageBox.Show("Favor preencher todos os campos!!!");
@@ -150,7 +140,6 @@ namespace Barbearia
             }
 
         }
-
         public void DesabilitarCampos()
         {
             Gpb_Cadastrar.Enabled = false;
@@ -174,7 +163,6 @@ namespace Barbearia
             txtLogin.Clear();
             txtSenha.Clear();
         }
-
         public int cadastrarFunc()
         {
             MySqlCommand comm = new MySqlCommand();
@@ -185,10 +173,10 @@ namespace Barbearia
             comm.Parameters.Clear();
             comm.Parameters.Add("@nomeFunc", MySqlDbType.VarChar, 100).Value = Txt_nome.Text;
             comm.Parameters.Add("@telCelFunc", MySqlDbType.VarChar, 10).Value = Msk_Telefone.Text;
-            comm.Parameters.Add("LoginFunc", MySqlDbType.VarChar, 50).Value = txtLogin.Text;
-            comm.Parameters.Add("senhaFunc", MySqlDbType.VarChar, 10).Value = txtSenha.Text;
-            comm.Parameters.Add("cpfFunc", MySqlDbType.VarChar, 14).Value = mskCPF.Text;
-            comm.Parameters.Add("aluguel", MySqlDbType.Decimal).Value = decimal.Parse(mskAluguel.Text, NumberStyles.Currency, CultureInfo.GetCultureInfo("pt-BR"));
+            comm.Parameters.Add("@LoginFunc", MySqlDbType.VarChar, 50).Value = txtLogin.Text;
+            comm.Parameters.Add("@senhaFunc", MySqlDbType.VarChar, 10).Value = txtSenha.Text;
+            comm.Parameters.Add("@cpfFunc", MySqlDbType.VarChar, 14).Value = mskCPF.Text;
+            comm.Parameters.Add("@aluguel", MySqlDbType.Decimal).Value = decimal.Parse(mskAluguel.Text);
 
             comm.Connection = Conexao.obterConexao();
 
@@ -200,7 +188,6 @@ namespace Barbearia
 
 
         }
-
         private void btn_voltar2_Click(object sender, EventArgs e)
         {
             DesabilitarCampos();
@@ -217,7 +204,6 @@ namespace Barbearia
             Btn_Pesquisar.Location = new Point(902, 600);
             Btn_Novo.Enabled = true;
         }
-
         private void Btn_Pesquisar_Click(object sender, EventArgs e)
         {
             Btn_Cadastrar.Visible = true;
@@ -235,7 +221,6 @@ namespace Barbearia
 
 
         }
-
         public void pesquisarPorCodigo(string descricao)
         {
             if (!int.TryParse(descricao, out int idFunc))
@@ -270,7 +255,6 @@ namespace Barbearia
                 }
             }
         }
-
         public void pesquisarPorNome(string descricao)
         {
             if (string.IsNullOrWhiteSpace(descricao))
@@ -297,15 +281,14 @@ namespace Barbearia
                 }
             }
         }
-
         private void Btn_Alterar_Click(object sender, EventArgs e)
         {
             if (Txt_nome.Text.Equals("") ||
                 !Msk_Telefone.MaskFull ||
-                !mskAluguel.MaskFull||
+                string.IsNullOrWhiteSpace(mskAluguel.Text) ||
                 !mskCPF.MaskFull ||
                 txtLogin.Text.Equals("") ||
-                txtSenha.Text.Equals("") )
+                txtSenha.Text.Equals(""))
             {
                 MessageBox.Show("Favor preencher todos os campos!!!");
             }
@@ -327,7 +310,6 @@ namespace Barbearia
 
             }
         }
-
         public int AlterarFuncionarios()
         {
             MySqlCommand comm = new MySqlCommand();
@@ -347,14 +329,13 @@ namespace Barbearia
             comm.Parameters.Add("LoginFunc", MySqlDbType.VarChar, 50).Value = txtLogin.Text;
             comm.Parameters.Add("senhaFunc", MySqlDbType.VarChar, 10).Value = txtSenha.Text;
             comm.Parameters.Add("cpfFunc", MySqlDbType.VarChar, 14).Value = mskCPF.Text;
-            comm.Parameters.Add("aluguel_cadeira", MySqlDbType.Decimal).Value = decimal.Parse(mskAluguel.Text, NumberStyles.Currency, CultureInfo.GetCultureInfo("pt-BR"));
+            comm.Parameters.Add("@aluguel_cadeira", MySqlDbType.Decimal).Value = decimal.Parse(mskAluguel.Text);
             comm.Connection = Conexao.obterConexao();
 
             int resp = comm.ExecuteNonQuery();
             Conexao.Fecharconexao();
             return resp;
         }
-
         private void Btn_Excluir_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Deseja excluir?",
@@ -400,13 +381,12 @@ namespace Barbearia
 
             return resp;
         }
-
         private void ltb_Pesquisar_SelectedIndexChanged(object sender, EventArgs e)
         {
 
             if (ltb_Pesquisar.SelectedItem != null)
             {
-                string nomeFunc= ltb_Pesquisar.SelectedItem.ToString();
+                string nomeFunc = ltb_Pesquisar.SelectedItem.ToString();
                 CarregarDadosFuncionario(nomeFunc);
                 HabilitarCampos();
                 Btn_Alterar.Enabled = true;
@@ -414,7 +394,6 @@ namespace Barbearia
                 Btn_Pesquisar.Enabled = false;
             }
         }
-
         public void CarregarDadosFuncionario(string nomeFunc)
         {
             MySqlCommand comm = new MySqlCommand();
@@ -424,20 +403,67 @@ namespace Barbearia
 
             MySqlDataReader DR = comm.ExecuteReader();
 
+            string aluguel = "";
+
             if (DR.Read())
             {
                 Txt_Codigo.Text = DR["idFunc"].ToString();
                 Txt_nome.Text = DR["nomeFunc"].ToString();
                 Msk_Telefone.Text = DR["TelCelFunc"].ToString();
-                mskAluguel.Text = DR["aluguel_cadeira"].ToString();
+                aluguel = DR["aluguel_cadeira"].ToString();
                 mskCPF.Text = DR["cpfFunc"].ToString();
                 txtSenha.Text = DR["senhaFunc"].ToString();
                 txtLogin.Text = DR["loginFunc"].ToString();
-                
             }
+
+            mskAluguel.Text = aluguel;
+
+
 
             Conexao.Fecharconexao();
         }
+        private void mskAluguel_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            string textoAtual = textBox.Text.Replace(",", "");
+
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+                return;
+            }
+
+            string novoTxt;
+            if (e.KeyChar == '\b' && textoAtual.Length > 0)
+            {
+                novoTxt = textoAtual.Substring(0, textoAtual.Length - 1);
+            }
+            else if (e.KeyChar == '\b')
+            {
+                novoTxt = "";
+            }
+            else
+            {
+                if (textoAtual.Length >= 5)
+                {
+                    e.Handled = true;
+                    return;
+                }
+                novoTxt = textoAtual + e.KeyChar;
+            }
+
+            if (novoTxt.Length > 0)
+            {
+                decimal valor = decimal.Parse(novoTxt) / 100;
+                textBox.Text = valor.ToString("#0.00").Replace(".", ",");
+                textBox.SelectionStart = textBox.Text.Length;
+            }
+            else
+            {
+                textBox.Text = "";
+            }
+
+            e.Handled = true;
+        }
     }
 }
-

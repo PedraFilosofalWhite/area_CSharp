@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Barbeariaz;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,14 +34,12 @@ namespace Barbearia
             Rb_Nao.Checked = true;
             Txt_dias.Text = Calendario_Dias.static_dia + "/" + frmTela_Inicial.static_mes + "/" + frmTela_Inicial.static_ano;
 
-            // Limpa todos os controles antes de recarregar
-            LimparCampos();
-
-            // Recarrega os dados com o novo idFunc
-            gerarHorarios();
-            carregarFuncionarios();
-            carregarServicos();
-            CarregarHorarios();
+            
+        }
+        public string obterData()
+        {
+            string data = Txt_dias.Text;
+            return data;
         }
         public void checagem()
         {
@@ -76,11 +75,6 @@ namespace Barbearia
         private void Bt_Sair_agenda_Click(object sender, EventArgs e)
         {
             tela_inicial();
-        }
-        private void Agenda_Load(object sender, EventArgs e)
-        {
-
-
         }
         private void Btn_limpar_Click(object sender, EventArgs e)
         {
@@ -344,7 +338,7 @@ namespace Barbearia
             Conexao.Fecharconexao();
 
         }
-        private void gerarHorarios()
+        public DateTime gerarHorarios()
         {
             string dataSelecionada = Txt_dias.Text;
             DateTime data = DateTime.ParseExact(dataSelecionada, "d/M/yyyy", CultureInfo.InvariantCulture);
@@ -369,6 +363,8 @@ namespace Barbearia
             comm.Connection = Conexao.obterConexao();
             comm.ExecuteNonQuery();
             Conexao.Fecharconexao();
+
+            return data;
         }
         private void Btn_Procurar_Click(object sender, EventArgs e)
         {
@@ -569,6 +565,17 @@ namespace Barbearia
         {
             Txt_Pesquisar.Text = ltbPesquisar.SelectedItem.ToString();
             ltbPesquisar.Visible = false;
+        }
+        private void frmAgenda_Load(object sender, EventArgs e)
+        {
+            // Limpa todos os controles antes de recarregar
+            LimparCampos();
+
+            // Recarrega os dados com o novo idFunc
+            gerarHorarios();
+            carregarFuncionarios();
+            carregarServicos();
+            CarregarHorarios();
         }
     }
 }
