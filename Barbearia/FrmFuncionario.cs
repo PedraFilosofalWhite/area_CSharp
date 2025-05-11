@@ -11,6 +11,7 @@ using System.Runtime.InteropServices;
 using System.Globalization;
 using MySql.Data.MySqlClient;
 using Google.Protobuf.WellKnownTypes;
+using Barbeariaz;
 
 namespace Barbearia
 {
@@ -35,12 +36,6 @@ namespace Barbearia
             Gpb_Cadastrar.Enabled = false;
             Gpb_Pesquisar.Visible = false;
             btn_voltar2.Visible = false;
-
-
-
-
-
-
 
         }
         private void Btn_Voltar_Click(object sender, EventArgs e)
@@ -470,6 +465,5 @@ namespace Barbearia
 
             e.Handled = true;
         }
-
     }
 }

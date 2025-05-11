@@ -90,9 +90,9 @@
             // 
             // ltb_Pesquisar
             // 
-            ltb_Pesquisar.Font = new Font("Arial", 12F);
+            ltb_Pesquisar.Font = new Font("Arial", 18F);
             ltb_Pesquisar.FormattingEnabled = true;
-            ltb_Pesquisar.ItemHeight = 18;
+            ltb_Pesquisar.ItemHeight = 27;
             ltb_Pesquisar.Location = new Point(10, 106);
             ltb_Pesquisar.Name = "ltb_Pesquisar";
             ltb_Pesquisar.Size = new Size(1209, 274);
@@ -247,6 +247,7 @@
             // 
             // mskAluguel
             // 
+            mskAluguel.Font = new Font("Arial", 12F);
             mskAluguel.Location = new Point(393, 112);
             mskAluguel.MaxLength = 5;
             mskAluguel.Name = "mskAluguel";
@@ -256,7 +257,7 @@
             // 
             // txtSenha
             // 
-            txtSenha.Font = new Font("Arial Narrow", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtSenha.Font = new Font("Arial", 12F);
             txtSenha.Location = new Point(779, 112);
             txtSenha.MaxLength = 10;
             txtSenha.Name = "txtSenha";
@@ -274,7 +275,7 @@
             // 
             // txtLogin
             // 
-            txtLogin.Font = new Font("Arial Narrow", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtLogin.Font = new Font("Arial", 12F);
             txtLogin.Location = new Point(721, 52);
             txtLogin.MaxLength = 50;
             txtLogin.Name = "txtLogin";

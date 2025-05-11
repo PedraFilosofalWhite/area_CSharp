@@ -30,11 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTela_Inicial));
             msNavBar = new MenuStrip();
-            menuVizualizarAgenda = new ToolStripMenuItem();
             Menu_cliente = new ToolStripMenuItem();
             Menu_Estoque = new ToolStripMenuItem();
             Menu_Funcionario = new ToolStripMenuItem();
-            Menu_Financa = new ToolStripMenuItem();
             Menu_Sair = new ToolStripMenuItem();
             panel1 = new Panel();
             label1 = new Label();
@@ -58,20 +56,13 @@
             // msNavBar
             // 
             msNavBar.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            msNavBar.Items.AddRange(new ToolStripItem[] { menuVizualizarAgenda, Menu_cliente, Menu_Estoque, Menu_Funcionario, Menu_Financa, Menu_Sair });
+            msNavBar.Items.AddRange(new ToolStripItem[] { Menu_cliente, Menu_Estoque, Menu_Funcionario, Menu_Sair });
             msNavBar.Location = new Point(0, 0);
             msNavBar.Name = "msNavBar";
             msNavBar.RenderMode = ToolStripRenderMode.Professional;
             msNavBar.Size = new Size(1260, 26);
             msNavBar.TabIndex = 5;
             msNavBar.Text = "menuStrip1";
-            // 
-            // menuVizualizarAgenda
-            // 
-            menuVizualizarAgenda.Name = "menuVizualizarAgenda";
-            menuVizualizarAgenda.Size = new Size(163, 22);
-            menuVizualizarAgenda.Text = "Visualizar Agenda";
-            menuVizualizarAgenda.Click += menuVizualizarAgenda_Click;
             // 
             // Menu_cliente
             // 
@@ -93,13 +84,6 @@
             Menu_Funcionario.Size = new Size(124, 22);
             Menu_Funcionario.Text = "&Funcionarios";
             Menu_Funcionario.Click += Menu_Funcionario_Click;
-            // 
-            // Menu_Financa
-            // 
-            Menu_Financa.Name = "Menu_Financa";
-            Menu_Financa.Size = new Size(93, 22);
-            Menu_Financa.Text = "&Finanças";
-            Menu_Financa.Click += Menu_Financa_Click;
             // 
             // Menu_Sair
             // 
@@ -292,7 +276,6 @@
         private ToolStripMenuItem Menu_cliente;
         private ToolStripMenuItem Menu_Estoque;
         private ToolStripMenuItem Menu_Funcionario;
-        private ToolStripMenuItem Menu_Financa;
         private ToolStripMenuItem Menu_Sair;
         private Panel panel1;
         private Label label1;
@@ -307,7 +290,6 @@
         private Button Btn_avançar_mes;
         private Button Btn_retornar;
         private FileSystemWatcher fileSystemWatcher1;
-        private ToolStripMenuItem menuVizualizarAgenda;
         private Label lblFuncionario;
         public ComboBox cbxFuncionarios;
     }

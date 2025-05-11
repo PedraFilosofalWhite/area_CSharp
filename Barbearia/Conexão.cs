@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Barbearia
+namespace Barbeariaz
 {
 
     public class Conexao
     {
 
-        private static string stringConn = "Server=localhost;port=3306;database=barbearia;uid=root;pwd='P@$$w0rd';";
+        private static string stringConn = "Server=localhost;port=3306;database=barbearia;uid=root;pwd='Ph230905?';";
 
         private static MySqlConnection conn = null;
 
