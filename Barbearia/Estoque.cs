@@ -69,8 +69,8 @@ namespace Barbearia
         private void Btn_Pesquisar_Click(object sender, EventArgs e)
         {
             Gpb_Pesquisar.Visible = true;
-            Btn_Alterar.Enabled = true;
-            Btn_Excluir.Enabled = true;
+            Btn_Alterar.Enabled = false;
+            Btn_Excluir.Enabled = false;
             ltb_Pesquisar.Items.Clear();
 
             if (rdbCategoria.Checked)
@@ -88,7 +88,6 @@ namespace Barbearia
         }
         public void LimparCampos()
         {
-            Txt_Codigo.Clear();
             txtProduto.Clear();
             cbxCategoria.SelectedIndex = -1;
             TxtDescricao.Clear();
@@ -482,6 +481,8 @@ namespace Barbearia
                 string prod = ltb_Pesquisar.SelectedItem.ToString();
                 CarregarDadosProd(prod);
                 HabilitarCampos();
+                Btn_Alterar.Enabled = true;
+                Btn_Excluir.Enabled = true;
                 Btn_Novo.Enabled = false;
                 Btn_voltar2.Enabled = true;
                 Btn_voltar2.Visible = true;

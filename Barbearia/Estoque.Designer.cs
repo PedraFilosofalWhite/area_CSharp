@@ -90,6 +90,7 @@
             // 
             // txt_preco
             // 
+            txt_preco.Font = new Font("Arial", 12F);
             txt_preco.Location = new Point(678, 54);
             txt_preco.Name = "txt_preco";
             txt_preco.Size = new Size(169, 26);
@@ -109,6 +110,7 @@
             // 
             // txtProduto
             // 
+            txtProduto.Font = new Font("Arial", 12F);
             txtProduto.Location = new Point(113, 97);
             txtProduto.Margin = new Padding(4);
             txtProduto.MaxLength = 50;
@@ -129,6 +131,7 @@
             // 
             // txtQuantidade
             // 
+            txtQuantidade.Font = new Font("Arial", 12F);
             txtQuantidade.Location = new Point(678, 97);
             txtQuantidade.Margin = new Padding(4);
             txtQuantidade.Mask = "000";
@@ -140,6 +143,7 @@
             // 
             // TxtDescricao
             // 
+            TxtDescricao.Font = new Font("Arial", 12F);
             TxtDescricao.Location = new Point(113, 146);
             TxtDescricao.Margin = new Padding(4);
             TxtDescricao.Name = "TxtDescricao";
@@ -170,6 +174,7 @@
             // 
             // cbxCategoria
             // 
+            cbxCategoria.Font = new Font("Arial", 12F);
             cbxCategoria.FormattingEnabled = true;
             cbxCategoria.Location = new Point(678, 141);
             cbxCategoria.Margin = new Padding(4);
@@ -180,6 +185,7 @@
             // Txt_Codigo
             // 
             Txt_Codigo.Enabled = false;
+            Txt_Codigo.Font = new Font("Arial", 12F);
             Txt_Codigo.Location = new Point(113, 55);
             Txt_Codigo.Margin = new Padding(4);
             Txt_Codigo.Name = "Txt_Codigo";

@@ -90,12 +90,12 @@
             // 
             // ltb_Pesquisar
             // 
-            ltb_Pesquisar.Font = new Font("Arial", 18F);
+            ltb_Pesquisar.Font = new Font("Arial Rounded MT Bold", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
             ltb_Pesquisar.FormattingEnabled = true;
-            ltb_Pesquisar.ItemHeight = 27;
+            ltb_Pesquisar.ItemHeight = 28;
             ltb_Pesquisar.Location = new Point(10, 106);
             ltb_Pesquisar.Name = "ltb_Pesquisar";
-            ltb_Pesquisar.Size = new Size(1209, 274);
+            ltb_Pesquisar.Size = new Size(1209, 284);
             ltb_Pesquisar.TabIndex = 11;
             ltb_Pesquisar.SelectedIndexChanged += ltb_Pesquisar_SelectedIndexChanged;
             // 

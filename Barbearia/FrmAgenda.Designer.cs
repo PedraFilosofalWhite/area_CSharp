@@ -458,6 +458,7 @@
             Gb_Pergunta.TabIndex = 34;
             Gb_Pergunta.TabStop = false;
             Gb_Pergunta.Text = "Houve compra  de  Produto ?";
+            Gb_Pergunta.Visible = false;
             // 
             // Rb_Nao
             // 
