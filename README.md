@@ -1,3 +1,5 @@
+lala teste
+
 # Sistema de Gestão - Barbearia Bê Cortes ✂️💈
 
 Este projeto foi desenvolvido para ajudar a **Barbearia Bê Cortes** a organizar melhor seus processos internos, oferecendo uma solução simples e funcional para controle de agendamentos, gerenciamento de funcionários e estoque.
